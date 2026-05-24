@@ -1,59 +1,28 @@
 ---
 title: "Worklog Tuần 1"
-date: 2024-01-01
+date: 2026-05-04
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 1:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tìm hiểu về các dịch vụ AWS và cách thức vượt qua quá trình học tập tại chương trình First Cloud AI Journey.
+* Tìm kiếm thành viên nhóm và xác nhận đề tài thực hiện: Xây dựng Server Restful API với các dịch vụ của AWS.
+* Tham gia hội thảo để nắm bắt các dịch vụ AWS miễn phí và cách ứng dụng AI.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu / Ghi chú |
+| --- | --- | --- | --- | --- |
+| 2 - 6 | - Tìm hiểu về các dịch vụ AWS. <br> - Tìm hiểu cách thức vượt qua quá trình học tập tại First Cloud AI Journey. <br> - Tìm kiếm thành viên nhóm. <br> - Xác nhận đề tài: Xây dựng Server Game Restful API với các dịch vụ của AWS. | 04/05/2026 | 08/05/2026 | First Cloud AI Journey |
+| 7 | - Tham gia hội thảo. <br> - Tìm hiểu các tính năng miễn phí của AWS có thể tận dụng: EC2, DynamoDB, S3, Lambda, Bedrock…. <br> - Tối ưu hoá việc sử dụng AI hiệu quả. <br> - Tìm hiểu chia sẻ về web tạo prompt cho AI. | 09/05/2026 | 09/05/2026 | Nội dung hội thảo |
 
 ### Kết quả đạt được tuần 1:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Đã tìm hiểu tổng quan về các dịch vụ AWS và cách thức học tập tại First Cloud AI Journey.
+* Đã tìm được thành viên nhóm và chốt thành công đề tài: Xây dựng Server Game Restful API với các dịch vụ của AWS.
+* Đã tham gia hội thảo ngày thứ 7 (09/05/2026) ([ảnh minh chứng](/images/evidence/chung-nhan-tuan-1.jpg)).
+* Nắm được danh sách một số tính năng miễn phí của AWS có thể tận dụng cho dự án như: EC2, DynamoDB, S3, Lambda, Bedrock….
+* Nắm được phương pháp tối ưu hoá việc sử dụng AI hiệu quả và biết thêm về web tạo prompt cho AI.

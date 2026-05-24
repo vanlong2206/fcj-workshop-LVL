@@ -1,59 +1,30 @@
 ---
 title: "Worklog Tuần 2"
-date: 2024-01-01
-weight: 1
+date: 2026-05-11
+weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 2:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tìm hiểu các dịch vụ AWS và các module miễn phí có thể ứng dụng trực tiếp vào đồ án.
+* Triển khai dự án thực tế trên máy ảo EC2 và cơ sở dữ liệu RDS.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2  | - Tìm hiểu các dịch vụ AWS và module miễn phí có thể ứng dụng vào đồ án: <br>&emsp; + EC2 (t3.micro) <br>&emsp; + RDS (db.t4g.micro) <br>&emsp; + Amazon Gamelift <br>&emsp; + ElastiCache (cache.t3.micro) | 11/05/2026 | 11/05/2026 |
+| 3 - 5 | - Khởi tạo tài nguyên cơ bản: <br>&emsp; + Tạo EC2 (t3.micro) với hệ điều hành Ubuntu Linux. <br>&emsp; + Tạo RDS (db.t4g.micro) chạy MySQL. <br>&emsp; + Thiết lập IP tĩnh cho server bằng Elastic IP. | 12/05/2026 | 14/05/2026 |
+| 6 - 7 | - Cấu hình và liên kết tài nguyên: <br>&emsp; + Liên kết db RDS đến EC2. <br>&emsp; + Thiết lập inbound rule (launch-wizard-x). <br>&emsp; + Tận dụng ổ cứng dư thừa để cắt làm RAM ảo. | 15/05/2026 | 16/05/2026 |
+| CN | - Deploy dự án: <br>&emsp; + Sử dụng pm2 để deploy ngay trên máy ảo EC2. <br>&emsp; + Mở cổng để máy khác có thể truy cập vào public IP. | 17/05/2026 | 17/05/2026 |
 
 ### Kết quả đạt được tuần 2:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Nắm rõ và xác định được các dịch vụ/module AWS miễn phí phù hợp cho đồ án: EC2, RDS, Amazon Gamelift, ElastiCache.
+* Triển khai thành công máy ảo EC2 (Ubuntu Linux, t3.micro) và cơ sở dữ liệu RDS (MySQL, db.t4g.micro).
+* Đã thiết lập thành công IP tĩnh cho server thông qua Elastic IP.
+* Hoàn tất liên kết cơ sở dữ liệu RDS vào EC2 và cấu hình Inbound rule (launch-wizard-x) để cho phép kết nối.
+* Tối ưu hóa được máy ảo bằng cách tận dụng ổ cứng dư thừa làm RAM ảo.
+* Đã sử dụng pm2 để deploy dự án trực tiếp trên EC2 và mở cổng thành công, cho phép truy cập từ public IP.
