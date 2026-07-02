@@ -9,7 +9,20 @@ pre: " <b> 5.5. </b> "
 
 Amazon API Gateway giúp tạo, xuất bản, bảo trì, theo dõi và bảo vệ các API ở bất kỳ quy mô nào. Trong hệ thống API Gateway đóng vai trò là cửa ngõ tiếp nhận tất cả các request từ Client và định tuyến đến các hàm xử lý logic (Lambda).
 
-#### 5.5.2 Cấu hình AWS API GATEWAY
+#### 5.5.2 Luồng hoạt động 
+
+![1783012663573](image/_index.vi/1783012663573.png)
+
+
+* Client gửi yêu cầu HTTP đến Amazon API Gateway.
+* API Gateway xác định Endpoint và định tuyến yêu cầu đến Lambda tương ứng.
+* Lambda được kích hoạt và khởi tạo môi trường thực thi.
+* Lambda chuyển yêu cầu đến Controller phù hợp để xử lý nghiệp vụ.
+* Controller truy cập Amazon Aurora PostgreSQL để đọc hoặc ghi dữ liệu.
+* Sau khi xử lý xong, Lambda trả kết quả về API Gateway.
+* API Gateway gửi phản hồi cuối cùng về cho Client.
+
+#### 5.5.3 Cấu hình AWS API GATEWAY
 
 * Cấu hình AWS credentials :
 
@@ -129,7 +142,7 @@ gameapi-progression-world-dev-api  512MB  nodejs20.x
 gameapi-transaction-dev-api       512MB  nodejs20.x
 ```
 
-#### 5.5.3 Test AWS API GATEWAY
+#### 5.5.4 Test AWS API GATEWAY
 
 ![1782929549653](image/_index.vi/1782929549653.png)
 
@@ -139,11 +152,9 @@ gameapi-transaction-dev-api       512MB  nodejs20.x
 
 <div align="center"><i>Hình 5.5.2: Đăng nhập user.</i></div>
 
-
 ![1782929937041](image/_index.vi/1782929937041.png)
 
 <div align="center"><i>Hình 5.5.3:Xem dashboard.</i></div>
-
 
 ![1782930080859](image/_index.vi/1782930080859.png)
 
@@ -152,7 +163,6 @@ gameapi-transaction-dev-api       512MB  nodejs20.x
 ![1782930242619](image/_index.vi/1782930242619.png)
 
 <div align="center"><i>Hình 5.5.5:Thêm trang bị.</i></div>
-
 
 ![1782930706552](image/_index.vi/1782930706552.png)
 
@@ -166,7 +176,7 @@ gameapi-transaction-dev-api       512MB  nodejs20.x
 
 <div align="center"><i>Hình 5.5.8: Đồng bộ inventory khi muua trang bị</i></div>
 
-#### 5.5.4 Kết Quả
+#### 5.5.5 Kết Quả
 
 **Lambda Auth**
 
@@ -195,5 +205,3 @@ GET /PlayerStats/profile → 200 OK: Truy xuất thông tin hồ sơ và tiến 
 GET /Leaderboard → 200 OK: Lấy dữ liệu bảng xếp hạng thành công.
 
 GET /GameData/ping → 200 OK: Kiểm tra trạng thái hoạt động của dịch vụ thành công.
-
-
