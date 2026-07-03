@@ -9,10 +9,9 @@ pre: " <b> 5.5. </b> "
 
 Amazon API Gateway giúp tạo, xuất bản, bảo trì, theo dõi và bảo vệ các API ở bất kỳ quy mô nào. Trong hệ thống API Gateway đóng vai trò là cửa ngõ tiếp nhận tất cả các request từ Client và định tuyến đến các hàm xử lý logic (Lambda).
 
-#### 5.5.2 Luồng hoạt động 
+#### 5.5.2 Luồng hoạt động
 
-![1783012663573](image/_index.vi/1783012663573.png)
-
+![1783018858523](image/_index.vi/1783018858523.png)
 
 * Client gửi yêu cầu HTTP đến Amazon API Gateway.
 * API Gateway xác định Endpoint và định tuyến yêu cầu đến Lambda tương ứng.
@@ -144,35 +143,35 @@ gameapi-transaction-dev-api       512MB  nodejs20.x
 
 #### 5.5.4 Test AWS API GATEWAY
 
-![1782929549653](image/_index.vi/1782929549653.png)
+![1783018546606](image/_index.vi/1783018546606.png)
 
 <div align="center"><i>Hình 5.5.1: Test đăng ký user</i></div>
 
-![1782929612593](image/_index.vi/1782929612593.png)
+![1783018562951](image/_index.vi/1783018562951.png)
 
 <div align="center"><i>Hình 5.5.2: Đăng nhập user.</i></div>
 
-![1782929937041](image/_index.vi/1782929937041.png)
+![1783018573733](image/_index.vi/1783018573733.png)
 
 <div align="center"><i>Hình 5.5.3:Xem dashboard.</i></div>
 
-![1782930080859](image/_index.vi/1782930080859.png)
+![1783018583631](image/_index.vi/1783018583631.png)
 
 <div align="center"><i>Hình 5.5.4:Xem số dư ví.</i></div>
 
-![1782930242619](image/_index.vi/1782930242619.png)
+![1783018597094](image/_index.vi/1783018597094.png)
 
 <div align="center"><i>Hình 5.5.5:Thêm trang bị.</i></div>
 
-![1782930706552](image/_index.vi/1782930706552.png)
+![1783018604995](image/_index.vi/1783018604995.png)
 
 <div align="center"><i>Hình 5.5.6: Lấy danh sách trang bị</i></div>
 
-![1782934606097](image/_index.vi/1782934606097.png)
+![1783018613506](image/_index.vi/1783018613506.png)
 
 <div align="center"><i>Hình 5.5.7: Mua trang bị</i></div>
 
-![1782934704570](image/_index.vi/1782934704570.png)
+![1783018636220](image/_index.vi/1783018636220.png)
 
 <div align="center"><i>Hình 5.5.8: Đồng bộ inventory khi muua trang bị</i></div>
 
