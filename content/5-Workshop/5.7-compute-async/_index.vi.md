@@ -5,6 +5,8 @@ weight : 7
 chapter : false
 pre : " <b> 5.7. </b> "
 ---
+#### 5.7.1 Khái niệm
+
 Compute Async (Asynchronous Computing) là mô hình xử lý bất đồng bộ, trong đó request không cần chờ tác vụ hoàn thành ngay lập tức. Thay vì Lambda xử lý trực tiếp và trả kết quả ngay, request sẽ được đưa vào Amazon SQS. Lambda Consumer sẽ đọc Queue và xử lý sau.
 
 Ví dụ :
@@ -16,14 +18,6 @@ Ví dụ :
 * Farm
 * Reward
 * Log
-
-#### 5.7.1 Kiến trúc Compute Async của hệ thống
-
-![1783094529501](image/_index.vi/1783094529501.png)
-
-<div align="center"><i>Hình 5.5.1: Kiến trúc Compute Async</i></div>
-
-Client → API Gateway → Producer Lambda → Amazon SQS FIFO → Consumer Lambda → Amazon Aurora/RDS. Producer Lambda chỉ tiếp nhận và đưa yêu cầu vào Queue, còn Consumer Lambda xử lý nghiệp vụ và cập nhật dữ liệu bất đồng bộ, giúp hệ thống phản hồi nhanh và hoạt động ổn định hơn.
 
 #### 5.7.2 Các Module trong Compute Async
 
