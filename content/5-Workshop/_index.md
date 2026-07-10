@@ -28,5 +28,5 @@ You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoi
 3. [Database Setup and Backup](5.3-database/)
 4. [Project Architecture](5.4-architecture-overview/)
 5. [Amazon API Gateway Setup](5.5-API-Gateway/)
-6. [Compute Sync — Real-Time Processing with Lambda](5.6-compute-sync/)
-7. [Amazon SQS FIFO](5.7-sqs-fifo/)
+6. [Amazon SQS FIFO](5.6-sqs-fifo/)
+7. [AWS SQS Dead Letter Queue](5.7-sqs-dlq/)

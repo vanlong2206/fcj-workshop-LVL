@@ -1,24 +1,21 @@
 ---
 title : "Amazon SQS FIFO"
 date : 2024-01-01
-weight : 8
+weight : 6
 chapter : false
-pre : " <b> 5.7. </b> "
+pre : " <b> 5.6. </b> "
 ---
 #### Amazon SQS FIFO
 
-#### 5.7.2 Mục tiêu
+#### 5.6.1 Khái niệm
 
-- Giới thiệu Amazon SQS FIFO — hàng đợi first-in-first-out, exactly-once processing, có thứ tự
-- Giải quyết race condition trong game backend (economy, inventory, gift code, stats, save data)
-- Áp dụng vào dự án thực tế: chuyển write path từ synchronous → asynchronous qua SQS FIFO
-- Kết quả: Controller trả về HTTP 202 ngay, Consumer xử lý ghi DB an toàn với pessimistic lock
+**Amazon SQS FIFO (First-In-First-Out)** là một loại hàng đợi (queue) do AWS cung cấp, được thiết kế đặc biệt để đảm bảo hai yếu tố cực kỳ quan trọng trong các hệ thống phân tán: **thứ tự xử lý tin nhắn** và  **tránh trùng lặp dữ liệu** .
 
-#### 5.7.2 Kiến trúc hệ thống
+#### 5.6.2 Kiến trúc hệ thống
 
 ![1783096083070](image/_index.vi/1783096083070.png)
 
-<div align="center"><i>Hình 5.7.1:Kiến trúc hệ thống.</i></div>
+<div align="center"><i>Hình 5.6.1:Kiến trúc hệ thống.</i></div>
 
 ví dụ với luồng xử lí POST /Economy/earn :
 
@@ -31,9 +28,9 @@ ví dụ với luồng xử lí POST /Economy/earn :
 * Consumer Lambda xử lý nghiệp vụ và ghi dữ liệu vào Amazon Aurora/RDS.
 * Sau khi xử lý thành công, message được xóa khỏi SQS; nếu thất bại sẽ được retry hoặc chuyển sang DLQ.
 
-#### 5.7.3 Setup SQS FIFO
+#### 5.6.3 Setup SQS FIFO
 
-##### * Tạo FIFO Queue 
+##### * Tạo FIFO Queue
 
 Định nghĩa queue trong services/sqs-infrastructure/serverless.yml:
 
@@ -55,7 +52,7 @@ EconomyQueue:
 
 ![1783405716023](image/_index.vi/1783405716023.png)
 
-<div align="center"><i>Hình 5.7.2:Hệ thống SQS Consumer Lambda .</i></div>
+<div align="center"><i>Hình 5.6.2:Hệ thống SQS Consumer Lambda .</i></div>
 
 ##### * Cấu hình IAM
 
@@ -75,7 +72,7 @@ Thêm policy mới:
 
 ![1783404285339](image/_index.vi/1783404285339.png)
 
-<div align="center"><i>Hình 5.7.3:Thêm policy mới để cấp role khởi tạo sqs.</i></div>
+<div align="center"><i>Hình 5.6.3:Thêm policy mới để cấp role khởi tạo sqs.</i></div>
 
 ```YAML
 {
@@ -182,7 +179,7 @@ Handler pattern (services/sqs-consumer-economy/src/lambda.ts):
 
 ```typescript
 export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
-  if (!initialized) {              
+  if (!initialized) {            
     await initializeApplicationDbContext();
     initialized = true;
   }
@@ -190,7 +187,7 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
   for (const record of event.Records) {
     try {
       const message: SQSMessage = JSON.parse(record.body);
-      switch (message.type) {      
+      switch (message.type) {    
         case 'economy.earn':
           await handleEarnCurrency(message.payload);
           break;
@@ -232,9 +229,9 @@ Stack tên gameapi-sqs-infrastructure-dev, sẽ tạo:
 
 ![1783403865434](image/_index.vi/1783403865434.png)
 
-<div align="center"><i>Hình 5.7.4: Deploy SQS thành công.</i></div>
+<div align="center"><i>Hình 5.6.4: Deploy SQS thành công.</i></div>
 
-chú thích : các file dlq có trong queues sẽ được hướng dẫn setup và deploy ở phần 5.8 AWS SQS Dead Letter Queue
+chú thích : các file dlq có trong queues sẽ được hướng dẫn setup và deploy ở phần 5.7 AWS SQS Dead Letter Queue
 
 ##### * Deploy consumer sqs
 
@@ -247,31 +244,31 @@ serverless deploy --stage dev
 
 ![1783406146804](image/_index.vi/1783406146804.png)
 
-<div align="center"><i>Hình 5.7.5: Deploy Consumer sqs thành công.</i></div>
+<div align="center"><i>Hình 5.6.5: Deploy Consumer sqs thành công.</i></div>
 
-#### 5.7.4 Test SQS FIFO
+#### 5.6.4 Test SQS FIFO
 
 ##### * Xác nhận Producer Lambda gửi được message vào SQS FIFO
 
 ![1783409513213](image/_index.vi/1783409513213.png)
 
-<div align="center"><i>Hình 5.7.6: Gửi yêu cầu nhận tiền.</i></div>
+<div align="center"><i>Hình 5.6.6: Gửi yêu cầu nhận tiền.</i></div>
 
 ![1783409553035](image/_index.vi/1783409553035.png)
 
-<div align="center"><i>Hình 5.7.7: message được trả về.</i></div>
+<div align="center"><i>Hình 5.6.7: message được trả về.</i></div>
 
 ##### * Kiểm tra Message vào Queue
 
 ![1783409759694](image/_index.vi/1783409759694.png)
 
-<div align="center"><i>Hình 5.7.8: NumberOfMessagesSent tăng lên khi nhận request.</i></div>
+<div align="center"><i>Hình 5.6.8: NumberOfMessagesSent tăng lên khi nhận request.</i></div>
 
 ##### * Kiểm tra Consumer
 
 ![1783410182104](image/_index.vi/1783410182104.png)
 
-<div align="center"><i>Hình 5.7.9: Consumer đã nhận được message.</i></div>
+<div align="center"><i>Hình 5.6.9: Consumer đã nhận được message.</i></div>
 
 ##### * FIFO Ordering
 
@@ -292,15 +289,15 @@ done
 
 ![1783411392460](image/_index.vi/1783411392460.png)
 
-<div align="center"><i>Hình 5.7.10: SequenceNumber nhỏ nhất.</i></div>
+<div align="center"><i>Hình 5.6.10: SequenceNumber nhỏ nhất.</i></div>
 
 ![1783411453862](image/_index.vi/1783411453862.png)
 
-<div align="center"><i>Hình 5.7.11: SequenceNumber lớn nhất.</i></div>
+<div align="center"><i>Hình 5.6.11: SequenceNumber lớn nhất.</i></div>
 
 SequenceNumber tăng dần theo thứ tự xử lý từ nhỏ nhất tới lớn nhất:
 
-Message amount=20 → 18903297315744239872
+Message amount=20 → 18903297315744239872 
 
 Message amount=30 → 18903297315816687872
 
@@ -308,7 +305,7 @@ Message amount=40 → 18903297315898607872
 
 Message amount=50 → 18903297315972591616
 
-#### 5.7.5 Tổng kết
+#### 5.6.5 Tổng kết
 
 Hệ thống **Amazon SQS FIFO** đã được triển khai và tích hợp thành công với  **AWS Lambda** :
 
