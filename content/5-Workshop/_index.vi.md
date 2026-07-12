@@ -5,7 +5,6 @@ weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-
 ![1782935499173](image/_index.vi/1782935499173.png)
 
 # Nghiên cứu và Triển khai Hệ thống Máy chủ cho Trò chơi Trực tuyến
@@ -29,5 +28,13 @@ Hệ thống phân tách luồng dữ liệu và xử lý thành hai mô hình c
 4. [Kiến trúc dự án](5.4-architecture-overview/)
 5. [Khởi tạo Amazon API Gateway](5.5-API-Gateway/)
 6. [Amazon SQS FIFO](5.6-sqs-fifo/)
-7. [AWS DLQ & AWS CloudWatch](5.7-sqs-dlq/)
+7. [AWS DLQ &amp; AWS CloudWatch](5.7-sqs-dlq/)
+8. [AWS EventBridge](5.8-eventbridge/)
 
+- **Invocations** — biểu đồ hiển thị số lần gọi tăng lên sau khi test
+- **Duration** — thời gian xử lý (kỳ vọng vài giây đến vài chục giây)
+- **Error count & success rate (%)** — kỳ vọng 0% errors
+- 
+- **Invocations** — biểu đồ hiển thị số lần gọi tăng lên sau khi test
+- **Duration** — thời gian xử lý (kỳ vọng vài giây đến vài chục giây)
+- **Error count & success rate (%)** — kỳ vọng 0% errors
