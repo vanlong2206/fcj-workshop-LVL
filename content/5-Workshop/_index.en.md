@@ -31,3 +31,7 @@ The system separates data flow and processing into two strategic models dependin
 6. [Amazon SQS FIFO](5.6-sqs-fifo/)
 7. [AWS DLQ & AWS CloudWatch](5.7-sqs-dlq/)
 8. [AWS EventBridge](5.8-eventbridge/)
+9. [AWS Backup](5.9-aws-backup/)
+10. [Verification and Testing](5.10-verification-and-testing/)
+11. [Resource Clean Up](5.11-clean-up/)
+12. [Challenges and Future Development](5.12-challenges-and-future/)

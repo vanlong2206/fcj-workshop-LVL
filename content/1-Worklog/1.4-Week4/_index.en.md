@@ -1,56 +1,34 @@
 ---
 title: "Worklog Week 4"
-date: 2024-01-01
+date: 2026-06-25
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
 ### Week 4 Objectives:
 
-* Connect and get familiar with members of the First Cloud AI Journey.
-* Understand basic AWS services, how to use console & CLI.
+* Understand and grasp the concepts of Serverless architecture on AWS.
+* Get familiar with and practice AWS Lambda along with Serverless database services (DynamoDB, Aurora).
+* Explore edge networking and security services: API Gateway, CloudFront, AWS WAF.
 
 ### Weekly Tasks:
+
 | Day | Tasks | Start Date | End Date | Resources |
 | --- | --- | --- | --- | --- |
-| Tue | - Get familiar with FCAJ members <br> - Read and note the rules and regulations at the internship unit | 11/08/2025 | 11/08/2025 |
-| Wed | - Learn about AWS and service types <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... | 12/08/2025 | 12/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Thu | - Create AWS Free Tier account <br> - Learn AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install AWS CLI & configure <br> &emsp; + How to use AWS CLI | 13/08/2025 | 13/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Fri | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - How to SSH into EC2 <br> - Learn about Elastic IP | 14/08/2025 | 15/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Sat | - **Practice:** <br>&emsp; + Create EC2 instance <br>&emsp; + SSH connection <br>&emsp; + Attach EBS volume | 15/08/2025 | 15/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| Mon | - Learn about Serverless architecture on AWS:<br>+ Serverless concepts.<br>+ Pros/cons compared to traditional servers.<br>+ Explore AWS Lambda. | 25/06/2026 | 25/06/2026 | |
+| Tue | - Learn about Serverless databases:<br>+ Amazon DynamoDB.<br>+ Amazon Aurora Serverless.<br>+ Use cases for each DB type. | 26/06/2026 | 26/06/2026 | |
+| Wed | - Initialize Amazon Aurora.<br>- Try packaging the entire project into a single Lambda. | 27/06/2026 | 27/06/2026 | |
+| Thu | - Learn about edge networking:<br>+ Amazon API Gateway.<br>+ Amazon CloudFront.<br>+ AWS WAF.<br>- Use CloudFormation to set up the edge network layer for the Lambda. | 28/06/2026 | 28/06/2026 | |
 
 ### Week 4 Results:
 
-* Understood what AWS is and grasped basic service groups:
-  * Compute
-  * Storage
-  * Networking
-  * Database
-  * ...
-
-* Successfully created and configured AWS Free Tier account.
-
-* Got familiar with AWS Management Console and learned how to find, access, and use services from the web interface.
-
-* Installed and configured AWS CLI including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations:
-
-  * Check account info & configuration
-  * List regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check running service information
-  * ...
-
-* Able to use both web interface and CLI to manage AWS resources in parallel.
-* ...
+* Clearly understood the Serverless concept, how to optimize costs and reduce server management overhead.
+* Grasped the working mechanism of AWS Lambda, trigger configuration, and execution permissions.
+* Differentiated between DynamoDB and Aurora Serverless, and when to apply each type for a project.
+* Successfully deployed an all-in-one Serverless model.
+* Understood the role of edge network services:
+  * API Gateway: Acts as the gateway to manage and route API calls to Lambda.
+  * CloudFront: Supports content delivery to end users with the lowest latency.
+  * AWS WAF: How the web application firewall works to block malicious traffic before it reaches the backend.
+* Able to chain services together: `End-user -> CloudFront -> API Gateway -> Lambda -> DynamoDB`.
