@@ -8,7 +8,7 @@ pre : " <b> 5.1. </b> "
 
 #### Giới thiệu về Kiến trúc Game Backend Server
 
-#### Tổng quan về mô hình triển khai
+#### 5.1.1 Tổng quan về mô hình triển khai
 Edge & Security Layer:
    * AWS Route 53: Phân giải và điều phối tên miền hệ thống.
    * Amazon CloudFront: Mạng lưới phân phối nội dung (CDN) giúp tối ưu hóa tốc độ đường truyền và giảm độ trễ cho Client.
@@ -34,4 +34,4 @@ Automation & Maintenance Layer:
      * Bảo trì CSDL: Định kỳ kích hoạt hàm `vacuum & analyze` để tối ưu hóa hiệu năng DB và hàm `reset_daily` để làm mới tiến trình thế giới hàng ngày.
 
 ![overview](/images/diagram.png)
-<div align="center"><i>Hình 1.1: Sơ đồ kiến trúc tổng thể.</i></div>
+<div align="center"><i>Hình 5.1.1: Sơ đồ kiến trúc tổng thể.</i></div>
