@@ -1,49 +1,49 @@
 ---
 title: "AWS Backup"
-date: 2024-01-01
+date: 2026-06-18
 weight: 9
 chapter: false
 pre: " <b> 5.9. </b> "
 ---
 #### AWS Backup
 
-#### 5.9.1 Giới thiệu
+#### 5.9.1 Introduction
 
-**AWS Backup** là dịch vụ được quản lý hoàn toàn (fully managed) giúp tập trung hóa việc sao lưu dữ liệu trên nhiều dịch vụ AWS khác nhau. AWS Backup cho phép bạn định nghĩa các chính sách sao lưu (backup policies) tập trung, tự động hóa lịch sao lưu, và quản lý việc khôi phục (restore) dữ liệu một cách thống nhất.
+**AWS Backup** is a fully managed service that centralizes data backup across multiple AWS services. AWS Backup allows you to define centralized backup policies, automate backup schedules, and manage data restoration in a unified manner.
 
-#### 5.9.2 Kiến trúc AWS Backup
+#### 5.9.2 AWS Backup Architecture
 
 ![1783878044406](image/_index.vi/1783878044406.png)
 
-<div align="center"><i>Hình 5.9.1: Kiến trúc hệ thống AWS Backup.</i></div>
+<div align="center"><i>Figure 5.9.1: AWS Backup system architecture.</i></div>
 
-Workflow backup :
+Backup workflow:
 
-* **Backup Plan** kích hoạt theo lịch đã cấu hình (Daily/Weekly).
-* **AWS Backup** tự động sao lưu  **Amazon Aurora PostgreSQL** .
-* Bản sao lưu được lưu trong **Backup Vault** và tạo  **Recovery Point** .
-* Khi cần khôi phục, **Restore Job** sử dụng **Recovery Point** để tạo  **Aurora PostgreSQL (Restored Cluster)** .
-* **Amazon CloudWatch** giám sát các Backup/Restore Job và kích hoạt **Alarm** khi có lỗi.
-* **Amazon SNS** gửi thông báo cảnh báo đến **Email** của quản trị viên.
+* **Backup Plan** triggers according to the configured schedule (Daily/Weekly).
+* **AWS Backup** automatically backs up **Amazon Aurora PostgreSQL**.
+* Backups are stored in **Backup Vault** and create **Recovery Points**.
+* When restoration is needed, **Restore Job** uses **Recovery Points** to create **Aurora PostgreSQL (Restored Cluster)**.
+* **Amazon CloudWatch** monitors Backup/Restore Jobs and triggers **Alarms** on errors.
+* **Amazon SNS** sends alert notifications to the administrator's **Email**.
 
-Quy trình backup hoạt động như sau:
+The backup process operates as follows:
 
-**Hàng ngày lúc 05:00 UTC** — AWS Backup kích hoạt snapshot toàn bộ Aurora cluster.
+**Daily at 05:00 UTC** — AWS Backup triggers a full snapshot of the Aurora cluster.
 
-- Snapshot được mã hóa bằng KMS key và lưu vào vault.
-- Snapshot được giữ lại **14 ngày**, sau đó tự động xóa.
+- Snapshot is encrypted using KMS key and stored in the vault.
+- Snapshot is retained for **14 days**, then automatically deleted.
 
-**Chủ nhật hàng tuần lúc 05:00 UTC** — AWS Backup tạo snapshot weekly.
+**Weekly on Sunday at 05:00 UTC** — AWS Backup creates a weekly snapshot.
 
-- Snapshot được giữ lại **56 ngày** (8 tuần), sau đó tự động xóa.
+- Snapshot is retained for **56 days** (8 weeks), then automatically deleted.
 
-**Khi backup hoàn tất hoặc thất bại** — SNS Topic nhận event và gửi thông báo.
+**When backup completes or fails** — SNS Topic receives the event and sends notification.
 
-**CloudWatch Alarm** — cảnh báo ngay lập tức nếu có backup/restore job failed.
+**CloudWatch Alarm** — immediately alerts if any backup/restore job fails.
 
-#### 5.9.3 Tạo Backup Vault & KMS Key
+#### 5.9.3 Creating Backup Vault & KMS Key
 
-##### Cấu trúc thư mục
+##### Directory structure
 
 ```
 services/aws-backup-infrastructure/
@@ -52,7 +52,7 @@ services/aws-backup-infrastructure/
 
 ##### KMS Key
 
-Backup vault sử dụng KMS CMK (Customer Managed Key) riêng:
+The backup vault uses a dedicated KMS CMK (Customer Managed Key):
 
 ```yaml
 BackupKmsKey:
@@ -85,7 +85,7 @@ BackupKmsKeyAlias:
     TargetKeyId: !Ref BackupKmsKey
 ```
 
-Key có alias `alias/gameapi-aurora-backup` để dễ dàng tham chiếu sau này.
+The key has alias `alias/gameapi-aurora-backup` for easy reference later.
 
 ##### Backup Vault
 
@@ -104,13 +104,13 @@ BackupVault:
       SNSTopicArn: !Ref BackupSnsTopic
 ```
 
-Vault được cấu hình gửi thông báo ra SNS Topic cho 4 loại sự kiện: backup completed, backup failed, restore completed, restore failed.
+The vault is configured to send notifications to the SNS Topic for 4 event types: backup completed, backup failed, restore completed, restore failed.
 
-#### 5.9.4 Tạo Backup Plan & Selection
+#### 5.9.4 Creating Backup Plan & Selection
 
 ##### IAM Role
 
-AWS Backup cần một IAM Role để có quyền snapshot RDS:
+AWS Backup needs an IAM Role to have permission to snapshot RDS:
 
 ```yaml
 BackupRole:
@@ -127,9 +127,9 @@ BackupRole:
       - arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup
 ```
 
-Policy `AWSBackupServiceRolePolicyForBackup` là AWS managed policy, cấp quyền backup cho RDS, DynamoDB, EFS, Storage Gateway,...
+The `AWSBackupServiceRolePolicyForBackup` policy is an AWS managed policy that grants backup permissions for RDS, DynamoDB, EFS, Storage Gateway, etc.
 
-##### Backup Plan với 2 Rules
+##### Backup Plan with 2 Rules
 
 ```yaml
 BackupPlan:
@@ -154,8 +154,8 @@ BackupPlan:
             DeleteAfterDays: 56
 ```
 
-`StartWindowMinutes`: thời gian AWS Backup được phép trì hoãn job (nếu tài nguyên đang bận).
-`CompletionWindowMinutes`: thời gian tối đa để job hoàn thành.
+`StartWindowMinutes`: The time AWS Backup is allowed to delay the job (if resources are busy).
+`CompletionWindowMinutes`: The maximum time for the job to complete.
 
 ##### Resource Assignment
 
@@ -171,7 +171,7 @@ BackupSelection:
         - arn:aws:rds:<region>:<aws-account-id>:cluster:<cluster-name>
 ```
 
-Assigned resource là Aurora cluster `<cluster-name>` (ARN đầy đủ). Có thể mở rộng bằng cách dùng tag-based selection thay vì hardcode ARN:
+The assigned resource is the Aurora cluster `<cluster-name>` (full ARN). Can be extended by using tag-based selection instead of hardcoded ARN:
 
 ```yaml
 Resources: []
@@ -192,7 +192,7 @@ BackupSnsTopic:
     DisplayName: GameAPI Backup Notifications
 ```
 
-SNS Topic nhận event từ Backup Vault và CloudWatch Alarms.
+The SNS Topic receives events from Backup Vault and CloudWatch Alarms.
 
 ##### CloudWatch Alarms
 
@@ -231,7 +231,7 @@ RestoreFailedAlarm:
       - !Ref BackupSnsTopic
 ```
 
-Hai alarm này kiểm tra mỗi 24 giờ (86400s), nếu có bất kỳ backup hoặc restore job nào failed → chuyển sang `ALARM` và gửi thông báo qua SNS.
+These two alarms check every 24 hours (86400s); if any backup or restore job fails → transitions to `ALARM` and sends notification via SNS.
 
 #### 5.9.6 Deploy
 
@@ -244,67 +244,67 @@ npx serverless deploy --stage dev
 
 ##### Subscribe SNS
 
-Sau deploy, vào **AWS Console → SNS → Topics → `gameapi-backup-notifications` → Create subscription**: Xác nhận subscription qua email trước khi nhận thông báo
+After deployment, go to **AWS Console → SNS → Topics → `gameapi-backup-notifications` → Create subscription**: Confirm the subscription via email before receiving notifications.
 
 ![1783878556553](image/_index.vi/1783878556553.png)
 
-<div align="center"><i>Hình 5.9.2: Xác nhận email nhận thông báo khi backup lỗi.</i></div>
+<div align="center"><i>Figure 5.9.2: Confirm email for backup failure notifications.</i></div>
 
-#### 5.9.7 Kiểm thử
+#### 5.9.7 Testing
 
-##### * Kiểm tra Backup Vault
+##### * Check Backup Vault
 
 ![1783881327889](image/_index.vi/1783881327889.png)
 
-<div align="center"><i>Hình 5.9.3: Backup Vault được tạo thành công.</i></div>
+<div align="center"><i>Figure 5.9.3: Backup Vault created successfully.</i></div>
 
-##### * Kiểm tra Backup Plan
+##### * Check Backup Plan
 
 ![1783881416470](image/_index.vi/1783881416470.png)
 
-<div align="center"><i>Hình 5.9.4: Backup Plan được tạo thành công.</i></div>
+<div align="center"><i>Figure 5.9.4: Backup Plan created successfully.</i></div>
 
 - **Rules**: Daily (14 days) + Weekly (56 days)
 - **Resource assignments**: Aurora cluster `<cluster-name>`
 
-##### * Chạy Backup thủ công
+##### * Run Manual Backup
 
 ![1783882216846](image/_index.vi/1783882216846.png)
 
-<div align="center"><i>Hình 5.9.5: Cấu hình chạy backup thủ công.</i></div>
+<div align="center"><i>Figure 5.9.5: Configure manual backup run.</i></div>
 
 ![1783882807221](image/_index.vi/1783882807221.png)
 
-<div align="center"><i>Hình 5.9.6: Chạy backup thành công.</i></div>
+<div align="center"><i>Figure 5.9.6: Backup run successful.</i></div>
 
 - **Resource**: `<cluster-name>`
-- **Backup size**: dung lượng snapshot
-- **Creation time**: thời gian tạo
-- **Expiration date:** thời gian kết thúc backup
+- **Backup size**: snapshot size
+- **Creation time**: time of creation
+- **Expiration date:** backup expiration time
 
-##### * Kiểm tra Restore
+##### * Check Restore
 
-* Vào AWS Console → **AWS Backup** → **Backup vaults** → `gameapi-aurora-vault` → Recovery points
-* Chọn recovery point → Click **Restore**
+* Go to AWS Console → **AWS Backup** → **Backup vaults** → `gameapi-aurora-vault` → Recovery points
+* Select recovery point → Click **Restore**
 
 ![1783883225535](image/_index.vi/1783883225535.png)
 
-<div align="center"><i>Hình 5.9.7: Cấu hình Aurora cluster mới.</i></div>
+<div align="center"><i>Figure 5.9.7: Configure new Aurora cluster.</i></div>
 
-* Nhấn **Restore backup** — job restore sẽ tạo một Aurora cluster mới từ snapshot.
+* Click **Restore backup** — the restore job will create a new Aurora cluster from the snapshot.
 
 ![1783911304054](image/_index.vi/1783911304054.png)
 
-<div align="center"><i>Hình 5.9.8: Cluster mới xuất hiện.</i></div>
+<div align="center"><i>Figure 5.9.8: New cluster appears.</i></div>
 
-* Sau khi xác nhận thành công, nhớ xóa cluster test để tránh phát sinh chi phí.
+* After confirming success, remember to delete the test cluster to avoid additional costs.
 
-##### * Kiểm tra Monitoring & Notification
+##### * Check Monitoring & Notification
 
 ![1783883682928](image/_index.vi/1783883682928.png)
 
-<div align="center"><i>Hình 5.9.9: CloudWatch Alarms ở trạng thái OK.</i></div>
+<div align="center"><i>Figure 5.9.9: CloudWatch Alarms in OK state.</i></div>
 
 ![1783911522229](image/_index.vi/1783911522229.png)
 
-<div align="center"><i>Hình 5.9.10: SNS Email nhận thông báo khi Backup hoặc Restore hoàn thành.</i></div>
+<div align="center"><i>Figure 5.9.10: SNS Email receives notification when Backup or Restore completes.</i></div>

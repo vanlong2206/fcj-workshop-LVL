@@ -1,62 +1,63 @@
 ---
 title : "Amazon SQS FIFO"
-date : 2024-01-01
+date : 2026-06-18
 weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
+
 #### Amazon SQS FIFO
 
-#### 5.6.1 Khái niệm
+#### 5.6.1 Concept
 
-**Amazon SQS FIFO (First-In-First-Out)** là một loại hàng đợi (queue) do AWS cung cấp, được thiết kế đặc biệt để đảm bảo hai yếu tố cực kỳ quan trọng trong các hệ thống phân tán: **thứ tự xử lý tin nhắn** và  **tránh trùng lặp dữ liệu** .
+**Amazon SQS FIFO (First-In-First-Out)** is a queue type provided by AWS, specifically designed to ensure two extremely important factors in distributed systems: **message processing order** and **data deduplication**.
 
-#### 5.6.2 Kiến trúc hệ thống
+#### 5.6.2 System Architecture
 
 ![1783096083070](image/_index.vi/1783096083070.png)
 
-<div align="center"><i>Hình 5.6.1:Kiến trúc hệ thống.</i></div>
+<div align="center"><i>Figure 5.6.1: System architecture.</i></div>
 
-ví dụ với luồng xử lí POST /Economy/earn :
+Example with the POST /Economy/earn processing flow:
 
-* Client gửi POST /Economy/earn.
-* API Gateway chuyển request đến Producer Lambda.
-* Producer Lambda tạo message và gửi vào Amazon SQS FIFO, không ghi trực tiếp vào cơ sở dữ liệu.
-* Producer Lambda phản hồi ngay cho Client với trạng thái queued.
-* Amazon SQS kích hoạt Consumer Lambda khi có message.
-* Consumer Lambda mở transaction và sử dụng SELECT ... FOR UPDATE để khóa bản ghi, tránh xung đột dữ liệu.
-* Consumer Lambda xử lý nghiệp vụ và ghi dữ liệu vào Amazon Aurora/RDS.
-* Sau khi xử lý thành công, message được xóa khỏi SQS; nếu thất bại sẽ được retry hoặc chuyển sang DLQ.
+* Client sends POST /Economy/earn.
+* API Gateway forwards the request to Producer Lambda.
+* Producer Lambda creates a message and sends it to Amazon SQS FIFO, without writing directly to the database.
+* Producer Lambda responds immediately to the Client with a queued status.
+* Amazon SQS triggers Consumer Lambda when a message is available.
+* Consumer Lambda opens a transaction and uses SELECT ... FOR UPDATE to lock the record, preventing data conflicts.
+* Consumer Lambda processes the business logic and writes data to Amazon Aurora/RDS.
+* After successful processing, the message is deleted from SQS; on failure, it will be retried or moved to DLQ.
 
 #### 5.6.3 Setup SQS FIFO
 
-##### * Tạo FIFO Queue
+##### * Create FIFO Queue
 
-Định nghĩa queue trong services/sqs-infrastructure/serverless.yml:
+Define the queue in services/sqs-infrastructure/serverless.yml:
 
-```YAML
+```yaml
 EconomyQueue:
   Type: AWS::SQS::Queue
   Properties:
     QueueName: game-economy.fifo
     FifoQueue: true
-    ContentBasedDeduplication: true    # SQS tự động dedup dựa trên nội dung
-    VisibilityTimeout: 60              # 60s cho consumer xử lý
-    MessageRetentionPeriod: 345600     # 4 ngày
+    ContentBasedDeduplication: true    # SQS auto dedup based on content
+    VisibilityTimeout: 60              # 60s for consumer processing
+    MessageRetentionPeriod: 345600     # 4 days
     RedrivePolicy:
       deadLetterTargetArn: !GetAtt EconomyDLQ.Arn
-      maxReceiveCount: 3               # Retry 3 lần rồi chuyển DLQ
+      maxReceiveCount: 3               # Retry 3 times then move to DLQ
 ```
 
-##### * Khởi tạo SQS Consumer Lambda
+##### * Initialize SQS Consumer Lambda
 
 ![1783405716023](image/_index.vi/1783405716023.png)
 
-<div align="center"><i>Hình 5.6.2:Hệ thống SQS Consumer Lambda .</i></div>
+<div align="center"><i>Figure 5.6.2: SQS Consumer Lambda system.</i></div>
 
-##### * Cấu hình IAM
+##### * IAM Configuration
 
-File .env cho local development:
+.env file for local development:
 
 ```
 AWS_REGION=ap-southeast-1
@@ -68,11 +69,11 @@ STATS_QUEUE_URL=http://sqs.ap-southeast-1.localhost.localstack.cloud:4566/000000
 SAVE_DATA_QUEUE_URL=http://sqs.ap-southeast-1.localhost.localstack.cloud:4566/000000000000/game-save-data.fifo
 ```
 
-Thêm policy mới:
+Add new policy:
 
 ![1783404285339](image/_index.vi/1783404285339.png)
 
-<div align="center"><i>Hình 5.6.3:Thêm policy mới để cấp role khởi tạo sqs.</i></div>
+<div align="center"><i>Figure 5.6.3: Add new policy to grant SQS creation role.</i></div>
 
 ```json
 {
@@ -110,7 +111,7 @@ Thêm policy mới:
 }
 ```
 
-**Producer IAM** (trong services/lambda-economy/serverless.yml):
+**Producer IAM** (in services/lambda-economy/serverless.yml):
 
 ```yaml
 iamRoleStatements:
@@ -119,7 +120,7 @@ iamRoleStatements:
     Resource: !ImportValue EconomyQueueArn
 ```
 
-**Consumer IAM** (trong services/sqs-consumer-economy/serverless.yml):
+**Consumer IAM** (in services/sqs-consumer-economy/serverless.yml):
 
 ```yaml
 iamRoleStatements:
@@ -128,7 +129,7 @@ iamRoleStatements:
     Resource: !ImportValue EconomyQueueArn
 ```
 
-##### * Kết nối Producer
+##### * Connect Producer
 
 Shared SQS client (shared/src/sqs/producer.ts):
 
@@ -139,13 +140,13 @@ const client = new SQSClient({
 });
 ```
 
-Message gửi lên queue gồm:
+Message sent to the queue includes:
 
-- MessageGroupId: account_{accountId} (hoặc giftcode_{code})
-- MessageDeduplicationId: tự gen từ {type}_{entityId}_{timestamp}_{random}
-- MessageBody: JSON chứa type, payload, timestamp, requestId
+- MessageGroupId: account_{accountId} (or giftcode_{code})
+- MessageDeduplicationId: auto-generated from {type}_{entityId}_{timestamp}_{random}
+- MessageBody: JSON containing type, payload, timestamp, requestId
 
-Dùng SqsProducer class trong controller:
+Use SqsProducer class in controller:
 
 ```typescript
 // EconomyController.earnCurrency
@@ -157,7 +158,7 @@ const messageId = await SqsProducer.economyEarn({
 res.status(202).json({ success: true, status: 'queued', requestId: messageId });
 ```
 
-##### * Tạo Consumer Lambda
+##### * Create Consumer Lambda
 
 File services/sqs-consumer-economy/serverless.yml:
 
@@ -170,7 +171,7 @@ functions:
     events:
       - sqs:
           arn: !ImportValue EconomyQueueArn
-          batchSize: 1                    # FIFO bắt buộc batchSize = 1
+          batchSize: 1                    # FIFO requires batchSize = 1
           maximumConcurrency: 2
           functionResponseType: ReportBatchItemFailures
 ```
@@ -203,7 +204,7 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
 };
 ```
 
-Xử lý với pessimistic lock trong handler:
+Process with pessimistic lock in handler:
 
 ```typescript
 await ApplicationDbContext.manager.transaction(async (manager) => {
@@ -223,19 +224,19 @@ cd services/sqs-infrastructure
 serverless deploy --stage dev
 ```
 
-Stack tên gameapi-sqs-infrastructure-dev, sẽ tạo:
+Stack named gameapi-sqs-infrastructure-dev will create:
 
 - 5 FIFO queues (game-economy.fifo, game-inventory.fifo, game-giftcode.fifo, game-stats.fifo, game-save-data.fifo)
 
 ![1783403865434](image/_index.vi/1783403865434.png)
 
-<div align="center"><i>Hình 5.6.4: Deploy SQS thành công.</i></div>
+<div align="center"><i>Figure 5.6.4: SQS deployed successfully.</i></div>
 
-chú thích : các file dlq có trong queues sẽ được hướng dẫn setup và deploy ở phần 5.7 AWS SQS Dead Letter Queue
+Note: DLQ files in the queues will be set up and deployed in section 5.7 AWS SQS Dead Letter Queue.
 
-##### * Deploy consumer sqs
+##### * Deploy Consumer SQS
 
-ví dụ, deploy sqs-consumer-economy :
+Example: deploy sqs-consumer-economy:
 
 ```
 cd services/sqs-consumer-economy
@@ -244,35 +245,35 @@ serverless deploy --stage dev
 
 ![1783406146804](image/_index.vi/1783406146804.png)
 
-<div align="center"><i>Hình 5.6.5: Deploy Consumer sqs thành công.</i></div>
+<div align="center"><i>Figure 5.6.5: Consumer SQS deployed successfully.</i></div>
 
 #### 5.6.4 Test SQS FIFO
 
-##### * Xác nhận Producer Lambda gửi được message vào SQS FIFO
+##### * Verify Producer Lambda sends message to SQS FIFO
 
 ![1783409513213](image/_index.vi/1783409513213.png)
 
-<div align="center"><i>Hình 5.6.6: Gửi yêu cầu nhận tiền.</i></div>
+<div align="center"><i>Figure 5.6.6: Send earn currency request.</i></div>
 
 ![1783409553035](image/_index.vi/1783409553035.png)
 
-<div align="center"><i>Hình 5.6.7: message được trả về.</i></div>
+<div align="center"><i>Figure 5.6.7: Message returned.</i></div>
 
-##### * Kiểm tra Message vào Queue
+##### * Check Message in Queue
 
 ![1783409759694](image/_index.vi/1783409759694.png)
 
-<div align="center"><i>Hình 5.6.8: NumberOfMessagesSent tăng lên khi nhận request.</i></div>
+<div align="center"><i>Figure 5.6.8: NumberOfMessagesSent increases when receiving requests.</i></div>
 
-##### * Kiểm tra Consumer
+##### * Check Consumer
 
 ![1783410182104](image/_index.vi/1783410182104.png)
 
-<div align="center"><i>Hình 5.6.9: Consumer đã nhận được message.</i></div>
+<div align="center"><i>Figure 5.6.9: Consumer received the message.</i></div>
 
 ##### * FIFO Ordering
 
-Thực hiện gửi 5 yêu cầu nhận tiền liên tiếp :
+Send 5 consecutive earn currency requests:
 
 ```
 TOKEN="<jwt-token>"
@@ -289,13 +290,13 @@ done
 
 ![1783411392460](image/_index.vi/1783411392460.png)
 
-<div align="center"><i>Hình 5.6.10: SequenceNumber nhỏ nhất.</i></div>
+<div align="center"><i>Figure 5.6.10: Smallest SequenceNumber.</i></div>
 
 ![1783411453862](image/_index.vi/1783411453862.png)
 
-<div align="center"><i>Hình 5.6.11: SequenceNumber lớn nhất.</i></div>
+<div align="center"><i>Figure 5.6.11: Largest SequenceNumber.</i></div>
 
-SequenceNumber tăng dần theo thứ tự xử lý từ nhỏ nhất tới lớn nhất:
+SequenceNumber increases in processing order from smallest to largest:
 
 Message amount=20 → 18903297315744239872
 
@@ -305,12 +306,12 @@ Message amount=40 → 18903297315898607872
 
 Message amount=50 → 18903297315972591616
 
-#### 5.6.5 Tổng kết
+#### 5.6.5 Summary
 
-Hệ thống **Amazon SQS FIFO** đã được triển khai và tích hợp thành công với  **AWS Lambda** :
+The **Amazon SQS FIFO** system has been successfully deployed and integrated with **AWS Lambda**:
 
-* Producer gửi message thành công vào SQS FIFO.
-* Lambda Consumer tự động nhận và xử lý message.
-* FIFO đảm bảo thứ tự xử lý các message cùng MessageGroupId.
-* Hệ thống hoạt động theo mô hình xử lý bất đồng bộ, tăng hiệu năng và khả năng mở rộng.
-* Cơ chế Retry và Dead Letter Queue giúp nâng cao độ tin cậy và khả năng phục hồi khi xảy ra lỗi.
+* Producer successfully sends messages to SQS FIFO.
+* Lambda Consumer automatically receives and processes messages.
+* FIFO ensures processing order for messages with the same MessageGroupId.
+* The system operates on an asynchronous processing model, improving performance and scalability.
+* Retry mechanism and Dead Letter Queue enhance reliability and recovery capabilities when errors occur.

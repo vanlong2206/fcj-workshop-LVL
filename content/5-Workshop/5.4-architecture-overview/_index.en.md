@@ -1,17 +1,18 @@
 ---
-title : "Kiến trúc dự án"
+title : "Project Architecture"
 date : 2026-06-18
 weight : 4
 chapter : false
 pre : " <b> 5.4. </b> "
 ---
-#### 5.4.1 Tổng quan kiú3
 
-Kiến trúc hệ thống trước dự án trước khi triển khai:
+#### 5.4.1 Architecture Overview
+
+System architecture before project deployment:
 
 ![1782935686221](image/_index.vi/1782935686221.png)
 
-Kiến trúc hệ thống mong muốn sau khi triển khai với serverless (Lambda):
+Expected system architecture after deploying with serverless (Lambda):
 
 ```
 services/
@@ -63,32 +64,32 @@ services/
 └── docker-compose.yml              # Local development
 ```
 
-Hệ thống được xây dựng theo mô hình **Serverless Microservices** trên nền tảng AWS Lambda. Thay vì triển khai toàn bộ backend trong một ứng dụng duy nhất (Monolithic), hệ thống được chia thành nhiều Lambda Functions, mỗi Lambda phụ trách một nhóm nghiệp vụ (Business Domain) riêng.
+The system is built on a **Serverless Microservices** model on AWS Lambda. Instead of deploying the entire backend as a single monolithic application, the system is divided into multiple Lambda Functions, each responsible for a specific Business Domain.
 
-Mỗi Lambda được triển khai như một dịch vụ độc lập, có thể phát triển, kiểm thử và triển khai riêng biệt. Tất cả các dịch vụ được truy cập thông qua Amazon API Gateway và cùng sử dụng cơ sở dữ liệu Amazon Aurora PostgreSQL.
+Each Lambda is deployed as an independent service that can be developed, tested, and deployed separately. All services are accessed through Amazon API Gateway and share the same Amazon Aurora PostgreSQL database.
 
-Kiến trúc này giúp hệ thống dễ mở rộng, giảm chi phí vận hành và tăng khả năng bảo trì.
+This architecture makes the system easy to scale, reduces operational costs, and improves maintainability.
 
-#### 5.4.2 Triển khai hệ thống **Serverless Microservices** trên nền tảng AWS Lambda
+#### 5.4.2 Deploying **Serverless Microservices** on AWS Lambda
 
-##### * **Bước 1 : Phân tách domain**
+##### * **Step 1: Domain Separation**
 
 ![1783013847165](image/_index.vi/1783013847165.png)
 
-Mỗi domain có thể phát triển, deploy, scale độc lập. Service A gọi Service B qua HTTP.
+Each domain can be developed, deployed, and scaled independently. Service A calls Service B via HTTP.
 
-##### * **Bước 2: Thiết Lập Monorepo với npm Workspaces**
+##### * **Step 2: Setting Up Monorepo with npm Workspaces**
 
 ```
 gameapi/
-├── shared/                         # Package dùng chung (@gameapi/shared)
+├── shared/                         # Shared package (@gameapi/shared)
 │   └── src/
 │       ├── models/                 # TypeORM entities (Account, UserItem, FarmPlot...)
 │       ├── middlewares/            # authMiddleware, adminMiddleware
 │       ├── utils/                  # JwtHelper, PasswordHasher...
 │       └── DTO/                    # Request/Response types
 ├── services/
-│   ├── lambda-auth/                # Mỗi service là 1 workspace riêng
+│   ├── lambda-auth/                # Each service is a separate workspace
 │   ├── lambda-economy/
 │   ├── lambda-inventory/
 │   ├── lambda-transaction/
@@ -110,11 +111,11 @@ Root `package.json`:
 }
 ```
 
-Chia sẻ entities, middlewares, utils giữa các Lambda mà không cần copy-paste.
+Share entities, middlewares, and utilities between Lambdas without copy-pasting.
 
-##### * Bước 3: Xây Dựng Lambda Handler Pattern
+##### * Step 3: Building the Lambda Handler Pattern
 
-Mỗi service dùng `@vendia/serverless-express` để wrap Express app thành Lambda handler:
+Each service uses `@vendia/serverless-express` to wrap an Express app as a Lambda handler:
 
 ```typescript
 // services/lambda-auth/src/lambda.ts
@@ -131,11 +132,11 @@ export const handler = async (event, context) => {
 };
 ```
 
-Giữ nguyên code Express controller quen thuộc, hot-reload local với nodemon, chỉ thay đổi entry point khi lên Lambda.
+Keep the familiar Express controller code, hot-reload locally with nodemon, only change the entry point when deploying to Lambda.
 
-##### * Bước 4: Cấu Hình Serverless Framework Cho Từng Service
+##### * Step 4: Configuring Serverless Framework for Each Service
 
-```typescript
+```yaml
 # services/lambda-auth/serverless.yml
 service: gameapi-auth
 
@@ -170,9 +171,9 @@ custom:
     target: node20
 ```
 
-##### * Bước 5: Kết nối Database (Aurora PostgreSQL + IAM Auth)
+##### * Step 5: Database Connection (Aurora PostgreSQL + IAM Auth)
 
-Mỗi Lambda kết nối đến cùng 1 Aurora PostgreSQL cluster qua TypeORM:
+Each Lambda connects to the same Aurora PostgreSQL cluster via TypeORM:
 
 ```typescript
 // shared/src/config/database.ts
@@ -193,39 +194,39 @@ export const createApplicationDbContext = async () => {
   const dbConfig = await getDbConfigCached();
   return new DataSource({
     ...dbConfig,
-    synchronize: true,   // Tự động sync schema khi dev
+    synchronize: true,   // Auto sync schema during dev
     entities: [Account, UserCurrency, ..., FarmPlot]
   });
 };
 ```
 
-**IAM Auth:** Dùng `@aws-sdk/rds-signer` sinh token tự động, không cần lưu password trong env. IAM Role của Lambda cần `rds-db:connect` permission.
+**IAM Auth:** Uses `@aws-sdk/rds-signer` to generate tokens automatically, no need to store passwords in env. The Lambda IAM Role needs `rds-db:connect` permission.
 
-##### * Bước 6 : Giao Tiếp Giữa Các Service (Cross-Service HTTP)
+##### * Step 6: Cross-Service Communication (HTTP)
 
-Khi một Lambda cần gọi service khác (vd: `Shop.buyItem` cần trừ tiền ở Economy + thêm item vào Inventory), nó gọi HTTP đến API Gateway:
+When a Lambda needs to call another service (e.g., `Shop.buyItem` needs to deduct currency from Economy + add item to Inventory), it makes HTTP calls to API Gateway:
 
-```TypeScript
-// lambda-transaction gọi lambda-economy
+```typescript
+// lambda-transaction calls lambda-economy
 await axios.post(`${API_GATEWAY_URL}/Economy/spend`, {
   accountId, amount, currency
 });
 
-// lambda-transaction gọi lambda-inventory
+// lambda-transaction calls lambda-inventory
 await axios.post(`${API_GATEWAY_URL}/Inventory/add`, {
   accountId, itemId, quantity
 });
 ```
 
-Service độc lập, không share DB trực tiếp, chỉ giao tiếp qua API. `API_GATEWAY_URL` được inject qua environment variable.
+Services are independent and do not share the DB directly; they communicate only through APIs. `API_GATEWAY_URL` is injected via environment variable.
 
-##### * Bước 7: Deploy Script
+##### * Step 7: Deploy Script
 
-```typescript
+```bash
 #!/bin/bash
 # scripts/deploy-lambdas.sh
 
-# Batch 1: Core services (không phụ thuộc)
+# Batch 1: Core services (no dependencies)
 deploy_service "auth" &
 deploy_service "economy" &
 deploy_service "inventory" &

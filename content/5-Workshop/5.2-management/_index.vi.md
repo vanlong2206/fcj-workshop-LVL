@@ -27,7 +27,7 @@ Trong sơ đồ kiến trúc hệ thống, các hàm AWS Lambda được phân t
 				"rds-db:connect"
 			],
 			"Resource": [
-				"arn:aws:rds-db:ap-southeast-1:523877807717:dbuser:cluster-id/database-user-name"
+				"arn:aws:rds-db:<region>:<aws-account-id>:dbuser:cluster-id/database-user-name"
 			]
 		}
 	]
@@ -36,7 +36,7 @@ Trong sơ đồ kiến trúc hệ thống, các hàm AWS Lambda được phân t
 
 region: ap-southeast-1 là khu vực chạy database.
 
-account-id: 523877807717 là ID tài khoản AWS cho phép truy cập database.
+account-id: <aws-account-id> là ID tài khoản AWS cho phép truy cập database.
 
 cluster-id là ID của Aurora Cluster.
 
@@ -83,9 +83,9 @@ Tương tự...
             "Action": [
                 "lambda:InvokeFunction"
             ],
-            "Resource": [
-                "arn:aws:lambda:ap-southeast-1:523877807717:function:lambda-function-name"
-            ]
+			"Resource": [
+				"arn:aws:lambda:<region>:<aws-account-id>:function:lambda-function-name"
+			]
         }
     ]
 }
@@ -93,7 +93,7 @@ Tương tự...
 
 region: ap-southeast-1 là khu vực chạy database.
 
-account-id: 523877807717 là ID tài khoản AWS cho phép truy cập database.
+account-id: <aws-account-id> là ID tài khoản AWS cho phép truy cập database.
 
 lambda-function-name: tên function lambda phụ trách việc bảo trì database.
 

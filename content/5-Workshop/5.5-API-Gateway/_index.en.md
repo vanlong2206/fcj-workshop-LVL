@@ -1,31 +1,32 @@
 ---
-title: "Khởi tạo Amazon API Gateway"
+title: "Amazon API Gateway Setup"
 date: 2026-06-18
 weight: 5
 chapter: false
 pre: " <b> 5.5. </b> "
 ---
-#### 5.5.1 Giới thiệu về API Gateway
 
-Amazon API Gateway giúp tạo, xuất bản, bảo trì, theo dõi và bảo vệ các API ở bất kỳ quy mô nào. Trong hệ thống API Gateway đóng vai trò là cửa ngõ tiếp nhận tất cả các request từ Client và định tuyến đến các hàm xử lý logic (Lambda).
+#### 5.5.1 Introduction to API Gateway
 
-#### 5.5.2 Luồng hoạt động
+Amazon API Gateway helps create, publish, maintain, monitor, and secure APIs at any scale. In the system, API Gateway acts as the entry point that receives all requests from clients and routes them to the logic handler functions (Lambda).
+
+#### 5.5.2 Workflow
 
 ![1783018858523](image/_index.vi/1783018858523.png)
 
-<div align="center"><i>Hình 5.5.1: Luồng hoạt động api gateway</i></div>
+<div align="center"><i>Figure 5.5.1: API Gateway workflow</i></div>
 
-* Client gửi yêu cầu HTTP đến Amazon API Gateway.
-* API Gateway xác định Endpoint và định tuyến yêu cầu đến Lambda tương ứng.
-* Lambda được kích hoạt và khởi tạo môi trường thực thi.
-* Lambda chuyển yêu cầu đến Controller phù hợp để xử lý nghiệp vụ.
-* Controller truy cập Amazon Aurora PostgreSQL để đọc hoặc ghi dữ liệu.
-* Sau khi xử lý xong, Lambda trả kết quả về API Gateway.
-* API Gateway gửi phản hồi cuối cùng về cho Client.
+* Client sends an HTTP request to Amazon API Gateway.
+* API Gateway identifies the endpoint and routes the request to the corresponding Lambda.
+* Lambda is triggered and initializes the execution environment.
+* Lambda forwards the request to the appropriate Controller for business logic processing.
+* Controller accesses Amazon Aurora PostgreSQL to read or write data.
+* After processing, Lambda returns the result to API Gateway.
+* API Gateway sends the final response back to the Client.
 
-#### 5.5.3 Cấu hình AWS API GATEWAY
+#### 5.5.3 AWS API Gateway Configuration
 
-* Cấu hình AWS credentials :
+* Configure AWS credentials:
 
 ```env
 AWS_ACCESS_KEY_ID=
@@ -39,10 +40,10 @@ DB_SSL=true
 JWT_SECRET=
 ```
 
-- RDS cluster `<cluster-name>` (Aurora PostgreSQL 17) dùng IAM authentication:
+- RDS cluster `<cluster-name>` (Aurora PostgreSQL 17) uses IAM authentication:
 
 ```sql
--- Tạo user và cấp quyền
+-- Create user and grant permissions
 CREATE USER <db-username>;
 GRANT rds_iam TO <db-username>;
 GRANT ALL ON SCHEMA public TO <db-username>;
@@ -50,7 +51,7 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO <db-username>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO <db-username>;
 ```
 
-* Lambda IAM Role cần permission:
+* Lambda IAM Role needs permission:
 
 ```json
 {
@@ -60,7 +61,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO <db-username>;
 }
 ```
 
-* Code sinh IAM token (shared/src/config/database.ts):
+* IAM token generation code (shared/src/config/database.ts):
 
 ```typescript
 const signer = new Signer({
@@ -72,7 +73,7 @@ const signer = new Signer({
 const password = await signer.getAuthToken();
 ```
 
-* Khởi tạo serverless.yml cho các function lambda , ví dụ cấu hình cho function auth :
+* Initialize serverless.yml for Lambda functions, example configuration for the auth function:
 
 ```yaml
 service: gameapi-auth
@@ -117,7 +118,7 @@ custom:
     sourcemap: false
 ```
 
-* Deploy :
+* Deploy:
 
 ```shell
 npm run build:shared
@@ -143,84 +144,78 @@ gameapi-progression-world-dev-api  512MB  nodejs20.x
 gameapi-transaction-dev-api       512MB  nodejs20.x
 ```
 
-
 ![1783362971367](image/_index.vi/1783362971367.png)
 
-<div align="center"><i>Hình 5.5.2: api gateway của dự án</i></div>
-
-
+<div align="center"><i>Figure 5.5.2: Project API Gateway</i></div>
 
 ![1783362882458](image/_index.vi/1783362882458.png)
 
-<div align="center"><i>Hình 5.5.3: các route được khởi tạo</i></div>
+<div align="center"><i>Figure 5.5.3: Initialized routes</i></div>
 
-#### 5.5.4 Test AWS API GATEWAY
+#### 5.5.4 Test AWS API Gateway
 
 ![1783018546606](image/_index.vi/1783018546606.png)
 
-<div align="center"><i>Hình 5.5.4: Test đăng ký user</i></div>
+<div align="center"><i>Figure 5.5.4: Test user registration</i></div>
 
 ![1783018562951](image/_index.vi/1783018562951.png)
 
-<div align="center"><i>Hình 5.5.5: Đăng nhập user.</i></div>
+<div align="center"><i>Figure 5.5.5: User login.</i></div>
 
 ![1783349316662](image/_index.vi/1783349316662.png)
 
-<div align="center"><i>Hình 5.5.6:Xem dashboard.</i></div>
+<div align="center"><i>Figure 5.5.6: View dashboard.</i></div>
 
 ![1783362731585](image/_index.vi/1783362731585.png)
 
-<div align="center"><i>Hình 5.5.7: Lambda nhận request thành công</i></div>
+<div align="center"><i>Figure 5.5.7: Lambda received request successfully</i></div>
 
 ![1783349378894](image/_index.vi/1783349378894.png)
 
-<div align="center"><i>Hình 5.5.8:Xem số dư ví.</i></div>
-
-
+<div align="center"><i>Figure 5.5.8: View wallet balance.</i></div>
 
 ![1783363100297](image/_index.vi/1783363100297.png)
 
-<div align="center"><i>Hình 5.5.9: Lambda nhận request thành công</i></div>
-
+<div align="center"><i>Figure 5.5.9: Lambda received request successfully</i></div>
 
 ![1783349432243](image/_index.vi/1783349432243.png)
 
-<div align="center"><i>Hình 5.5.10: Lấy danh sách trang bị</i></div>
+<div align="center"><i>Figure 5.5.10: Get equipment list</i></div>
 
 ![1783018613506](image/_index.vi/1783018613506.png)
 
-<div align="center"><i>Hình 5.5.11: Mua trang bị</i></div>
+<div align="center"><i>Figure 5.5.11: Purchase equipment</i></div>
 
 ![1783364104671](image/_index.vi/1783364104671.png)
 
-<div align="center"><i>Hình 5.5.12: Lambda nhận request thành công</i></div>
+<div align="center"><i>Figure 5.5.12: Lambda received request successfully</i></div>
 
-#### 5.5.5 Kết Quả
+#### 5.5.5 Results
 
 **Lambda Auth**
 
-POST /Accounts/Create → 201 Created: Tạo tài khoản người dùng thành công.
+POST /Accounts/Create → 201 Created: User account created successfully.
 
-POST /Accounts/Login → 200 OK: Đăng nhập và xác thực người dùng thành công.
+POST /Accounts/Login → 200 OK: User login and authentication successful.
 
 **Lambda Economy**
 
-GET /Economy/balance → 200 OK: Truy xuất số dư của người chơi thành công.
+GET /Economy/balance → 200 OK: Player balance retrieved successfully.
 
 **Lambda Inventory**
 
-GET /Inventory/sync → 200 OK: Đồng bộ dữ liệu kho đồ của người chơi thành công.
+GET /Inventory/sync → 200 OK: Player inventory data synchronized successfully.
 
 **Lambda Transaction**
 
-GET /Shop/items → 200 OK: Lấy danh sách vật phẩm trong cửa hàng thành công.
+GET /Shop/items → 200 OK: Shop item list retrieved successfully.
 
 **Lambda Progression World**
 
-GET /PlayerStats/profile → 200 OK: Truy xuất thông tin hồ sơ và tiến trình phát triển của người chơi thành công.
+GET /PlayerStats/profile → 200 OK: Player profile and progression info retrieved successfully.
 
 **Lambda Loot Reward**
 
-GET /Leaderboard → 200 OK: Lấy dữ liệu bảng xếp hạng thành công.
+GET /Leaderboard → 200 OK: Leaderboard data retrieved successfully.
 
-GET /GameData/ping → 200 OK: Kiểm tra trạng thái hoạt động của dịch vụ thành công.
+GET /GameData/ping → 200 OK: Service health check successful.
