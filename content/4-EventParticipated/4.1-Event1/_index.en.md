@@ -6,120 +6,66 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# Report on FCAJ Community Day
 
-# Report on "GenAI-powered App-DB Modernization workshop"
+| Info        | Details                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| Date        | 09/05/2026                                                                                 |
+| Location | 26th Floor, Bitexco Building, 02 Hai Trieu, Ben Nghe Ward, District 1, Ho Chi Minh City |
+| Role        | Attendee                                                                                |
 
-### Purpose of the Event
+## 4.1.1 Purpose of the Event
 
-- Share best practices in modern application design
-- Introduce DDD methodology and event-driven architecture
-- Guide selection of appropriate compute services
-- Introduce AI tools supporting the development lifecycle
+The sharing session focused on providing attendees with practical knowledge and experience in learning as well as career development in the field of information technology. The main content included:
 
-### Speaker List
+* Methods to maintain motivation and build effective learning habits.
+* How to leverage AI through Prompt Engineering to improve output quality.
+* Introduction to Serverless architecture on AWS and commonly used services.
+* Perspectives on foundational knowledge, mindset, and career orientation for software engineers.
+* Introduction to coordinating AI Agents in the software development lifecycle.
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+## 4.1.2 Speakers
 
-### Key Content
+* **Mr. Huynh Hoang Long** – Shared insights on learning psychology and how to maintain motivation.
+* **Mr. Thinh Nguyen** – Presented on Prompt Engineering, AI, and Serverless architecture on AWS.
+* **Mr. Khang** – Solutions Architect at Cloud Kinetics.
+* **Ms. Thao** – Software Developer at VIB.
 
-#### Negative Impacts of Legacy Application Architecture
+## 4.1.3 Key Content
 
-- Long product release time → Lost revenue/missed opportunities
-- Poor operational efficiency → Lost productivity, high costs
-- Non-compliance with security regulations → Security risks, reputational damage
+### Building Learning Motivation
 
-#### Transitioning to New Application Architecture - Microservice Architecture
+The speaker introduced several methods to sustain long-term learning. Instead of trying to learn too much at once, one should break goals into smaller, manageable pieces. Creating completion milestones or maintaining consistent daily learning streaks also helps increase discipline and reduce feelings of burnout.
 
-Transform into a modular system – each function is an **independent service** communicating through **events** with 3 core pillars:
+A notable point was the **2-minute rule**, which encourages handling small tasks immediately to avoid accumulation and procrastination habits.
 
-- **Queue Management**: Asynchronous task processing
-- **Caching Strategy:** Performance optimization
-- **Message Handling:** Flexible communication between services
+### Prompt Engineering and Serverless Architecture
 
-#### Domain-Driven Design (DDD)
+The next part focused on how to build effective prompts when working with Large Language Models (LLMs). A good prompt needs to clearly define the role, objective, context, input data, and desired output format. Additionally, techniques like **Chain of Thought** were introduced to help the model reason better on complex problems.
 
-- **4-step method**: Identify domain events → arrange timeline → identify actors → determine bounded contexts
-- **Bookstore case study**: Illustrates practical DDD application
-- **Context mapping**: 7 patterns for integrating bounded contexts
+The speaker also illustrated a Serverless architecture on AWS, where:
 
-#### Event-Driven Architecture
+* Amazon S3 and CloudFront serve static content.
+* Amazon Cognito handles user authentication.
+* API Gateway combined with AWS Lambda processes business logic.
+* Amazon Bedrock integrates AI models.
+* DynamoDB stores data and CloudWatch supports system monitoring.
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming
-- **Benefits**: Loose coupling, scalability, resilience
-- **Sync vs async comparison**: Understanding trade-offs
+### Foundation and Career Mindset
 
-#### Compute Evolution
+A key message emphasized was that AI only plays a supporting role and cannot replace the foundational knowledge and thinking ability of a programmer. Therefore, understanding system fundamentals, regularly asking "why," and maintaining work quality are crucial factors in career development.
 
-- **Shared Responsibility Model**: From EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Selection criteria
+The speaker also encouraged students to focus on gaining experience, expanding relationships, and continuous learning rather than only caring about income in the early stages.
 
-#### Amazon Q Developer
+### AI Agent in the Software Development Lifecycle
 
-- **SDLC automation**: From planning to maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+The session introduced a model that divides AI into different roles corresponding to each stage of the SDLC. Each AI Agent is responsible for a specific task such as requirements analysis, system design, programming, or testing. This approach helps reduce context confusion, improve output quality, and support development teams to work more efficiently.
 
-### What Was Learned
+## 4.1.4 Lessons Learned and Application Direction
 
-#### Design Thinking
+* Design prompts with clear structure when using AI to support programming or research.
+* Continue exploring AWS Serverless services such as Lambda, API Gateway, CloudFront, and Bedrock for application in real projects.
+* Spend time strengthening foundational knowledge of operating systems, computer networking, databases, and system design to reduce dependence on AI.
+* When using AI in software development, clearly divide tasks for each stage instead of asking AI to handle the entire project at once.
 
-- **Business-first approach**: Always start from business domain, not technology
-- **Ubiquitous language**: Importance of common vocabulary between business and tech teams
-- **Bounded contexts**: How to identify and manage complexity in large systems
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes
-- Using **Event-driven communication** instead of synchronous calls
-- **Integration patterns**: Understanding when to use sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria for choosing from VM → containers → serverless
-
-#### Modernization Strategy
-
-- **Phased approach**: Don't rush, need clear roadmap
-- **7Rs framework**: Multiple paths depending on application characteristics
-- **ROI measurement**: Cost reduction + business agility
-
-### Application to Work
-
-- **Apply DDD** to current project: Event storming sessions with business team
-- **Refactor microservices**: Use bounded contexts to identify service boundaries
-- **Implement event-driven patterns**: Replace some sync calls with async messaging
-- **Serverless adoption**: Pilot AWS Lambda for suitable use cases
-- **Try Amazon Q Developer**: Integrate into development workflow to boost productivity
-
-### Event Experience
-
-Participating in the **"GenAI-powered App-DB Modernization"** workshop was a very rewarding experience, providing a comprehensive view of modernizing applications and databases using modern methods and tools. Key highlights:
-
-#### Learning from Highly Skilled Speakers
-- Speakers from AWS and major technology organizations shared **best practices** in modern application design.
-- Through real case studies, I gained a deeper understanding of applying **Domain-Driven Design (DDD)** and **Event-Driven Architecture** to large projects.
-
-#### Hands-on Technical Experience
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.
-- Learned how to **decompose microservices** and identify **bounded contexts** to manage large system complexity.
-- Understood the trade-offs between **synchronous and asynchronous communication** as well as integration patterns like **pub/sub, point-to-point, streaming**.
-
-#### Modern Tool Application
-- Directly explored **Amazon Q Developer**, an AI tool supporting SDLC from planning to maintenance.
-- Learned how to **automate code transformation** and pilot serverless with **AWS Lambda**, enhancing development productivity.
-
-#### Networking and Exchange
-- The workshop created opportunities for direct exchange with experts, colleagues, and business teams, helping **improve ubiquitous language** between business and tech.
-- Through real examples, I recognized the importance of the **business-first approach**, always starting from business needs rather than focusing only on technology.
-
-#### Key Takeaways
-- Applying DDD and event-driven patterns helps reduce **coupling**, increase **scalability** and **resilience** for the system.
-- Modernization strategy needs a **phased approach** and **ROI measurement**, avoiding rushing full system transformation.
-- AI tools like Amazon Q Developer can **boost productivity** when integrated into existing development workflows.
-
-#### Event Photos
-* Add your photos here
-> Overall, the event not only provided technical knowledge but also changed my way of thinking about application design, system modernization, and effective team collaboration.
+![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![1784012809025](image/_index.vi/1784012809025.png)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)

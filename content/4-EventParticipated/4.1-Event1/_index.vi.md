@@ -5,121 +5,66 @@ weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
+# Bài thu hoạch sự kiện FCAJ Community Day
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+| Thông tin   | Chi tiết                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| Ngày        | 09/05/2026                                                                                 |
+| Địa điểm | Tầng 26 Tòa nhà Bitexco, 02 Hải Triều, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh |
+| Vai trò     | Người tham dự                                                                           |
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+## 4.1.1 Mục tiêu của sự kiện
 
-### Mục Đích Của Sự Kiện
+Buổi chia sẻ tập trung vào việc cung cấp cho người tham dự những kiến thức và kinh nghiệm thực tế trong quá trình học tập cũng như phát triển nghề nghiệp trong lĩnh vực công nghệ thông tin. Nội dung chính bao gồm:
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+* Các phương pháp duy trì động lực và xây dựng thói quen học tập hiệu quả.
+* Cách khai thác AI thông qua Prompt Engineering để nâng cao chất lượng kết quả.
+* Giới thiệu kiến trúc Serverless trên AWS và các dịch vụ thường được sử dụng.
+* Chia sẻ góc nhìn về nền tảng kiến thức, tư duy và định hướng nghề nghiệp của kỹ sư phần mềm.
+* Giới thiệu phương pháp phối hợp AI Agent trong quy trình phát triển phần mềm.
 
-### Danh Sách Diễn Giả
+## 4.1.2 Diễn giả
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+* **Mr. Huỳnh Hoàng Long** – Chia sẻ về tâm lý học trong học tập và cách duy trì động lực.
+* **Mr. Thịnh Nguyễn** – Trình bày về Prompt Engineering, AI và kiến trúc Serverless trên AWS.
+* **Mr. Khang** – Solutions Architect tại Cloud Kinetics.
+* **Ms. Thảo** – Software Developer tại VIB.
 
-### Nội Dung Nổi Bật
+## 4.1.3 Nội dung chính
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+### Xây dựng động lực học tập
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Diễn giả giới thiệu một số phương pháp giúp duy trì việc học trong thời gian dài. Thay vì cố gắng học quá nhiều trong một lần, nên chia mục tiêu thành những phần nhỏ để dễ thực hiện. Đồng thời, việc tạo các mốc hoàn thành hoặc duy trì chuỗi ngày học liên tục cũng giúp tăng tính kỷ luật và giảm cảm giác chán nản.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+Một điểm đáng chú ý là quy tắc  **2 phút** , khuyến khích xử lý ngay các công việc nhỏ để tránh tích tụ và hình thành thói quen trì hoãn.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+### Prompt Engineering và kiến trúc Serverless
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+Phần tiếp theo tập trung vào cách xây dựng prompt hiệu quả khi làm việc với các mô hình ngôn ngữ lớn (LLM). Một prompt tốt cần xác định rõ vai trò, mục tiêu, bối cảnh, dữ liệu đầu vào và định dạng đầu ra mong muốn. Bên cạnh đó, các kỹ thuật như **Chain of Thought** được giới thiệu nhằm hỗ trợ mô hình suy luận tốt hơn trong các bài toán phức tạp.
 
-#### Domain-Driven Design (DDD)
+Diễn giả cũng minh họa một kiến trúc Serverless trên AWS, trong đó:
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+* Amazon S3 và CloudFront phục vụ nội dung tĩnh.
+* Amazon Cognito đảm nhiệm xác thực người dùng.
+* API Gateway kết hợp AWS Lambda xử lý logic nghiệp vụ.
+* Amazon Bedrock tích hợp các mô hình AI.
+* DynamoDB lưu trữ dữ liệu và CloudWatch hỗ trợ giám sát hệ thống.
 
-#### Event-Driven Architecture
+### Nền tảng và tư duy nghề nghiệp
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+Một thông điệp được nhấn mạnh là AI chỉ đóng vai trò hỗ trợ, không thể thay thế kiến thức nền và khả năng tư duy của lập trình viên. Vì vậy, việc hiểu bản chất của hệ thống, thường xuyên đặt câu hỏi "vì sao" và duy trì chất lượng công việc là những yếu tố quan trọng trong quá trình phát triển sự nghiệp.
 
-#### Compute Evolution
+Diễn giả cũng khuyến khích sinh viên tập trung tích lũy kinh nghiệm, mở rộng mối quan hệ và học hỏi liên tục thay vì chỉ quan tâm đến thu nhập ở giai đoạn đầu.
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+### AI Agent trong quy trình phát triển phần mềm
 
-#### Amazon Q Developer
+Buổi chia sẻ giới thiệu mô hình phân chia AI thành nhiều vai trò khác nhau tương ứng với từng giai đoạn của SDLC. Mỗi AI Agent phụ trách một nhiệm vụ riêng như phân tích yêu cầu, thiết kế hệ thống, lập trình hoặc kiểm thử. Cách tiếp cận này giúp giảm nhầm lẫn về ngữ cảnh, nâng cao chất lượng đầu ra và hỗ trợ nhóm phát triển làm việc hiệu quả hơn.
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+## 4.1.4 Bài học và định hướng áp dụng
 
-### Những Gì Học Được
+* Thiết kế prompt có cấu trúc rõ ràng khi sử dụng AI để hỗ trợ lập trình hoặc nghiên cứu.
+* Tiếp tục tìm hiểu các dịch vụ Serverless của AWS như Lambda, API Gateway, CloudFront và Bedrock để áp dụng vào các dự án thực tế.
+* Dành thời gian củng cố kiến thức nền về hệ điều hành, mạng máy tính, cơ sở dữ liệu và thiết kế hệ thống nhằm giảm sự phụ thuộc vào AI.
+* Khi sử dụng AI trong phát triển phần mềm, nên phân chia rõ nhiệm vụ cho từng giai đoạn thay vì yêu cầu AI xử lý toàn bộ dự án trong một lần.
 
-#### Tư Duy Thiết Kế
-
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
-
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
-
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
-
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![1784012809025](image/_index.vi/1784012809025.png)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)
