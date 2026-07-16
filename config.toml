@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/fcj-workshop-LVL/"
+baseURL = "https://vanlong2206.github.io/fcj-workshop-LVL/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "vi"
