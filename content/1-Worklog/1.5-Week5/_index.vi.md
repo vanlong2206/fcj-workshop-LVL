@@ -1,32 +1,59 @@
 ---
 title: "Worklog Tuần 5"
-date: 2026-06-01
+date: 2026-05-18
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
 
+
 ### Mục tiêu tuần 5:
 
-* Thiết lập Monorepo với npm Workspaces để quản lý mã nguồn đa service.
-* Xây dựng Lambda Handler Pattern chuẩn cho tất cả các service.
-* Cấu hình Serverless Framework cho từng service để triển khai lên AWS.
-* Kết nối database qua TypeORM kết hợp IAM Auth.
+* Tham gia sự kiện FCAJ Community Day và hoàn thành báo cáo về sự kiện.
+* Tiếp tục nghiên cứu Module 4 trên nền tảng Amazon Web Services.
+* Thực hiện các bài Lab thuộc Module 4 về dịch vụ lưu trữ, sao lưu và quản lý dữ liệu trên AWS.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu / Ghi chú |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Thiết lập Monorepo với npm Workspaces: <br> + Cấu trúc thư mục: packages/shared, services/*. <br> + Khởi tạo root package.json với workspaces. <br> + Chia sẻ code chung (types, utils) qua shared package. | 02/06/2026 | 02/06/2026 | |
-| 3 | - Xây dựng Lambda Handler Pattern: <br> + Thiết kế base handler class với error handling, logging, response format. <br> + Middleware pattern: authentication, validation, rate limiting. <br> + Standard response format cho tất cả API endpoints. | 03/06/2026 | 03/06/2026 | |
-| 4 | - Cấu hình Serverless Framework: <br> + Tạo serverless.yml cho từng service. <br> + Cấu hình provider: runtime, region, stage, IAM Role. <br> + Cấu hình functions, events, environment variables. <br> + Plugin hỗ trợ: serverless-offline, serverless-dotenv. | 04/06/2026 | 04/06/2026 | |
-| 5 | - Kết nối database qua TypeORM + IAM Auth: <br> + Cấu hình TypeORM DataSource với Aurora PostgreSQL. <br> + Tích hợp IAM Auth: dùng AWS SDK để lấy database auth token. <br> + Tạo entities và migrations cho các bảng dữ liệu. | 05/06/2026 | 05/06/2026 | |
-| 6 - CN | - Kiểm tra tích hợp: <br> + Build monorepo, xác nhận dependency được resolve đúng. <br> + Chạy Lambda handler locally với serverless-offline. <br> + Kiểm tra kết nối database với IAM Auth. | 06/06/2026 | 07/06/2026 | |
+| 2 | - Hoàn thành các nội dung còn lại của Module 3 <br> - Chuẩn bị môi trường học tập cho Module 4 | 18/05/2026 | 18/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Tìm hiểu Module 4: AWS Storage <br>&emsp; + Amazon S3 <br>&emsp; + Storage Class <br>&emsp; + Access Point <br>&emsp; + Glacier | 19/05/2026 | 19/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Nghiên cứu Storage Gateway, AWS Backup, Snow Family <br> - Thực hành các Lab về AWS Backup và Storage Gateway | 20/05/2026 | 20/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Thực hành Lab Amazon FSx <br>&emsp; + Tạo File System <br>&emsp; + Kiểm tra hiệu năng <br>&emsp; + Quản lý File Shares | 21/05/2026 | 22/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| **7** | - **Tham gia sự kiện FCAJ Community Day** <br> - Ghi nhận các nội dung chia sẻ về Generative AI, Amazon Q, Amazon CloudFront, LLM và Multi-Agent Systems <br> - Thu thập tài liệu để viết báo cáo sự kiện | **23/05/2026** | **23/05/2026** | Nội bộ FCAJ |
 
 ### Kết quả đạt được tuần 5:
 
-* Thiết lập thành công Monorepo với npm Workspaces, chia sẻ code chung qua shared package, giúp quản lý mã nguồn nhất quán giữa các service.
-* Xây dựng Lambda Handler Pattern chuẩn với base handler, middleware support và response format thống nhất.
-* Cấu hình Serverless Framework hoàn chỉnh cho từng service với đầy đủ functions, events và environment variables.
-* Kết nối database thành công qua TypeORM + IAM Auth: sử dụng database auth token thay vì password truyền thống, tăng cường bảo mật.
-* Tạo entities và migrations cho các bảng dữ liệu chính, sẵn sàng phát triển business logic.
+* Tham gia sự kiện **FCAJ Community Day** và hoàn thành báo cáo về các nội dung được chia sẻ tại sự kiện.
+
+* Tiếp cận các công nghệ mới trên AWS như:
+  * Generative AI
+  * Amazon Q
+  * Amazon CloudFront
+  * Large Language Models (LLMs)
+  * Multi-Agent Systems
+
+* Hoàn thành việc nghiên cứu Module 4 trên nền tảng Amazon Web Services.
+
+* Nắm được kiến thức về:
+  * Amazon S3
+  * S3 Storage Class
+  * S3 Access Point
+  * Glacier
+  * AWS Backup
+  * AWS Storage Gateway
+  * AWS Snow Family
+  * Amazon FSx
+
+* Hoàn thành các bài Lab thuộc Module 4, bao gồm:
+  * AWS Backup
+  * Storage Gateway
+  * Amazon FSx
+  * S3 Static Website
+  * Amazon CloudFront
+  * Bucket Versioning
+  * Replication
+  * Clean up Resources
+
+* Cập nhật đầy đủ kết quả học tập, thực hành và báo cáo sự kiện vào nhật ký công việc, sẵn sàng tiếp tục các nội dung tiếp theo của chương trình.

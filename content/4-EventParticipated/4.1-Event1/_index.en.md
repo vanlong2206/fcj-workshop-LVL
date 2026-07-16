@@ -1,71 +1,143 @@
 ---
 title: "Event 1"
-date: 2024-01-01
+date: 2026-05-23
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# Report on FCAJ Community Day
 
-| Info        | Details                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| Date        | 09/05/2026                                                                                 |
-| Location | 26th Floor, Bitexco Building, 02 Hai Trieu, Ben Nghe Ward, District 1, Ho Chi Minh City |
-| Role        | Attendee                                                                                |
 
-## 4.1.1 Purpose of the Event
+# AWS Community Day Report
 
-The sharing session focused on providing attendees with practical knowledge and experience in learning as well as career development in the field of information technology. The main content included:
+### Purpose of the Event
 
-* Methods to maintain motivation and build effective learning habits.
-* How to leverage AI through Prompt Engineering to improve output quality.
-* Introduction to Serverless architecture on AWS and commonly used services.
-* Perspectives on foundational knowledge, mindset, and career orientation for software engineers.
-* Introduction to coordinating AI Agents in the software development lifecycle.
+- Introduce the latest trends in Artificial Intelligence (AI), Cloud Computing, and modern system architecture on AWS.
+- Share practical applications of Generative AI in enterprise environments.
+- Present real-world experiences and best practices from industry experts.
+- Help participants gain knowledge about Amazon CloudFront, Amazon Q, Large Language Models (LLMs), and Multi-Agent Systems.
 
-## 4.1.2 Speakers
+### Speakers
 
-* **Mr. Huynh Hoang Long** – Shared insights on learning psychology and how to maintain motivation.
-* **Mr. Thinh Nguyen** – Presented on Prompt Engineering, AI, and Serverless architecture on AWS.
-* **Mr. Khang** – Solutions Architect at Cloud Kinetics.
-* **Ms. Thao** – Software Developer at VIB.
+- **Truong Anh Tinh** – Platform Engineer, GoTymeX
+- **Pham Ng. Hai Anh** – AWS Community Builder, G-AsiaPacific Vietnam
+- **Nguyen Tuan Thinh** – DevOps Engineer
+- **Team VIB** – LotusHacks 2026
+- **Lam Cat Vy** – Senior Business Systems Analyst, VPBank
+- **Dao Duc** – Solution Architect, Cloud Kinetics
 
-## 4.1.3 Key Content
+### Key Topics
 
-### Building Learning Motivation
+#### Context Is Everything – Build Second Brain
 
-The speaker introduced several methods to sustain long-term learning. Instead of trying to learn too much at once, one should break goals into smaller, manageable pieces. Creating completion milestones or maintaining consistent daily learning streaks also helps increase discipline and reduce feelings of burnout.
+- Explained the importance of **context** in improving AI performance.
+- Introduced the concept of building a **Second Brain** to organize and reuse personal knowledge.
+- Demonstrated how structured information helps AI provide more accurate responses.
+- Shared practical methods for using AI effectively in daily work.
 
-A notable point was the **2-minute rule**, which encourages handling small tasks immediately to avoid accumulation and procrastination habits.
+#### Friendly AI Assistant with Amazon Q
 
-### Prompt Engineering and Serverless Architecture
+- Introduced **Amazon Q** as an AI assistant for developers and businesses.
+- Demonstrated how Amazon Q analyzes information from multiple sources.
+- Showed how AI can automate repetitive tasks and improve productivity.
+- Provided a live demonstration of context-aware question answering.
 
-The next part focused on how to build effective prompts when working with Large Language Models (LLMs). A good prompt needs to clearly define the role, objective, context, input data, and desired output format. Additionally, techniques like **Chain of Thought** were introduced to help the model reason better on complex problems.
+#### From Edge To Origin – CloudFront as Your Foundation
 
-The speaker also illustrated a Serverless architecture on AWS, where:
+- Explained how **Amazon CloudFront** works.
+- Highlighted its main benefits:
+  - Faster content delivery.
+  - Lower infrastructure costs.
+  - Enhanced security.
+  - Improved application availability.
+- Shared best practices and real-world deployment scenarios.
 
-* Amazon S3 and CloudFront serve static content.
-* Amazon Cognito handles user authentication.
-* API Gateway combined with AWS Lambda processes business logic.
-* Amazon Bedrock integrates AI models.
-* DynamoDB stores data and CloudWatch supports system monitoring.
+#### 36 Hours with LotusHacks – Building UTMorpho
 
-### Foundation and Career Mindset
+- Presented the journey of developing a project during the LotusHacks competition.
+- Explained the complete development process from idea to implementation.
+- Discussed challenges faced during a limited development timeline.
+- Shared lessons about teamwork, project management, and problem-solving.
 
-A key message emphasized was that AI only plays a supporting role and cannot replace the foundational knowledge and thinking ability of a programmer. Therefore, understanding system fundamentals, regularly asking "why," and maintaining work quality are crucial factors in career development.
+#### Enterprise-Grade Multi-Agent System
 
-The speaker also encouraged students to focus on gaining experience, expanding relationships, and continuous learning rather than only caring about income in the early stages.
+- Introduced the concept of **Multi-Agent Systems** in enterprise applications.
+- Presented a case study on building an AI-powered credit scoring system.
+- Compared Single-Agent and Multi-Agent architectures.
+- Explained how multiple AI agents collaborate to solve complex tasks efficiently.
 
-### AI Agent in the Software Development Lifecycle
+#### How LLM Actually Works
 
-The session introduced a model that divides AI into different roles corresponding to each stage of the SDLC. Each AI Agent is responsible for a specific task such as requirements analysis, system design, programming, or testing. This approach helps reduce context confusion, improve output quality, and support development teams to work more efficiently.
+- Explained how Large Language Models generate the next token.
+- Discussed the concept of **non-determinism** in LLMs.
+- Introduced factors that influence model outputs.
+- Shared techniques for improving response consistency.
 
-## 4.1.4 Lessons Learned and Application Direction
+### Knowledge Gained
 
-* Design prompts with clear structure when using AI to support programming or research.
-* Continue exploring AWS Serverless services such as Lambda, API Gateway, CloudFront, and Bedrock for application in real projects.
-* Spend time strengthening foundational knowledge of operating systems, computer networking, databases, and system design to reduce dependence on AI.
-* When using AI in software development, clearly divide tasks for each stage instead of asking AI to handle the entire project at once.
+#### AI Concepts
 
-![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![1784012809025](image/_index.vi/1784012809025.png)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)![](blob:https://www.facebook.com/65150fbb-87fb-4593-8457-bd61a0a06a1c)
+- Understood the importance of context in improving AI responses.
+- Learned that AI performs better with complete and well-structured information.
+- Recognized the advantages of Multi-Agent Systems for solving complex problems.
+
+#### Technical Knowledge
+
+- Learned how Amazon Q improves developer productivity.
+- Understood the architecture and working principles of Amazon CloudFront.
+- Gained insights into how LLMs generate responses.
+- Learned about the software development process through a real-world hackathon project.
+
+#### Practical Experience
+
+- Learned how AI solutions are implemented in enterprise environments.
+- Understood best practices for cloud application deployment.
+- Gained practical insights into building AI-powered applications.
+
+### Applications to Future Work
+
+- Apply knowledge management techniques to build a personal "Second Brain."
+- Use Amazon Q to improve productivity and information retrieval.
+- Utilize Amazon CloudFront to enhance application performance and security.
+- Explore Multi-Agent Systems for enterprise AI projects.
+- Improve prompt engineering skills by understanding how LLMs work.
+
+### Event Experience
+
+Participating in **AWS Community Day** provided valuable knowledge about Artificial Intelligence, Cloud Computing, and modern AWS technologies. The presentations combined theoretical concepts with practical demonstrations, making it easier to understand how these technologies can be applied in real-world projects.
+
+#### Learning from Experts
+
+- Gained insights from experienced professionals in AI and cloud technologies.
+- Learned practical approaches to implementing AWS solutions.
+- Explored successful real-world case studies.
+
+#### Technical Experience
+
+- Learned how context-aware AI systems are developed.
+- Understood the benefits of Amazon CloudFront.
+- Explored the principles of Large Language Models and Multi-Agent Systems.
+- Observed the software development process during the LotusHacks competition.
+
+#### Exploring Modern Technologies
+
+- Discovered Amazon Q and other AI-powered AWS services.
+- Learned about cloud technologies supporting AI applications.
+- Gained practical knowledge of enterprise cloud solutions.
+
+#### Networking and Knowledge Sharing
+
+- Had opportunities to exchange ideas with speakers and AWS community members.
+- Learned from discussions about cloud computing and AI development.
+- Expanded my understanding of modern software architecture.
+
+#### Key Takeaways
+
+- Context is one of the most important factors in building effective AI systems.
+- Amazon CloudFront improves application performance, security, and scalability.
+- Multi-Agent Systems provide an efficient solution for complex enterprise AI applications.
+- Understanding how LLMs work helps developers use AI tools more effectively in both learning and software development.
+
+#### Event Photos
+
+![Event 1](./Event-1.jpg)

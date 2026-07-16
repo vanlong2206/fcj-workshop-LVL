@@ -1,32 +1,58 @@
 ---
 title: "Worklog Week 5"
-date: 2026-06-01
+date: 2026-05-18
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
 
-### Week 5 Objectives:
+### Week 5 Objectives
 
-* Set up Monorepo with npm Workspaces for multi-service source code management.
-* Build a standard Lambda Handler Pattern for all services.
-* Configure Serverless Framework for each service to deploy to AWS.
-* Connect to the database using TypeORM with IAM Auth.
+* Participate in the **FCAJ Community Day** event and complete an event report.
+* Continue studying **Module 4** on the Amazon Web Services learning platform.
+* Complete the hands-on labs in **Module 4** covering AWS storage, backup, and data management services.
 
-### Weekly Tasks:
+### Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Tasks | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Set up Monorepo with npm Workspaces: <br> + Directory structure: packages/shared, services/*. <br> + Initialize root package.json with workspaces. <br> + Share common code (types, utils) via shared package. | 02/06/2026 | 02/06/2026 | |
-| Wed | - Build Lambda Handler Pattern: <br> + Design base handler class with error handling, logging, response format. <br> + Middleware pattern: authentication, validation, rate limiting. <br> + Standard response format for all API endpoints. | 03/06/2026 | 03/06/2026 | |
-| Thu | - Configure Serverless Framework: <br> + Create serverless.yml for each service. <br> + Configure provider: runtime, region, stage, IAM Role. <br> + Configure functions, events, environment variables. <br> + Plugins: serverless-offline, serverless-dotenv. | 04/06/2026 | 04/06/2026 | |
-| Fri | - Connect database via TypeORM + IAM Auth: <br> + Configure TypeORM DataSource with Aurora PostgreSQL. <br> + Integrate IAM Auth: use AWS SDK to get database auth token. <br> + Create entities and migrations for data tables. | 05/06/2026 | 05/06/2026 | |
-| Sat - Sun | - Integration testing: <br> + Build monorepo, verify dependencies resolve correctly. <br> + Run Lambda handler locally with serverless-offline. <br> + Test database connection with IAM Auth. | 06/06/2026 | 07/06/2026 | |
+| Monday | - Complete the remaining contents of Module 3 <br> - Prepare the learning environment for Module 4 | 18/05/2026 | 18/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Tuesday | - Study Module 4: AWS Storage <br>&emsp; + Amazon S3 <br>&emsp; + Storage Classes <br>&emsp; + Access Points <br>&emsp; + Amazon S3 Glacier | 19/05/2026 | 19/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Wednesday | - Study AWS Storage Gateway, AWS Backup, and the AWS Snow Family <br> - Complete hands-on labs on AWS Backup and Storage Gateway | 20/05/2026 | 20/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Thursday | - Complete Amazon FSx labs <br>&emsp; + Create a File System <br>&emsp; + Test performance <br>&emsp; + Manage File Shares | 21/05/2026 | 22/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Saturday | - Participate in the **FCAJ Community Day** event <br> - Learn about Generative AI, Amazon Q, Amazon CloudFront, Large Language Models (LLMs), and Multi-Agent Systems <br> - Collect materials for the event report | 23/05/2026 | 23/05/2026 | FCAJ Internal |
 
-### Week 5 Results:
+### Week 5 Achievements
 
-* Successfully set up Monorepo with npm Workspaces, sharing common code via shared package for consistent source management across services.
-* Built a standard Lambda Handler Pattern with base handler, middleware support, and unified response format.
-* Configured Serverless Framework completely for each service with full functions, events, and environment variables.
-* Connected to the database successfully using TypeORM + IAM Auth, using database auth tokens instead of traditional passwords for enhanced security.
-* Created entities and migrations for core data tables, ready for business logic development.
+* Participated in the **FCAJ Community Day** event and completed a report summarizing the key topics presented during the event.
+
+* Gained exposure to emerging AWS technologies, including:
+  * Generative AI
+  * Amazon Q
+  * Amazon CloudFront
+  * Large Language Models (LLMs)
+  * Multi-Agent Systems
+
+* Successfully completed the study of **Module 4** on the Amazon Web Services learning platform.
+
+* Gained a solid understanding of the following AWS services:
+  * Amazon S3
+  * S3 Storage Classes
+  * S3 Access Points
+  * Amazon S3 Glacier
+  * AWS Backup
+  * AWS Storage Gateway
+  * AWS Snow Family
+  * Amazon FSx
+
+* Successfully completed the hands-on labs in **Module 4**, including:
+  * AWS Backup
+  * AWS Storage Gateway
+  * Amazon FSx
+  * Amazon S3 Static Website Hosting
+  * Amazon CloudFront
+  * Bucket Versioning
+  * Cross-Region Replication
+  * Resource Cleanup
+
+* Updated the work log with all learning activities, hands-on lab results, and the event report, and prepared to continue with the next phase of the training program.

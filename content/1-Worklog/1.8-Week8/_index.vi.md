@@ -1,35 +1,45 @@
 ---
 title: "Worklog Tuần 8"
-date: 2026-06-22
+date: 2026-06-08
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
 
+
 ### Mục tiêu tuần 8:
 
-* Tạo HTTP API V2 tập trung để quản lý toàn bộ các endpoints của hệ thống.
-* Cấu hình routing cho từng service và deploy lên AWS.
-* Kiểm thử toàn bộ API hệ thống.
+* Hoàn thành các nội dung của **Module 6** trên nền tảng Amazon Web Services.
+* Thực hành các bài Lab về Amazon RDS, Amazon Aurora và AWS Database Migration Service (DMS).
+* Nâng cao kiến thức về dịch vụ cơ sở dữ liệu, triển khai, sao lưu, khôi phục và di chuyển dữ liệu trên AWS.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu / Ghi chú |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Thiết kế cấu trúc HTTP API V2:<br>+ Xác định các routes cho từng service (auth, inventory, economy, transaction).<br>+ Lên kế hoạch mapping giữa API Gateway paths và Lambda functions. | 23/06/2026 | 23/06/2026 | |
-| 3 | - Tạo HTTP API V2 trên API Gateway:<br>+ Cấu hình CORS cho phép client truy cập.<br>+ Thiết lập các stages (dev, staging, prod).<br>+ Tích hợp Lambda authorizer cho các endpoints yêu cầu xác thực. | 24/06/2026 | 24/06/2026 | |
-| 4 | - Cấu hình routing chi tiết:<br>+ Định nghĩa routes và integrations cho từng Lambda.<br>+ Thiết lập request/response transformation nếu cần.<br>+ Cấu hình throttle và rate limiting. | 25/06/2026 | 25/06/2026 | |
-| 5 | - Deploy toàn bộ Compute Services + API Gateway:<br>+ Deploy các Lambda functions lên AWS.<br>+ Cập nhật environment variables và permissions.<br>+ Deploy API Gateway lên stage production. | 26/06/2026 | 26/06/2026 | |
-| 6 - CN | - Kiểm thử toàn diện hệ thống API:<br>+ Kiểm thử từng endpoint riêng lẻ.<br>+ Kiểm thử luồng xuyên suốt (end-to-end).<br>+ Kiểm tra error handling và response codes.<br>+ Tối ưu performance (cold start, latency). | 27/06/2026 | 28/06/2026 | |
+| 2 | - Học các nội dung Database Concepts.<br>- Tìm hiểu Amazon RDS và Amazon Aurora.<br>- Thực hành tạo VPC, Security Group và DB Subnet Group. | 08/06/2026 | 08/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Tạo EC2 Instance và RDS Database.<br>- Triển khai ứng dụng kết nối cơ sở dữ liệu.<br>- Thực hành Backup và Restore dữ liệu. | 09/06/2026 | 09/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Thực hành AWS Database Migration Service (DMS).<br>- Cấu hình Source, Target Database và Schema Conversion.<br>- Tạo Migration Project và Migration Task. | 10/06/2026 | 10/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Kiểm tra kết quả Migration.<br>- Theo dõi Logs, xử lý lỗi và Troubleshooting.<br>- Dọn dẹp tài nguyên (Resource Cleanup). | 11/06/2026 | 12/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
 ### Kết quả đạt được tuần 8:
 
-* Thiết kế và triển khai thành công HTTP API V2 tập trung, quản lý toàn bộ routes cho tất cả services.
-* Hoàn thành cấu hình routing chi tiết với CORS, Lambda authorizer, và các stage environments.
-* Deploy thành công toàn bộ Compute Services (lambda-auth, lambda-inventory, lambda-economy, lambda-transaction) lên AWS.
-* API Gateway được deploy lên stage production sẵn sàng phục vụ.
-* Hoàn thành kiểm thử toàn diện:
-  * Tất cả endpoints hoạt động đúng chức năng.
-  * Luồng end-to-end: authentication -> authorization -> business logic -> response hoạt động ổn định.
-  * Error handling trả về mã lỗi phù hợp (400, 401, 403, 404, 500).
-  * Đã tối ưu cold start bằng cách tăng allocated memory cho Lambda.
+* Hoàn thành nội dung **Module 6** trên nền tảng Amazon Web Services.
+* Nắm được kiến thức về:
+  * Database Concepts.
+  * Amazon RDS.
+  * Amazon Aurora.
+  * Amazon Redshift.
+  * Amazon ElastiCache.
+  * AWS Database Migration Service (DMS).
+* Hoàn thành các bài Lab thuộc Module 6, bao gồm:
+  * Tạo VPC, Security Group và DB Subnet Group.
+  * Triển khai EC2 và Amazon RDS.
+  * Backup và Restore cơ sở dữ liệu.
+  * Cấu hình Source và Target Database.
+  * Schema Conversion.
+  * Tạo Migration Project và Migration Task.
+  * Theo dõi Logs và xử lý lỗi trong quá trình Migration.
+  * Resource Cleanup.
+* Hiểu và áp dụng được quy trình triển khai, quản lý, sao lưu và di chuyển cơ sở dữ liệu trên AWS.
+* Cập nhật đầy đủ kết quả học tập và thực hành vào nhật ký công việc, sẵn sàng tiếp tục các nội dung của Module 7 trong tuần tiếp theo.

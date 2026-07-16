@@ -1,32 +1,32 @@
 ---
 title: "Báo cáo thực tập"
-date: 2024-01-01
+date: 2026-07-16
 weight: 1
 chapter: false
 ---
+
 # Báo cáo thực tập
 
 ### Thông tin sinh viên:
+&emsp; **Họ và tên:** Lại Văn Long
 
-![1783962734622](image/_index.vi/1783962734622.png)
+&emsp; **Số điện thoại:** 0938699884
 
-&emsp; **Họ và tên:** Trần Văn Quân
+&emsp; **Email:** vanlong2264@gmail.com
 
-&emsp; **Số điện thoại:** 0589694852
-
-&emsp; **Email:** tvquan2004@gmail.com
-
-&emsp; **Trường:** Đại học Công nghệ TP.HCM (HUTECH)
+&emsp; **Trường:** Đại học Công nghệ TP. Hồ Chí Minh (HUTECH)
 
 &emsp; **Ngành:** Công nghệ thông tin
 
-&emsp; **Lớp:** 22DTHE5
+&emsp; **Lớp:** 22DTHG8
 
-&emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Việt Nam
+&emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Viet Nam
 
 &emsp; **Vị trí thực tập:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Thời gian thực tập:** Từ ngày 05/05/2026 đến ngày 30/7/2026
+&emsp; **Thời gian thực tập:** Từ ngày 17/04/2026 đến ngày 12/07/2026
+
+![Ảnh đại diện của bạn](images/avatar.png)
 
 ### Nội dung báo cáo
 

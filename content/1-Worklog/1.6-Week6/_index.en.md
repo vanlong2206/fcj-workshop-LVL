@@ -1,33 +1,49 @@
 ---
 title: "Worklog Week 6"
-date: 2026-06-08
+date: 2026-05-25
 weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
-### Week 6 Objectives:
+### Week 6 Objectives
 
-* Build Core Services for the Backend Game API system.
-* Develop lambda-auth: user authentication and authorization.
-* Develop lambda-inventory: inventory and equipment management.
-* Develop lambda-economy: in-game currency management (Coin, Gem).
+* Complete the remaining contents of **Module 4** on the Amazon Web Services learning platform.
+* Begin studying **Module 5**, focusing on AWS security and identity management.
+* Complete the hands-on labs on **IAM, AWS Security Hub, Resource Groups, and AWS resource management**.
 
-### Weekly Tasks:
+### Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Tasks | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Detail design of Core Services: <br> + Define API endpoints for each service. <br> + Design database schema: users, inventory_items, currencies. <br> + Define data flow between services. | 09/06/2026 | 09/06/2026 | |
-| Wed | - Develop lambda-auth: <br> + Build signup, sign-in, refresh token APIs. <br> + JWT token validation. <br> + Authentication middleware for other services. | 10/06/2026 | 10/06/2026 | |
-| Thu | - Develop lambda-inventory: <br> + API to add items to inventory. <br> + API to list items, equipment. <br> + API to equip/unequip items. <br> + Update item quantities on usage. | 11/06/2026 | 11/06/2026 | |
-| Fri | - Develop lambda-economy: <br> + API to add/deduct Coin, Gem. <br> + API to check balance. <br> + API for transaction history. <br> + Handle concurrent transactions safely. | 12/06/2026 | 12/06/2026 | |
-| Sat - Sun | - Test Core Services: <br> + Test each Lambda individually. <br> + Test integration flow: auth -> inventory/economy. <br> + Verify error handling. <br> + Optimize Lambda performance. | 13/06/2026 | 14/06/2026 | |
+| Monday | - Complete the remaining contents of Module 4 <br> - Review AWS Storage and AWS Backup services | 25/05/2026 | 25/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Tuesday | - Begin Module 5 <br>&emsp; + AWS Shared Responsibility Model <br>&emsp; + AWS Identity and Access Management (IAM) <br>&emsp; + Amazon Cognito | 26/05/2026 | 26/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Wednesday | - Study AWS Organizations <br>&emsp; + IAM Identity Center <br>&emsp; + AWS Key Management Service (KMS) <br>&emsp; + AWS Security Hub | 27/05/2026 | 27/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Thursday | - Complete AWS Security Hub labs <br> - Practice managing VPC, EC2, Lambda, and Resource Tags <br> - Practice working with IAM Users, IAM Policies, IAM Roles, and Switch Roles | 28/05/2026 | 29/05/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 6 Results:
+### Week 6 Achievements
 
-* Completed detailed design of Core Services architecture with full API endpoints and database schema.
-* lambda-auth fully developed: sign-up, sign-in, JWT authentication, refresh token, auth middleware.
-* lambda-inventory operational with full functionality: inventory management, add/remove items, equip/unequip.
-* lambda-economy manages in-game currency (Coin, Gem) with safe concurrent transaction handling and detailed transaction history.
-* Integration testing successful: authentication -> authorization -> business logic flow works stably.
-* All 3 Core Services ready for deployment, serving as the foundation for Dependent Services in the following weeks.
+* Successfully completed the remaining contents of **Module 4** and began studying **Module 5**.
+
+* Gained a solid understanding of:
+  * AWS Shared Responsibility Model
+  * AWS Identity and Access Management (IAM)
+  * Amazon Cognito
+  * AWS Organizations
+  * IAM Identity Center
+  * AWS Key Management Service (KMS)
+  * AWS Security Hub
+
+* Successfully completed the hands-on labs in **Module 5**, including:
+  * AWS Security Hub
+  * Resource Tags
+  * AWS Lambda
+  * IAM Users
+  * IAM Policies
+  * IAM Roles
+  * Switch Roles
+  * Resource Cleanup
+
+* Learned how to manage users, configure access permissions, and strengthen security on AWS using IAM and related security services.
+
+* Updated the work log with all learning activities and hands-on lab results, and prepared to continue the remaining contents of **Module 5** in the following week.

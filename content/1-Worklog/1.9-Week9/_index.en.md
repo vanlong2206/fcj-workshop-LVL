@@ -1,32 +1,54 @@
 ---
 title: "Worklog Week 9"
-date: 2026-06-29
+date: 2026-06-15
 weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
 
-### Week 9 Objectives:
+## Week 9 Objectives
 
-* Build an asynchronous processing system with SQS FIFO to ensure transaction order.
-* Configure Producer Lambda to send messages to the SQS queue.
-* Build Consumer Lambda to receive and process messages from SQS.
-* Implement pessimistic locking in transactions to prevent race conditions.
+* Complete **Module 6** on AWS database services.
+* Complete hands-on labs for Amazon RDS, Amazon Aurora, and AWS Database Migration Service (DMS).
+* Begin **Module 7** by learning AWS analytics services, including Amazon Kinesis, AWS Glue, Amazon Athena, Amazon QuickSight, and Amazon DynamoDB.
 
-### Weekly Tasks:
+## Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Mon | - Learn SQS FIFO mechanism:<br>+ Compare Standard Queue vs FIFO Queue.<br>+ How FIFO ensures message order (First-In-First-Out).<br>+ Message Group ID and Deduplication ID. | 30/06/2026 | 30/06/2026 | |
-| Tue | - Configure Producer Lambda:<br>+ Integrate AWS SDK to send messages to SQS FIFO.<br>+ Set Message Group ID by player ID to ensure transaction order per player.<br>+ Handle send errors and retry logic. | 01/07/2026 | 01/07/2026 | |
-| Wed | - Build Consumer Lambda:<br>+ Configure SQS trigger for Lambda.<br>+ Process received messages from the queue.<br>+ Implement pessimistic lock in transactions to prevent duplicate processing. | 02/07/2026 | 02/07/2026 | |
-| Thu | - Implement pessimistic locking:<br>+ Use database-level locking (SELECT FOR UPDATE).<br>+ Ensure consistency when multiple messages process the same resource.<br>+ Handle timeout and rollback on lock failure. | 03/07/2026 | 03/07/2026 | |
-| Fri - Sat | - Test the asynchronous system:<br>+ Send multiple concurrent messages, verify processing order.<br>+ Verify pessimistic lock works correctly.<br>+ Test error handling and retry. | 04/07/2026 | 05/07/2026 | |
+| 2 | - Study Module 6: Database Concepts, Amazon RDS, Amazon Aurora, Amazon Redshift, and Amazon ElastiCache. | 15/06/2026 | 15/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Complete the Amazon RDS Lab: Create a VPC, EC2 instance, DB Subnet Group, RDS instance, and perform Backup & Restore. | 16/06/2026 | 16/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Complete the AWS Database Migration Service (DMS) Lab: Configure source databases, perform schema conversion, create migration tasks, and troubleshoot migration issues. | 17/06/2026 | 18/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Begin Module 7: Practice using Amazon Kinesis Data Firehose, AWS Glue, Amazon Athena, Amazon QuickSight, and Amazon DynamoDB. | 19/06/2026 | 20/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 9 Results:
+## Week 9 Achievements
 
-* Mastered SQS FIFO architecture and its application in the game transaction system to ensure processing order.
-* Successfully built Producer Lambda sending messages to SQS FIFO with Message Group ID per player.
-* Consumer Lambda configured with SQS trigger, automatically processing messages when new data arrives.
-* Implemented pessimistic lock (SELECT FOR UPDATE) in transactions, ensuring no race conditions when processing multiple concurrent transactions on the same resource.
-* Asynchronous processing system operates stably, ensuring transaction order and data consistency.
+* Successfully completed **Module 6** on the Amazon Web Services learning platform.
+
+* Gained knowledge of:
+  * Amazon RDS and Amazon Aurora
+  * Amazon Redshift and Amazon ElastiCache
+  * Database Backup and Restore
+  * AWS Database Migration Service (DMS)
+
+* Successfully completed all Module 6 labs, including:
+  * Deploying Amazon RDS
+  * Configuring a VPC, EC2 instance, and DB Subnet Group
+  * Database Backup and Restore
+  * AWS Database Migration Service (DMS)
+  * Schema Conversion
+  * Migration Tasks
+  * Troubleshooting Database Migration
+  * Resource Cleanup
+
+* Completed the introductory topics of **Module 7**, including:
+  * Amazon Kinesis Data Firehose
+  * AWS Glue
+  * Amazon Athena
+  * Amazon QuickSight
+  * Amazon DynamoDB
+
+* Practiced building data processing pipelines, analyzing data with Amazon Athena, visualizing data using Amazon QuickSight, and gained hands-on experience with Amazon DynamoDB and NoSQL database management.
+
+* Updated the internship work log with all learning activities and hands-on practice results, and prepared to continue the remaining topics of **Module 7** in the following week.
+```

@@ -1,101 +1,140 @@
 ---
 title: "Event 3"
-date: 2024-01-01
+date: 2026-06-27
 weight: 1
 chapter: false
 pre: " <b> 4.3. </b> "
 ---
+
+
+
 # Bài thu hoạch sự kiện FCAJ Community Day
 
-| Thông tin   | Chi tiết                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| Ngày        | 27/6/2026                                                                                  |
-| Địa điểm | Tầng 26 Tòa nhà Bitexco, 02 Hải Triều, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh |
-| Vai trò     | Người tham gia                                                                           |
+### Mục Đích Của Sự Kiện
 
+- Cập nhật các xu hướng AI đang được áp dụng trong doanh nghiệp hiện đại.
+- Giới thiệu các giải pháp AWS hỗ trợ tự động hóa và tối ưu vận hành.
+- Chia sẻ kinh nghiệm triển khai AI Agent trong DevOps và Cloud.
+- Nâng cao nhận thức về bảo mật dữ liệu khi xây dựng các hệ thống AI.
 
-## 4.3.1 Mục Đích Của Sự Kiện
+### Danh Sách Diễn Giả
 
-Buổi chia sẻ tập trung vào việc giới thiệu các giải pháp ứng dụng AI trong môi trường doanh nghiệp, đặc biệt là trong lĩnh vực vận hành hạ tầng, tối ưu hệ thống đám mây và đảm bảo an toàn dữ liệu. Nội dung cũng đề cập đến các mô hình triển khai AI thực tế trên nền tảng AWS nhằm nâng cao hiệu quả vận hành và tự động hóa quy trình.
+- **Mr. Steve Trần** – Cloud Thinker
+- **Mr. Hiếu Nghị, Mr. Kiệt và Mr. Trung** – AI Voice Assistant
+- **Ms. Bảo và Mr. Nguyên Nguyễn** – Cloud Kinetics
+- **Mr. Trường và Ms. Minh Anh** – Noventic
+- **Mr. Toàn Nguyễn và Mr. Hiếu Nghị** – Renova Cloud
 
-## 4.3.2 Danh Sách Diễn Giả
+### Nội Dung Nổi Bật
 
-* **Mr. Steve Trần (Cloud Thinker):** Chuyên đề  *Vận hành Hạ tầng Đám mây và Kỷ nguyên Agentic Platform* .
-* **Mr. Hiếu Nghị & Mr. Kiệt & Mr. Trung:** Chuyên đề  *Xây dựng Trợ lý AI Giọng nói cho Doanh nghiệp* .
-* **Ms. Bảo & Mr. Nguyên Nguyễn (Cloud Kinetics):** Chuyên đề  *Triển khai DevOps AI Agent trên AWS* .
-* **Mr. Trường & Ms. Minh Anh (Noventic):** Chuyên đề  *Tự động hóa Quy trình Nhân sự với Amazon Q* .
-* **Mr. Toàn Nguyễn & Mr. Hiếu Nghị (Renova Cloud):** Chuyên đề  *Mô hình Bảo mật Private cho Amazon Q và MCP Server* .
+#### Ứng dụng AI Agent trong quản trị hạ tầng
 
-## 4.3.3 Nội Dung Nổi Bật
+Phần đầu chương trình giới thiệu cách AI Agent có thể hỗ trợ đội ngũ vận hành hệ thống thay vì chỉ thực hiện các thao tác thủ công.
 
-### Vận hành hạ tầng đám mây trong kỷ nguyên Agentic Platform
+- Phân tích log và hỗ trợ xác định nguyên nhân lỗi.
+- Đánh giá chất lượng source code trước khi triển khai.
+- Theo dõi mức sử dụng tài nguyên để tối ưu chi phí.
+- Hỗ trợ kiểm tra các vấn đề liên quan đến bảo mật.
 
-Phần trình bày giới thiệu mô hình **Agentic Platform** với mục tiêu hỗ trợ vận hành hệ thống thông minh hơn thông qua AI. Nền tảng này tập trung giải quyết bốn bài toán phổ biến gồm điều tra sự cố, đánh giá mã nguồn, tối ưu chi phí hạ tầng (FinOps) và tăng cường bảo mật.
+Bên cạnh đó, diễn giả cũng chia sẻ sự khác biệt giữa **Single Agent** và **Multi-Agent**, đồng thời đưa ra các tình huống phù hợp để áp dụng từng mô hình.
 
-Diễn giả cũng so sánh hai mô hình triển khai AI Agent:
+#### Giải pháp AI Voice Assistant
 
-* **Single Agent** có thể xử lý hiệu quả phần lớn tác vụ nếu được thiết kế đầy đủ ngữ cảnh và quy trình.
-* **Multi-Agent** chia nhỏ công việc cho nhiều Agent chuyên biệt nhằm tối ưu khả năng xử lý, quản lý context và phân quyền rõ ràng hơn.
+Buổi chia sẻ trình bày quy trình xây dựng trợ lý AI bằng giọng nói dành cho doanh nghiệp.
 
-Cách tiếp cận này giúp đội ngũ kỹ sư rút ngắn thời gian phân tích và xử lý sự cố trong môi trường vận hành thực tế.
+- Chuyển lời nói thành văn bản với **Speech-to-Text**.
+- Phân tích yêu cầu bằng **Large Language Model (LLM)**.
+- Chuyển kết quả thành giọng nói thông qua **Text-to-Speech**.
+- Tích hợp Guardrails, Streaming và API để đáp ứng nhu cầu thực tế.
 
-### Xây dựng trợ lý AI giọng nói cho doanh nghiệp
+#### AI hỗ trợ quy trình DevOps
 
-Nội dung tiếp theo trình bày kiến trúc xây dựng trợ lý AI sử dụng ba thành phần chính:
+AI Agent được sử dụng nhằm hỗ trợ kỹ sư trong quá trình vận hành hệ thống AWS.
 
-* **Speech-to-Text (STT)** chuyển giọng nói thành văn bản.
-* **Large Language Model (LLM)** xử lý nội dung và ngữ cảnh.
-* **Text-to-Speech (TTS)** tạo phản hồi bằng giọng nói.
+- Nhận cảnh báo từ Amazon CloudWatch.
+- Phân tích nguyên nhân của sự cố.
+- Đề xuất hướng xử lý phù hợp.
+- Hỗ trợ đánh giá và cải thiện hệ thống sau khi khắc phục lỗi.
 
-Việc sử dụng văn bản làm lớp trung gian giúp doanh nghiệp dễ dàng áp dụng Guardrails để kiểm soát nội dung cũng như tích hợp khả năng gọi API theo thời gian thực.
+#### Amazon Q và ứng dụng trong doanh nghiệp
 
-Ở môi trường Production, hệ thống cần bổ sung các cơ chế như Streaming nhằm giảm độ trễ, hỗ trợ nhiều vùng giọng nói, nhận diện giới tính, xử lý tình huống người dùng ngắt lời và chuyển tiếp cuộc gọi đến nhân viên khi cần thiết.
+Amazon Q được giới thiệu như một công cụ AI hỗ trợ nhiều nghiệp vụ nội bộ.
 
-### DevOps AI Agent trên AWS
+- Kết nối với GitHub, Jira, Google Workspace và nhiều nền tảng khác.
+- Hỗ trợ xử lý hồ sơ tuyển dụng.
+- Đánh giá ứng viên và tổng hợp dữ liệu.
+- Sinh báo cáo nhằm giảm khối lượng công việc thủ công.
 
-Chuyên đề giới thiệu giải pháp sử dụng AI Agent để hỗ trợ quy trình DevOps, đặc biệt trong việc tự động điều tra sự cố sau khi hệ thống phát sinh cảnh báo từ CloudWatch.
+#### Kiến trúc bảo mật cho Amazon Q
 
-Giải pháp được xây dựng dựa trên sáu thành phần chính:
+Chuyên đề cuối tập trung vào việc triển khai Amazon Q trong môi trường doanh nghiệp yêu cầu bảo mật cao.
 
-* Context Learning
-* Control
-* Integration
-* Collaboration
-* Convenient
-* Cost Effective
+- Áp dụng mô hình Zero Trust.
+- Đặt MCP Server trong Private Subnet.
+- Mã hóa kết nối bằng TLS.
+- Kết hợp Interface Endpoint và Route 53 để bảo vệ hệ thống khỏi truy cập không mong muốn.
 
-Quy trình xử lý bao gồm tiếp nhận cảnh báo, phân loại lỗi, phân tích nguyên nhân gốc (Root Cause Analysis), đề xuất hướng khắc phục trước mắt và đưa ra các cải tiến dài hạn. AI Agent chỉ đóng vai trò hỗ trợ và đề xuất, không trực tiếp thực hiện thay đổi trên hệ thống.
+### Những Gì Học Được
 
-### Ứng dụng Amazon Q trong quy trình nhân sự
+#### Kiến thức về AI
 
-Buổi chia sẻ giới thiệu Amazon Q như một trợ lý AI nội bộ phục vụ doanh nghiệp với khả năng đảm bảo tính bảo mật dữ liệu cao hơn so với các nền tảng AI công cộng.
+- AI Agent không chỉ hỗ trợ tạo nội dung mà còn có thể tham gia vào quá trình vận hành hệ thống.
+- Multi-Agent giúp chia nhỏ nhiệm vụ để nâng cao hiệu quả xử lý.
+- Chất lượng dữ liệu và ngữ cảnh có ảnh hưởng lớn đến kết quả của AI.
 
-Amazon Q có thể tích hợp với nhiều hệ thống như Google Workspace, Microsoft Workspace, Jira, Salesforce và GitHub thông qua MCP.
+#### Kiến thức kỹ thuật
 
-Trong quy trình tuyển dụng, hệ thống có thể tự động:
+- Hiểu rõ quy trình xây dựng AI Voice Assistant.
+- Biết thêm cách ứng dụng AI vào DevOps và Cloud Operations.
+- Nắm được khả năng tích hợp Amazon Q với các nền tảng doanh nghiệp.
+- Có thêm góc nhìn về cách triển khai AI trên hạ tầng AWS.
 
-* Phân tích tài liệu hướng dẫn tuyển dụng.
-* Trích xuất nội dung từ CV, bao gồm cả OCR.
-* Đánh giá và phân loại ứng viên.
-* Đề xuất mức lương cũng như xuất báo cáo thông qua các ứng dụng no-code.
+#### Kiến thức về bảo mật
 
-### Mô hình bảo mật Private cho Amazon Q và MCP Server
+- Data Governance cần được chuẩn bị ngay từ giai đoạn thiết kế.
+- Zero Trust là một trong những mô hình phù hợp khi triển khai AI trong doanh nghiệp.
+- Guardrails góp phần kiểm soát nội dung và hạn chế rủi ro khi sử dụng AI.
 
-Chuyên đề cuối cùng tập trung vào kiến trúc triển khai Amazon Q trong môi trường Private nhằm đảm bảo an toàn thông tin.
+### Ứng Dụng Vào Công Việc
 
-Giải pháp được xây dựng theo nguyên tắc  **Zero Trust** , giúp hạn chế các nguy cơ như tấn công DDoS hoặc Man-in-the-Middle.
+- Tìm hiểu khả năng sử dụng AI để hỗ trợ giám sát và xử lý sự cố hệ thống.
+- Thử nghiệm Amazon Q trong các công việc cần tổng hợp và tra cứu tài liệu.
+- Nghiên cứu mô hình Multi-Agent cho các dự án AI trong tương lai.
+- Quan tâm nhiều hơn đến các giải pháp bảo mật khi phát triển ứng dụng AI.
+- Tiếp tục cập nhật các dịch vụ AI và Cloud mới trên nền tảng AWS.
 
-Kiến trúc được đề xuất bao gồm:
+### Trải nghiệm trong event
 
-* Đặt MCP Server trong Private Subnet của VPC.
-* Amazon Q truy cập thông qua Interface Endpoint và VPC Connection.
-* Mã hóa lưu lượng bằng TLS thông qua Internal ALB kết hợp ACM và Amazon Cognito.
-* Sử dụng Route 53 Resolver để che giấu DNS nội bộ khỏi Internet.
+FCAJ Community Day mang đến nhiều nội dung thiết thực về AI và AWS, đặc biệt là các ví dụ triển khai trong môi trường doanh nghiệp. Các phiên chia sẻ không chỉ giới thiệu công nghệ mà còn phân tích cách áp dụng vào những tình huống thực tế, giúp người tham dự dễ dàng hình dung hơn.
 
-## 4.3.4 Ứng Dụng Vào Công Việc
+#### Điều tôi ấn tượng
 
-* Xem AI là công cụ hỗ trợ nhằm nâng cao hiệu quả công việc thay vì thay thế hoàn toàn vai trò của con người.
-* Khi triển khai AI trong doanh nghiệp cần ưu tiên Data Governance, Guardrails và các mô hình bảo mật Private trước khi đưa hệ thống vào môi trường Production.
-* Vận dụng tư duy Agentic Platform và Multi-Agent để hỗ trợ giám sát hệ thống, điều tra sự cố cũng như tối ưu chi phí vận hành trong các dự án sử dụng AWS.
+- Nội dung được trình bày theo các tình huống thực tế thay vì chỉ giới thiệu lý thuyết.
+- Nhiều ví dụ minh họa giúp dễ hiểu cách AI hỗ trợ vận hành hệ thống.
+- Các diễn giả chia sẻ kinh nghiệm triển khai dự án từ góc nhìn doanh nghiệp.
 
-![](blob:https://www.facebook.com/ebfcc44c-603b-4bb2-a1ce-9575e430ad4c)![1784013303527](image/_index.vi/1784013303527.png)
+#### Kiến thức tiếp thu
+
+- Hiểu thêm về kiến trúc AI Voice Assistant.
+- Biết cách AI Agent hỗ trợ quy trình DevOps.
+- Tiếp cận các giải pháp triển khai Amazon Q trên AWS.
+- Tìm hiểu mô hình bảo mật dành cho hệ thống AI.
+
+#### Giá trị thực tiễn
+
+- Có thêm định hướng trong việc ứng dụng AI vào công việc.
+- Hiểu rõ hơn vai trò của AWS trong việc xây dựng các hệ thống AI.
+- Mở rộng kiến thức về Cloud, AI Agent và tự động hóa.
+
+#### Kết nối và học hỏi
+
+- Gặp gỡ nhiều chuyên gia và thành viên trong cộng đồng AWS.
+- Lắng nghe các kinh nghiệm triển khai từ những dự án thực tế.
+- Trao đổi thêm về xu hướng AI và Cloud trong doanh nghiệp.
+
+#### Bài học rút ra
+
+- AI sẽ phát huy hiệu quả khi được kết hợp với quy trình và dữ liệu phù hợp.
+- Bảo mật cần được xem là yếu tố cốt lõi trong mọi giải pháp AI dành cho doanh nghiệp.
+- Multi-Agent là hướng phát triển đáng chú ý đối với các hệ thống AI trong tương lai.
+- Việc liên tục cập nhật công nghệ AWS sẽ giúp nâng cao kỹ năng và khả năng ứng dụng vào thực tế.

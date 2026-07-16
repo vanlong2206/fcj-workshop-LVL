@@ -1,31 +1,59 @@
 ---
 title: "Worklog Week 3"
-date: 2026-05-18
+date: 2026-05-04
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
 
-### Week 3 Objectives:
+### Week 3 Objectives
 
-* Set up IAM Policy and IAM Role to manage access permissions for AWS resources.
-* Calculate operational costs for the project using AWS Pricing Calculator.
-* Set up AWS Budgets: Cost Budget and Usage Budget for cost control.
+* Study the contents of **Module 2** on the Amazon Web Services learning platform.
+* Gain a solid understanding of **Amazon Virtual Private Cloud (VPC)**, AWS networking concepts, and networking services.
+* Complete the hands-on labs on **Amazon VPC, Hybrid DNS, VPC Peering, and AWS Transit Gateway**.
 
-### Weekly Tasks:
+### Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Tasks | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Learn about IAM (Identity and Access Management): <br> + Components: User, Group, Role, Policy. <br> + Difference between IAM User and IAM Role. <br> + Structure of an IAM Policy document (JSON). | 19/05/2026 | 19/05/2026 | |
-| Wed | - Set up IAM Policy: <br> + Write policies allowing Lambda to access RDS, SQS, S3. <br> + Apply the least privilege principle. <br> - Set up IAM Role: <br> + Create roles for Lambda with the written policies. <br> + Attach roles to Lambda functions. | 20/05/2026 | 20/05/2026 | |
-| Thu | - Calculate operational costs with AWS Pricing Calculator: <br> + Input estimated parameters: EC2, RDS, S3, Lambda, API Gateway. <br> + Estimate monthly costs. <br> + Plan for cost optimization. | 21/05/2026 | 21/05/2026 | |
-| Fri | - Set up AWS Budgets: <br> + Cost Budget: monthly spending budget. <br> + Usage Budget: resource usage limits. <br> + Configure email alerts when thresholds are exceeded. | 22/05/2026 | 22/05/2026 | |
-| Sat - Sun | - Review and finalize: <br> + Review created IAM Policies. <br> + Verify budgets are working. <br> + Document policies and budgets for the team. | 23/05/2026 | 24/05/2026 | |
+| Monday | - Study Module 2: AWS Networking <br> - Learn about Amazon VPC, VPC Security, and Multi-VPC architectures <br> - Study VPN, AWS Direct Connect, and Elastic Load Balancing | 04/05/2026 | 04/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Tuesday | - Complete Amazon VPC labs <br>&emsp; + Subnets <br>&emsp; + Route Tables <br>&emsp; + Internet Gateway <br>&emsp; + NAT Gateway <br>&emsp; + Security Groups <br>&emsp; + Network ACLs | 05/05/2026 | 05/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Wednesday | - Deploy a complete VPC environment <br>&emsp; + Create a VPC <br>&emsp; + Create Subnets <br>&emsp; + Launch EC2 Instances <br>&emsp; + Test network connectivity <br>&emsp; + Configure EC2 Instance Connect Endpoint | 06/05/2026 | 06/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Thursday | - Learn about Hybrid DNS using Amazon Route 53 Resolver <br> - Configure Outbound Endpoints, Inbound Endpoints, and Resolver Rules <br> - Verify the configuration and clean up AWS resources | 07/05/2026 | 08/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Friday | - Complete advanced networking labs <br>&emsp; + VPC Peering <br>&emsp; + AWS Transit Gateway <br>&emsp; + Configure Route Tables <br>&emsp; + Test network connectivity and clean up resources | 09/05/2026 | 09/05/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 3 Results:
+### Week 3 Achievements
 
-* Thoroughly understood IAM operation and IAM Policy document structure.
-* Successfully set up IAM Policies following the least privilege principle for all major services.
-* Created IAM Roles for Lambda with necessary access to RDS, SQS, and S3.
-* Completed project cost estimation using AWS Pricing Calculator, enabling accurate budget planning.
-* Set up AWS Budgets including Cost Budget and Usage Budget with email alerts, ensuring effective cost control.
+* Successfully completed the study of **Module 2** on the Amazon Web Services learning platform.
+
+* Gained a solid understanding of AWS networking concepts, including:
+  * Amazon VPC
+  * VPC Security
+  * Multi-VPC Architectures
+  * VPN
+  * AWS Direct Connect
+  * Elastic Load Balancing (ELB)
+
+* Successfully deployed and configured:
+  * Amazon VPC
+  * Subnets
+  * Route Tables
+  * Internet Gateway
+  * NAT Gateway
+  * Security Groups
+  * Network ACLs
+  * EC2 Instance Connect Endpoint
+
+* Acquired practical experience with **Hybrid DNS** using Amazon Route 53 Resolver, including the configuration of:
+  * Outbound Endpoints
+  * Inbound Endpoints
+  * Resolver Rules
+
+* Successfully completed the hands-on labs for:
+  * Amazon VPC
+  * Hybrid DNS
+  * VPC Peering
+  * AWS Transit Gateway
+  * Resource Cleanup
+
+* Updated the work log with all learning activities and hands-on lab results, and prepared to continue studying **Module 3**.

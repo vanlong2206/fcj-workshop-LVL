@@ -1,101 +1,140 @@
 ---
 title: "Event 3"
-date: 2024-01-01
+date: 2026-06-27
 weight: 1
 chapter: false
 pre: " <b> 4.3. </b> "
 ---
 
-# Report on FCAJ Community Day
 
-| Info        | Details                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| Date        | 27/06/2026                                                                                 |
-| Location | 26th Floor, Bitexco Building, 02 Hai Trieu, Ben Nghe Ward, District 1, Ho Chi Minh City |
-| Role        | Attendee                                                                                |
 
-## 4.3.1 Purpose of the Event
+# FCAJ Community Day Event Report
 
-The sharing session focused on introducing AI application solutions in the enterprise environment, particularly in infrastructure operations, cloud system optimization, and data security. The content also covered practical AI deployment models on AWS to improve operational efficiency and process automation.
+### Event Objectives
 
-## 4.3.2 Speaker List
+- Explore how Artificial Intelligence is being applied in modern enterprises.
+- Share practical experiences in deploying AWS services for real-world projects.
+- Introduce AI-powered solutions for automating operations and software development.
+- Enhance participants' understanding of cloud security, DevOps, and emerging AI technologies.
 
-* **Mr. Steve Tran (Cloud Thinker):** Topic *Cloud Infrastructure Operations in the Age of Agentic Platform*.
-* **Mr. Hieu Nghi & Mr. Kiet & Mr. Trung:** Topic *Building a Voice AI Assistant for Enterprises*.
-* **Ms. Bao & Mr. Nguyen Nguyen (Cloud Kinetics):** Topic *Deploying DevOps AI Agent on AWS*.
-* **Mr. Truong & Ms. Minh Anh (Noventic):** Topic *Automating HR Processes with Amazon Q*.
-* **Mr. Toan Nguyen & Mr. Hieu Nghi (Renova Cloud):** Topic *Private Security Model for Amazon Q and MCP Server*.
+### Speakers
 
-## 4.3.3 Notable Content
+- **Mr. Steve Tran** – Cloud Thinker
+- **Mr. Hieu Nghi, Mr. Kiet, and Mr. Trung** – AI Voice Assistant Session
+- **Ms. Bao and Mr. Nguyen Nguyen** – Cloud Kinetics
+- **Mr. Truong and Ms. Minh Anh** – Noventic
+- **Mr. Toan Nguyen and Mr. Hieu Nghi** – Renova Cloud
 
-### Cloud Infrastructure Operations in the Age of Agentic Platform
+### Key Highlights
 
-The presentation introduced the **Agentic Platform** model aimed at supporting smarter system operations through AI. This platform focuses on solving four common problems: incident investigation, code review, infrastructure cost optimization (FinOps), and security enhancement.
+#### AI Agents for Cloud Operations
 
-The speaker also compared two AI Agent deployment models:
+The session demonstrated how AI Agents can improve cloud infrastructure management by assisting engineers with routine operational tasks on AWS.
 
-* **Single Agent** can effectively handle most tasks if provided with sufficient context and workflow.
-* **Multi-Agent** divides work among multiple specialized agents to optimize processing capability, context management, and clearer permission segregation.
+- Analyze logs and identify the root causes of incidents.
+- Review source code before deployment.
+- Monitor cloud resource usage and optimize infrastructure costs.
+- Enhance system monitoring and strengthen security.
 
-This approach helps engineering teams reduce analysis and incident response time in real-world operational environments.
+The speakers also compared **Single-Agent** and **Multi-Agent** architectures, highlighting their advantages, limitations, and suitable use cases.
 
-### Building a Voice AI Assistant for Enterprises
+#### Building an AI Voice Assistant
 
-The next session presented the architecture for building a voice AI assistant using three main components:
+This presentation explained the overall architecture of an enterprise AI Voice Assistant.
 
-* **Speech-to-Text (STT)** converts speech into text.
-* **Large Language Model (LLM)** processes content and context.
-* **Text-to-Speech (TTS)** generates voice responses.
+- Convert speech into text using **Speech-to-Text (STT)**.
+- Process user requests with a **Large Language Model (LLM)**.
+- Generate spoken responses using **Text-to-Speech (TTS)**.
+- Improve reliability through **Guardrails**, **Streaming**, and external API integration.
 
-Using text as an intermediary layer makes it easier for enterprises to apply Guardrails for content control as well as integrate real-time API calling capabilities.
+#### AI for DevOps Automation
 
-In a Production environment, the system needs additional mechanisms such as Streaming to reduce latency, support for multiple voice regions, gender recognition, handling user interruptions, and call escalation to human agents when necessary.
+One of the most interesting topics focused on integrating AI into the DevOps workflow.
 
-### DevOps AI Agent on AWS
+- Receive alerts generated by Amazon CloudWatch.
+- Investigate incidents automatically.
+- Recommend possible solutions and long-term improvements.
+- Assist engineers in making operational decisions without directly modifying the infrastructure.
 
-This topic introduced a solution using AI Agents to support DevOps processes, especially for automated incident investigation after system alerts from CloudWatch.
+#### Amazon Q for Enterprise Productivity
 
-The solution is built on six key components:
+Amazon Q was introduced as an intelligent assistant designed to improve productivity within organizations.
 
-* Context Learning
-* Control
-* Integration
-* Collaboration
-* Convenient
-* Cost Effective
+- Integrate with platforms such as GitHub, Jira, and Google Workspace.
+- Support recruitment by analyzing resumes and candidate information.
+- Generate reports automatically.
+- Simplify internal business processes with AI assistance.
 
-The processing workflow includes receiving alerts, classifying errors, performing Root Cause Analysis, proposing immediate remediation, and suggesting long-term improvements. The AI Agent only plays a supportive and advisory role, not directly making changes to the system.
+#### Security Architecture for Amazon Q
 
-### Applying Amazon Q in HR Processes
+The final session focused on deploying Amazon Q securely in enterprise environments.
 
-The session introduced Amazon Q as an internal AI assistant for enterprises with the ability to ensure higher data security compared to public AI platforms.
+- Implement a **Zero Trust** security model.
+- Deploy the MCP Server inside a **Private Subnet**.
+- Protect communication using **TLS encryption**.
+- Restrict external access with **Interface Endpoints** and **Route 53**.
 
-Amazon Q can integrate with various systems such as Google Workspace, Microsoft Workspace, Jira, Salesforce, and GitHub via MCP.
+### Knowledge Gained
 
-In the recruitment process, the system can automatically:
+#### AI Concepts
 
-* Analyze recruitment guideline documents.
-* Extract content from CVs, including OCR.
-* Evaluate and classify candidates.
-* Suggest salary levels and generate reports through no-code applications.
+- AI should be viewed as a tool that enhances human productivity rather than replacing people.
+- Selecting the appropriate AI architecture is essential for achieving better performance.
+- AI Agents can significantly improve operational efficiency across different business scenarios.
 
-### Private Security Model for Amazon Q and MCP Server
+#### Technical Knowledge
 
-The final topic focused on the architecture for deploying Amazon Q in a Private environment to ensure information security.
+- Understand the architecture of AI Voice Assistants.
+- Learn how AI can support DevOps and cloud operations.
+- Explore Amazon Q and its integration with enterprise platforms.
+- Gain insights into AI deployment architectures on AWS.
 
-The solution is built on the **Zero Trust** principle, helping to mitigate risks such as DDoS or Man-in-the-Middle attacks.
+#### Security Awareness
 
-The proposed architecture includes:
+- Recognize the importance of **Data Governance** in AI systems.
+- Understand the principles of the **Zero Trust** security model.
+- Learn why **Guardrails** are critical for building safe AI applications.
 
-* Placing the MCP Server in a Private Subnet within the VPC.
-* Amazon Q accessing via Interface Endpoint and VPC Connection.
-* Encrypting traffic with TLS through Internal ALB combined with ACM and Amazon Cognito.
-* Using Route 53 Resolver to hide internal DNS from the Internet.
+### Applying the Knowledge
 
-## 4.3.4 Application to Work
+- Utilize AI to assist with system monitoring and incident analysis.
+- Explore Amazon Q to improve daily productivity.
+- Study Multi-Agent architectures for future AI-related projects.
+- Pay greater attention to security when developing AI-enabled applications.
+- Continue learning AWS AI and cloud services to strengthen technical skills.
 
-* View AI as a supporting tool to enhance work efficiency rather than completely replacing human roles.
-* When deploying AI in enterprises, prioritize Data Governance, Guardrails, and Private security models before putting the system into Production.
-* Apply the Agentic Platform and Multi-Agent mindset to support system monitoring, incident investigation, and operational cost optimization in projects using AWS.
+### Event Experience
 
-![](blob:https://www.facebook.com/ebfcc44c-603b-4bb2-a1ce-9575e430ad4c)![1784013303527](image/_index.vi/1784013303527.png)
+Attending **FCAJ Community Day** provided valuable insights into Artificial Intelligence, Cloud Computing, and DevOps. The presentations were closely connected to real-world enterprise scenarios, making it easier to understand how AWS technologies can be applied in software development and cloud operations.
+
+#### Learning from Industry Experts
+
+- Gained practical knowledge from experienced AWS and cloud professionals.
+- Learned about current AI adoption trends in enterprise environments.
+- Understood real-world implementation strategies for AWS solutions.
+
+#### Technical Experience
+
+- Explored the architecture of AI Voice Assistants.
+- Observed how AI can improve DevOps workflows.
+- Learned how Amazon Q is deployed in enterprise environments.
+- Discovered different approaches to securing AI systems.
+
+#### Exploring New Technologies
+
+- Became familiar with a variety of AI services available on AWS.
+- Learned how AI and DevOps can work together to streamline operations.
+- Expanded knowledge of cloud computing, AI Agents, and automation technologies.
+
+#### Networking and Knowledge Sharing
+
+- Had the opportunity to interact with speakers and members of the AWS community.
+- Learned from professionals with hands-on industry experience.
+- Broadened my understanding of AI, cloud technologies, and emerging industry trends.
+
+#### Key Takeaways
+
+- AI delivers the greatest value when combined with high-quality data and well-designed workflows.
+- Security should always be a top priority when implementing AI solutions in enterprise environments.
+- Multi-Agent architectures have significant potential for future AI applications.
+- Continuous learning of AWS services and AI technologies is essential for improving professional skills and staying current with industry advancements.

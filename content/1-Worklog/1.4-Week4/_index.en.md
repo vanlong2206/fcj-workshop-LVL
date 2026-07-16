@@ -1,32 +1,48 @@
 ---
 title: "Worklog Week 4"
-date: 2026-05-25
+date: 2026-05-11
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
-### Week 4 Objectives:
+### Week 4 Objectives
 
-* Create an Amazon Aurora PostgreSQL cluster as the primary database for the system.
-* Configure RDS Proxy to pool connections and reduce database load during Lambda scaling.
-* Create a CloudFormation Stack to automate infrastructure deployment.
-* Update IAM Policy with actual cluster-id and database-user-name.
+* Continue studying the contents of **Module 3** on the Amazon Web Services learning platform.
+* Gain a solid understanding of **AWS Compute and Storage services**.
+* Complete the hands-on labs on **AWS Backup, Amazon S3, and Amazon CloudFront**.
 
-### Weekly Tasks:
+### Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources |
+| Day | Tasks | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Learn about Amazon Aurora PostgreSQL: <br> + Cluster architecture, writer/reader instances. <br> + Compare Aurora with standard RDS MySQL/PostgreSQL. <br> + Configuration parameters: instance class, storage, backup. | 26/05/2026 | 26/05/2026 | |
-| Wed | - Create Amazon Aurora PostgreSQL cluster: <br> + Configure VPC, subnet groups, security groups. <br> + Create writer instance for read/write operations. <br> + Set up automated backup and maintenance window. | 27/05/2026 | 27/05/2026 | |
-| Thu | - Learn and configure RDS Proxy: <br> + How RDS Proxy pools connections from Lambda to reduce database load. <br> + Create RDS Proxy, connect to the Aurora cluster. <br> + Configure IAM Role for Lambda to use RDS Proxy. | 28/05/2026 | 28/05/2026 | |
-| Fri | - Create CloudFormation Stack: <br> + Write CloudFormation template for the entire infrastructure. <br> + Create stack, deploy resources: Aurora, RDS Proxy, Security Groups. <br> - Update IAM Policy with actual cluster-id and database-user-name. | 29/05/2026 | 29/05/2026 | |
-| Sat - Sun | - Test connection and finalize: <br> + Test connection from Lambda to Aurora via RDS Proxy. <br> + Verify IAM Auth works. <br> + Document configuration for the team. | 30/05/2026 | 31/05/2026 | |
+| Monday | - Study Module 3: AWS Compute Services <br> - Learn about Amazon EC2 <br>&emsp; + Instance Types <br>&emsp; + Amazon Machine Images (AMI) <br>&emsp; + Amazon EBS <br>&emsp; + Instance Store <br>&emsp; + User Data and Instance Metadata | 11/05/2026 | 11/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Tuesday | - Study EC2 Auto Scaling, Amazon EFS, Amazon FSx, and AWS Backup <br> - Learn backup and disaster recovery strategies on AWS | 12/05/2026 | 12/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Wednesday | - Complete AWS Backup labs <br>&emsp; + Deploy Infrastructure <br>&emsp; + Create a Backup Plan <br>&emsp; + Test Restore <br>&emsp; + Clean Up Resources | 13/05/2026 | 13/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Thursday | - Learn about Amazon S3 and Static Website Hosting <br> - Practice creating S3 Buckets, configuring Public Access, Bucket Versioning, and Amazon CloudFront | 14/05/2026 | 15/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Friday | - **Hands-on Practice:** <br>&emsp; + Complete Amazon S3 labs <br>&emsp; + Configure Cross-Region Object Replication <br>&emsp; + Verify deployment results <br>&emsp; + Clean Up Resources | 16/05/2026 | 16/05/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 4 Results:
+### Week 4 Achievements
 
-* Successfully created an Amazon Aurora PostgreSQL cluster with writer instance, ready for production.
-* Configured RDS Proxy successfully, pooling connections from Lambda and preventing connection exhaustion during sudden Lambda scaling.
-* CloudFormation Stack deployed successfully, automating the entire Aurora + RDS Proxy infrastructure setup.
-* IAM Policy updated with actual cluster-id and database-user-name, ensuring security and precise permission management.
-* Lambda -> RDS Proxy -> Aurora connection tested and working stably.
+* Successfully completed the study of **Module 3** on the Amazon Web Services learning platform.
+
+* Gained a solid understanding of the following AWS services:
+  * Amazon EC2
+  * Amazon EBS
+  * EC2 Auto Scaling
+  * Amazon EFS
+  * Amazon FSx
+  * AWS Backup
+
+* Understood the backup and disaster recovery process on AWS using **AWS Backup**.
+
+* Successfully deployed and configured the following storage services:
+  * Amazon S3
+  * Static Website Hosting
+  * Amazon CloudFront
+  * Bucket Versioning
+  * Cross-Region Object Replication
+
+* Successfully completed all hands-on labs in **Module 3** and cleaned up AWS resources after each lab.
+
+* Updated the work log with all learning activities and lab results, and prepared to participate in upcoming activities and continue studying in the following week.

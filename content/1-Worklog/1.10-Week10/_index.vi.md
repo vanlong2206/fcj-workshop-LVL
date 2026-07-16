@@ -1,32 +1,62 @@
 ---
 title: "Worklog Tuần 10"
-date: 2026-07-06
+date: 2026-06-22
 weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Mục tiêu tuần 10:
+## Mục tiêu tuần 10:
 
-* Xây dựng hệ thống Dead Letter Queue (DLQ) để quản lý các message bị lỗi.
-* Cấu hình RedrivePolicy với maxReceiveCount để tự động chuyển message lỗi sang DLQ.
-* Thiết lập CloudWatch Metric và Alarm để giám sát DLQ.
+* Hoàn thành các nội dung còn lại của **Module 7** trên nền tảng Amazon Web Services.
+* Thực hành các bài Lab về AWS CloudShell, AWS SDK, AWS Cloud9, AWS Glue DataBrew, AWS Glue, Amazon EMR, Amazon Athena, Amazon Kinesis Data Analytics, AWS Lambda, Amazon Redshift và Amazon QuickSight.
+* Nâng cao kiến thức về xử lý dữ liệu, phân tích dữ liệu và xây dựng hệ thống phân tích dữ liệu trên AWS.
 
-### Các công việc cần triển khai trong tuần này:
+## Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu / Ghi chú |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu kiến trúc Dead Letter Queue:<br>+ Vai trò của DLQ trong hệ thống xử lý bất đồng bộ.<br>+ Cách SQS kết hợp với DLQ để quản lý message lỗi.<br>+ Các thông số cấu hình: maxReceiveCount, retention period. | 07/07/2026 | 07/07/2026 | |
-| 3 | - Cấu hình RedrivePolicy:<br>+ Thiết lập maxReceiveCount = 3 (tự động chuyển sang DLQ sau 3 lần retry thất bại).<br>+ Tạo DLQ queue riêng cho từng loại message (game-economy-dlq.fifo, ...).<br>+ Cấu hình message retention 14 ngày trên DLQ. | 08/07/2026 | 08/07/2026 | |
-| 4 | - Cấu hình functionResponseType: ReportBatchItemFailures:<br>+ Cho phép Lambda báo cáo message lỗi trong batch.<br>+ Xử lý partial failure: chỉ những message lỗi mới được retry.<br>+ Tích hợp với SQS event source mapping. | 09/07/2026 | 09/07/2026 | |
-| 5 | - Kiểm thử retry và DLQ:<br>+ Gửi message lỗi cố ý để kiểm tra cơ chế retry.<br>+ Xác nhận message được retry đúng 3 lần.<br>+ Xác nhận message được chuyển sang DLQ sau khi retry thất bại. | 10/07/2026 | 10/07/2026 | |
-| 6 - CN | - Thiết lập CloudWatch Metric và Alarm cho DLQ:<br>+ Tạo metric ApproximateNumberOfMessagesVisible cho DLQ.<br>+ Thiết lập CloudWatch Alarm khi DLQ có message (threshold > 0).<br>+ Cấu hình SNS notification gửi email/cảnh báo khi alarm kích hoạt. | 11/07/2026 | 12/07/2026 | |
+| 2 | - Ôn tập Module 7 <br> - Thực hành Lab AWS CloudShell và AWS SDK <br> - Thực hành Lab AWS Cloud9 | 22/06/2026 | 22/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Thực hành Lab AWS Glue DataBrew <br> - Data Profiling <br> - Clean & Transform Data | 23/06/2026 | 23/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Thực hành Lab Data Pipeline <br> - Ingest and Store Data <br> - Catalog Data với AWS Glue | 24/06/2026 | 24/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Thực hành Lab Transform Data với AWS Glue, Glue DataBrew và Amazon EMR <br> - Phân tích dữ liệu bằng Amazon Athena và Kinesis Data Analytics | 25/06/2026 | 26/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 6 | - Thực hành Lab AWS Lambda <br> - Xây dựng Data Warehouse với Amazon Redshift <br> - Xây dựng Dashboard bằng Amazon QuickSight | 27/06/2026 | 28/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Kết quả đạt được tuần 10:
+## Kết quả đạt được tuần 10:
 
-* Xây dựng thành công hệ thống Dead Letter Queue giúp quản lý các message bị lỗi trong xử lý bất đồng bộ.
-* Cấu hình RedrivePolicy với maxReceiveCount = 3, message tự động chuyển sang DLQ sau 3 lần retry thất bại.
-* Tạo DLQ queue riêng cho từng service (game-economy-dlq.fifo) với retention period 14 ngày.
-* Cấu hình thành công ReportBatchItemFailures giúp xử lý partial failure trong batch processing.
-* Kiểm thử retry thành công: message lỗi được retry đúng 3 lần trước khi chuyển sang DLQ.
-* Thiết lập CloudWatch Metric và Alarm giám sát DLQ, gửi cảnh báo qua SNS khi có message lỗi phát sinh.
+* Hoàn thành toàn bộ nội dung còn lại của **Module 7** trên nền tảng Amazon Web Services.
+
+* Nắm được kiến thức về:
+  * AWS CloudShell.
+  * AWS SDK.
+  * AWS Cloud9.
+  * AWS Glue DataBrew.
+  * AWS Glue.
+  * Amazon EMR.
+  * Amazon Athena.
+  * Amazon Kinesis Data Analytics.
+  * AWS Lambda.
+  * Amazon Redshift.
+  * Amazon QuickSight.
+
+* Hoàn thành các bài Lab thuộc Module 7, bao gồm:
+  * AWS CloudShell.
+  * AWS SDK.
+  * AWS Cloud9.
+  * AWS Glue DataBrew.
+  * Data Profiling.
+  * Clean & Transform Data.
+  * Data Ingestion.
+  * AWS Glue Data Catalog.
+  * AWS Glue Interactive Sessions.
+  * AWS Glue GUI.
+  * Amazon EMR.
+  * Amazon Athena.
+  * Amazon Kinesis Data Analytics.
+  * AWS Lambda.
+  * Amazon Redshift.
+  * Xây dựng Dashboard và Interactive Dashboard bằng Amazon QuickSight.
+
+* Hiểu và áp dụng quy trình thu thập, xử lý, lưu trữ, phân tích và trực quan hóa dữ liệu trên nền tảng AWS.
+
+* Cập nhật đầy đủ kết quả học tập, thực hành vào nhật ký công việc, hoàn thành các nội dung của Module 7 và sẵn sàng tiếp tục các nội dung tiếp theo của chương trình.

@@ -1,58 +1,55 @@
 ---
 title: "Worklog Tuần 12"
-date: 2024-01-01
+date: 2026-07-06
 weight: 12
 chapter: false
 pre: " <b> 1.12 </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-### Mục tiêu tuần 12:
+## Mục tiêu tuần 12:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Hoàn thành Workshop về kiến trúc Game Backend Server trên nền tảng AWS.
+* Tìm hiểu và triển khai kiến trúc Serverless cho Game Backend theo mô hình nhiều lớp.
+* Nắm vững cách xây dựng hệ thống có khả năng mở rộng, bảo mật, xử lý bất đồng bộ và tự động hóa trên AWS.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+## Các công việc cần triển khai trong tuần này:
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Khởi động Workshop <br> - Tìm hiểu tổng quan kiến trúc Game Backend Server <br> - Thiết kế mô hình triển khai | 06/07/2026 | 06/07/2026 | Tài liệu Workshop |
+| 3 | - Xây dựng Edge & Security Layer <br> - Tìm hiểu Route 53, CloudFront và AWS WAF | 07/07/2026 | 07/07/2026 | AWS Documentation |
+| 4 | - Triển khai API & Compute Layer <br> - Tìm hiểu API Gateway, Lambda và xử lý đồng bộ | 08/07/2026 | 08/07/2026 | AWS Documentation |
+| 5 | - Triển khai Async Processing Layer <br> - Thực hành Amazon SQS, DLQ và CloudWatch Monitoring | 09/07/2026 | 10/07/2026 | AWS Documentation |
+| 6 | - Hoàn thiện Database và Automation Layer <br> - Cấu hình Aurora, AWS Backup, EventBridge <br> - Tổng kết và hoàn thành Workshop | 11/07/2026 | 12/07/2026 | AWS Documentation |
 
-### Kết quả đạt được tuần 12:
+## Kết quả đạt được tuần 12:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Hoàn thành Workshop về kiến trúc Game Backend Server trên nền tảng AWS.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Nắm được kiến thức về các thành phần trong kiến trúc hệ thống, bao gồm:
+  * AWS Route 53.
+  * Amazon CloudFront.
+  * AWS WAF.
+  * Amazon API Gateway.
+  * AWS Lambda.
+  * Amazon SQS FIFO.
+  * Amazon SQS Dead Letter Queue (DLQ).
+  * Amazon CloudWatch.
+  * Amazon Aurora Database.
+  * AWS Backup.
+  * Amazon S3.
+  * Amazon EventBridge.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Hoàn thành thiết kế kiến trúc nhiều lớp cho Game Backend Server, bao gồm:
+  * Edge & Security Layer.
+  * API & Sync Compute Layer.
+  * Async Processing Layer.
+  * Database Layer.
+  * Automation & Maintenance Layer.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Hiểu được cơ chế xử lý đồng bộ và bất đồng bộ, quản lý hàng đợi với SQS FIFO, giám sát lỗi bằng CloudWatch, tự động hóa bảo trì hệ thống bằng EventBridge và sao lưu dữ liệu với AWS Backup.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
+* Hoàn thiện tài liệu và kiến trúc tổng thể của hệ thống Game Backend Server, đáp ứng các yêu cầu về khả năng mở rộng, tính sẵn sàng, bảo mật và tự động hóa trên nền tảng AWS.
 * ...
 
 

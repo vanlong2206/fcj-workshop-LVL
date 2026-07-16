@@ -1,29 +1,30 @@
 ---
 title: "Internship Report"
-date: 2026-07-13
+date: 2026-07-16
 weight: 1
 chapter: false
 ---
 
 # Internship Report
+
 ### Student Information:
-&emsp; **Full Name:** Bui Binh Nguyen
+&emsp; **Full Name:** Lai Van Long
 
-&emsp; **Phone:** 0344898294
+&emsp; **Phone Number:** 0938699884 
 
-&emsp; **Email:** hoilamgiaaz@gmail.com
+&emsp; **Email:** vanlong2264@gmail.com
 
-&emsp; **University:** Ho Chi Minh City University of Technology (HUTECH)
+&emsp; **University:** HUTECH – Ho Chi Minh City University of Technology
 
 &emsp; **Major:** Information Technology
 
-&emsp; **Class:** 22DTHE5
+&emsp; **Class:** 22DTHG8
 
-&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
+&emsp; **Internship Company:** Amazon Web Services Viet Nam Company Limited
 
-&emsp; **Position:** Workforce Bootcamp - First Cloud AI Journey
+&emsp; **Internship Position:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Internship Period:** From May 4, 2026 to July 10, 2026
+&emsp; **Internship Duration:** From 17/04/2026 to 12/07/2026
 
 ![Avatar](/images/avatar.png)
 

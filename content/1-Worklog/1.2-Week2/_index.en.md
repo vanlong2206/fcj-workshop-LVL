@@ -1,28 +1,50 @@
 ---
 title: "Worklog Week 2"
-date: 2026-05-11
+date: 2026-04-27
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-### Week 2 Objectives:
+## Week 2 Objectives
 
-* Explore AWS services such as EC2, RDS, Route 53, S3 to find the optimal services for the Backend Game API project.
-* Survey and design the overall architecture solution for the project.
+* Continue studying the remaining contents of **Module 1** on the Amazon Web Services learning platform.
+* Gain a solid understanding of AWS account management and cost optimization.
+* Complete hands-on labs related to AWS Budgets and AWS Support.
 
-### Weekly Tasks:
+## Tasks to be completed this week
 
-| Day | Tasks | Start Date | End Date | Resources |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Learn Amazon EC2: instance types, AMI, EBS, Elastic IP, Security Groups. <br> - Learn Amazon RDS: database engines (MySQL, PostgreSQL, Aurora), instance classes. | 12/05/2026 | 12/05/2026 | |
-| Wed | - Learn Amazon Route 53: DNS management, routing policies, hosted zones. <br> - Learn Amazon S3: bucket, object storage, use cases for games (asset storage, backup). | 13/05/2026 | 13/05/2026 | |
-| Thu - Fri | - Compare and evaluate AWS services suitable for the Backend Game API project. <br> - Determine the optimal architecture: combine EC2 for compute, RDS for database, S3 for asset storage. | 14/05/2026 | 15/05/2026 | |
-| Sat - Sun | - Design the overall architecture solution for the project. <br> - Draw preliminary architecture diagram: <br> &emsp; + Client -> EC2 (Game Server) -> RDS (Database). <br> &emsp; + S3 for static asset storage. <br> &emsp; + Route 53 for domain management. <br> - Present and discuss the solution with the team. | 16/05/2026 | 17/05/2026 | |
+| Monday | - Review Module 1 concepts <br> - Learn AWS account security best practices <br> - Practice setting up Virtual MFA | 27/04/2026 | 27/04/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Tuesday | - Learn about IAM Users, IAM Groups, and Account Authentication <br> - Create an Admin User and Admin Group | 28/04/2026 | 28/04/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Wednesday | - Study AWS Budgets <br>&emsp; + Budget by Template <br>&emsp; + Cost Budget <br>&emsp; + Usage Budget | 29/04/2026 | 29/04/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Thursday | - Create Reservation Instance Budgets and Savings Plans Budgets <br> - Perform Budget Cleanup after completing the labs | 30/04/2026 | 01/05/2026 | https://cloudjourney.awsstudygroup.com/ |
+| Friday | - Learn about AWS Support <br>&emsp; + Support Plans <br>&emsp; + Types of Support Requests <br>&emsp; + Change Support Plan <br>&emsp; + Manage Support Requests | 02/05/2026 | 02/05/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 2 Results:
+## Week 2 Achievements
 
-* Mastered core AWS services: EC2, RDS, Route 53, S3 and how they apply to the Backend Game API project.
-* Evaluated and selected optimal services based on technical requirements and cost considerations.
-* Completed the solution survey and designed a preliminary architecture diagram for the system.
-* Identified the main data flow: Client request -> EC2 (game logic processing) -> RDS (data storage), with static assets served from S3.
+* Successfully completed the remaining topics of **Module 1** on the Amazon Web Services learning platform.
+
+* Understood and practiced AWS account security features, including:
+  * Virtual MFA
+  * IAM Users
+  * IAM Groups
+  * Account Authentication
+
+* Gained practical knowledge of AWS cost management using:
+  * Budget by Template
+  * Cost Budget
+  * Usage Budget
+  * Reservation Instance Budget
+  * Savings Plans Budget
+
+* Learned about AWS Support services and the process of creating and managing support requests, including:
+  * AWS Support Plans
+  * Types of Support Requests
+  * Changing Support Plans
+  * Managing Support Requests
+
+* Successfully completed all Module 1 hands-on labs and performed resource cleanup after each lab.
+
+* Updated the work log with all learning activities and practical exercises, and prepared to begin **Module 2**.

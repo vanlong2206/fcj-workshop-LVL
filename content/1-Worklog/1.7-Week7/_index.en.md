@@ -1,30 +1,55 @@
 ---
 title: "Worklog Week 7"
-date: 2026-06-15
+date: 2026-06-01
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
 
-### Week 7 Objectives:
+## Week 7 Objectives
 
-* Develop Dependent Services for game logic: Shop, Gift Code.
-* Build Cross-Service Communication mechanism via API Gateway for Lambda functions to interact with each other.
+* Complete the remaining topics in **Module 5** on the Amazon Web Services learning platform.
+* Complete hands-on labs covering IAM, Restriction Policies, AWS KMS, CloudTrail, Amazon Athena, and Amazon S3 data encryption.
+* Strengthen knowledge of identity and access management, authorization, monitoring, and security on AWS.
 
-### Weekly Tasks:
+## Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Mon | - Design architecture for lambda-transaction:<br>+ Identify required API endpoints.<br>+ Plan data flow between lambda-transaction and core services (lambda-economy, lambda-inventory). | 16/06/2026 | 16/06/2026 | |
-| Tue | - Develop Shop functionality:<br>+ Build API for purchasing items with Coin/Gem.<br>+ Implement balance checking and deduction logic.<br>+ Update player inventory after transactions. | 17/06/2026 | 17/06/2026 | |
-| Wed | - Develop Gift Code functionality:<br>+ Build API for creating and redeeming Gift Codes.<br>+ Implement code validation, expiry checking, and usage limit.<br>+ Handle item/resource reward distribution. | 18/06/2026 | 18/06/2026 | |
-| Thu - Fri | - Build Cross-Service Communication:<br>+ Set up API Gateway as communication intermediary between Lambdas.<br>+ Configure IAM Role for cross-Lambda invocation.<br>+ Handle errors and timeouts in inter-service communication. | 19/06/2026 | 20/06/2026 | |
-| Sun | - Integration testing of the full transaction flow:<br>+ Buy item from Shop -> deduct currency -> receive item.<br>+ Redeem Gift Code -> validate code -> distribute reward.<br>+ Verify data consistency across services. | 21/06/2026 | 21/06/2026 | |
+| 2 | - Review Module 5 <br> - Complete the Restriction Policy Lab <br> - Create an IAM Limited User | 01/06/2026 | 01/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Complete the AWS KMS Lab <br> - Create IAM Policies, Roles, Groups, and Users <br> - Encrypt data stored in Amazon S3 | 02/06/2026 | 02/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Complete the AWS CloudTrail and Amazon Athena Lab <br> - Query logs, verify encrypted data, and share encrypted objects <br> - Perform resource cleanup | 03/06/2026 | 03/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Complete IAM Group, IAM User, and IAM Role Labs <br> - Configure Switch Role <br> - Restrict access based on IP address and time conditions <br> - Practice using IAM Access Keys and IAM Roles for EC2 | 04/06/2026 | 05/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 7 Results:
+## Week 7 Achievements
 
-* Completed design and development of lambda-transaction with all required API endpoints for Shop and Gift Code.
-* Shop system operates stably: players can purchase items, the system automatically checks balances, deducts currency, and updates inventory accurately.
-* Gift Code functionality successfully deployed with code validation, expiry checking, and usage limit mechanisms.
-* Successfully built Cross-Service Communication via API Gateway, enabling Lambda functions to communicate safely and efficiently.
-* Completed integration testing, ensuring data consistency across all transaction flows.
+* Successfully completed all topics in **Module 5** on the Amazon Web Services learning platform.
+
+* Gained knowledge of:
+  * AWS Identity and Access Management (IAM)
+  * Restriction Policies
+  * AWS Key Management Service (KMS)
+  * AWS CloudTrail
+  * Amazon Athena
+  * Amazon S3 Data Encryption
+  * IAM Access Keys and IAM Roles
+
+* Successfully completed all Module 5 labs, including:
+  * Restriction Policy
+  * IAM Limited User
+  * AWS KMS
+  * AWS CloudTrail
+  * Amazon Athena
+  * Amazon S3 Data Encryption
+  * IAM Group
+  * IAM User
+  * IAM Role
+  * Switch Role
+  * IP Address and Time-Based Access Restrictions
+  * IAM Access Keys
+  * IAM Roles for Amazon EC2
+  * Resource Cleanup
+
+* Learned how to implement identity management, access control, data encryption, activity monitoring, and resource protection using AWS security services.
+
+* Updated the internship work log with all learning activities and hands-on practice results, and prepared to continue with **Module 6** in the following week.

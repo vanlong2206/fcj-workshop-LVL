@@ -1,4 +1,4 @@
-baseURL = "https://tvquan2004-svg.github.io/FCAJ_Worklog_TVQ/"
+baseURL = "http://localhost:1313/fcj-workshop-LVL/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "vi"
@@ -16,7 +16,7 @@ home = [ "HTML", "RSS", "JSON"]
   # Git hub repo link
   editURL = ""
   description = ""
-  author = "anhnguyen.732004@gmail.com"
+  author = "vanlong2264@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false

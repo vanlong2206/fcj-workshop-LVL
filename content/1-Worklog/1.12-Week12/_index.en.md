@@ -1,34 +1,54 @@
 ---
 title: "Worklog Week 12"
-date: 2024-01-01
+date: 2026-07-06
 weight: 12
 chapter: false
 pre: " <b> 1.12 </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+## Week 12 Objectives
 
-### Week 12 Objectives:
+* Complete the **Game Backend Server Architecture** workshop on AWS.
+* Learn and implement a multi-layer serverless architecture for the Game Backend.
+* Gain a solid understanding of how to build a scalable, secure, asynchronous, and automated system on AWS.
 
-* Connect and get familiar with members of the First Cloud AI Journey.
-* Understand basic AWS services, how to use console & CLI.
+## Tasks for This Week
 
-### Weekly Tasks:
-| Day | Tasks | Start Date | End Date | Resources |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Tue | - Get familiar with FCAJ members <br> - Read and note the rules and regulations | 11/08/2025 | 11/08/2025 |
-| Wed | - Learn about AWS and service types <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... | 12/08/2025 | 12/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Thu | - Create AWS Free Tier account <br> - Learn AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install AWS CLI & configure <br> &emsp; + How to use AWS CLI | 13/08/2025 | 13/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Fri | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - How to SSH into EC2 <br> - Learn about Elastic IP | 14/08/2025 | 15/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
-| Sat | - **Practice:** <br>&emsp; + Create EC2 instance <br>&emsp; + SSH connection <br>&emsp; + Attach EBS volume | 15/08/2025 | 15/08/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 2 | - Kick off the workshop.<br>- Study the overall Game Backend Server architecture.<br>- Design the deployment architecture. | 06/07/2026 | 06/07/2026 | Workshop Documentation |
+| 3 | - Build the Edge & Security Layer.<br>- Learn about Amazon Route 53, Amazon CloudFront, and AWS WAF. | 07/07/2026 | 07/07/2026 | AWS Documentation |
+| 4 | - Implement the API & Compute Layer.<br>- Learn about Amazon API Gateway, AWS Lambda, and synchronous request processing. | 08/07/2026 | 08/07/2026 | AWS Documentation |
+| 5 | - Implement the Async Processing Layer.<br>- Practice using Amazon SQS, Dead Letter Queues (DLQ), and Amazon CloudWatch monitoring. | 09/07/2026 | 10/07/2026 | AWS Documentation |
+| 6 | - Complete the Database and Automation Layer.<br>- Configure Amazon Aurora, AWS Backup, and Amazon EventBridge.<br>- Review and complete the workshop. | 11/07/2026 | 12/07/2026 | AWS Documentation |
 
-### Week 12 Results:
+## Week 12 Achievements
 
-* Understood what AWS is and grasped basic service groups.
-* Successfully created and configured AWS Free Tier account.
-* Got familiar with AWS Management Console.
-* Installed and configured AWS CLI.
-* Used AWS CLI to perform basic operations.
-* Able to use both web interface and CLI to manage AWS resources.
+* Successfully completed the **Game Backend Server Architecture** workshop on AWS.
+
+* Gained knowledge of the key components in the system architecture, including:
+  * Amazon Route 53
+  * Amazon CloudFront
+  * AWS WAF
+  * Amazon API Gateway
+  * AWS Lambda
+  * Amazon SQS FIFO
+  * Amazon SQS Dead Letter Queue (DLQ)
+  * Amazon CloudWatch
+  * Amazon Aurora Database
+  * AWS Backup
+  * Amazon S3
+  * Amazon EventBridge
+
+* Successfully designed a multi-layer architecture for the Game Backend Server, including:
+  * Edge & Security Layer
+  * API & Sync Compute Layer
+  * Async Processing Layer
+  * Database Layer
+  * Automation & Maintenance Layer
+
+* Gained practical understanding of synchronous and asynchronous processing, message queue management with Amazon SQS FIFO, error monitoring using Amazon CloudWatch, automated maintenance with Amazon EventBridge, and database backup using AWS Backup.
+
+* Finalized the documentation and overall architecture of the Game Backend Server, meeting the requirements for scalability, high availability, security, and automation on the AWS platform.
+
+* Completed the workshop deliverables and prepared the architecture as a foundation for future implementation and production deployment.

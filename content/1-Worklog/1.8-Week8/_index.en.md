@@ -1,35 +1,49 @@
 ---
 title: "Worklog Week 8"
-date: 2026-06-22
+date: 2026-06-08
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
 
-### Week 8 Objectives:
+## Week 8 Objectives
 
-* Create a centralized HTTP API V2 to manage all system endpoints.
-* Configure routing for each service and deploy to AWS.
-* Test all system APIs.
+* Complete all topics in **Module 6** on the Amazon Web Services learning platform.
+* Complete hands-on labs for Amazon RDS, Amazon Aurora, and AWS Database Migration Service (DMS).
+* Strengthen knowledge of AWS database services, deployment, backup, recovery, and database migration.
 
-### Weekly Tasks:
+## Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Mon | - Design HTTP API V2 structure:<br>+ Identify routes for each service (auth, inventory, economy, transaction).<br>+ Plan mapping between API Gateway paths and Lambda functions. | 23/06/2026 | 23/06/2026 | |
-| Tue | - Create HTTP API V2 on API Gateway:<br>+ Configure CORS for client access.<br>+ Set up stages (dev, staging, prod).<br>+ Integrate Lambda authorizer for authenticated endpoints. | 24/06/2026 | 24/06/2026 | |
-| Wed | - Configure detailed routing:<br>+ Define routes and integrations for each Lambda.<br>+ Set up request/response transformation if needed.<br>+ Configure throttle and rate limiting. | 25/06/2026 | 25/06/2026 | |
-| Thu | - Deploy all Compute Services + API Gateway:<br>+ Deploy Lambda functions to AWS.<br>+ Update environment variables and permissions.<br>+ Deploy API Gateway to production stage. | 26/06/2026 | 26/06/2026 | |
-| Fri - Sat | - Comprehensive API system testing:<br>+ Test each endpoint individually.<br>+ Test end-to-end flows.<br>+ Verify error handling and response codes.<br>+ Optimize performance (cold start, latency). | 27/06/2026 | 28/06/2026 | |
+| 2 | - Study Database Concepts.<br>- Learn about Amazon RDS and Amazon Aurora.<br>- Practice creating a VPC, Security Group, and DB Subnet Group. | 08/06/2026 | 08/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Create an EC2 instance and an Amazon RDS database.<br>- Deploy an application connected to the database.<br>- Practice database backup and restore. | 09/06/2026 | 09/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Complete the AWS Database Migration Service (DMS) Lab.<br>- Configure the source database, target database, and schema conversion.<br>- Create a migration project and migration task. | 10/06/2026 | 10/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Verify migration results.<br>- Monitor logs, troubleshoot issues, and resolve migration errors.<br>- Perform resource cleanup. | 11/06/2026 | 12/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 8 Results:
+## Week 8 Achievements
 
-* Successfully designed and deployed a centralized HTTP API V2 managing all routes for all services.
-* Completed detailed routing configuration with CORS, Lambda authorizer, and stage environments.
-* Successfully deployed all Compute Services (lambda-auth, lambda-inventory, lambda-economy, lambda-transaction) to AWS.
-* API Gateway deployed to production stage and ready to serve.
-* Completed comprehensive testing:
-  * All endpoints function correctly.
-  * End-to-end flow: authentication -> authorization -> business logic -> response works stably.
-  * Error handling returns appropriate status codes (400, 401, 403, 404, 500).
-  * Cold start optimized by increasing Lambda allocated memory.
+* Successfully completed **Module 6** on the Amazon Web Services learning platform.
+
+* Gained knowledge of:
+  * Database Concepts
+  * Amazon RDS
+  * Amazon Aurora
+  * Amazon Redshift
+  * Amazon ElastiCache
+  * AWS Database Migration Service (DMS)
+
+* Successfully completed all Module 6 labs, including:
+  * Creating a VPC, Security Group, and DB Subnet Group
+  * Deploying Amazon EC2 and Amazon RDS
+  * Database Backup and Restore
+  * Configuring Source and Target Databases
+  * Schema Conversion
+  * Creating Migration Projects and Migration Tasks
+  * Monitoring Logs and Troubleshooting Migration Issues
+  * Resource Cleanup
+
+* Learned how to deploy, manage, back up, restore, and migrate databases using AWS database services.
+
+* Updated the internship work log with all learning activities and hands-on practice results, and prepared to continue with **Module 7** in the following week.
+```

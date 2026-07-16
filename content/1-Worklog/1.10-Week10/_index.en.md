@@ -1,32 +1,62 @@
 ---
 title: "Worklog Week 10"
-date: 2026-07-06
+date: 2026-06-22
 weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Week 10 Objectives:
+## Week 10 Objectives
 
-* Build a Dead Letter Queue (DLQ) system to manage failed messages.
-* Configure RedrivePolicy with maxReceiveCount to automatically move failed messages to DLQ.
-* Set up CloudWatch Metrics and Alarms to monitor DLQ.
+* Complete the remaining topics in **Module 7** on the Amazon Web Services learning platform.
+* Complete hands-on labs for AWS CloudShell, AWS SDK, AWS Cloud9, AWS Glue DataBrew, AWS Glue, Amazon EMR, Amazon Athena, Amazon Kinesis Data Analytics, AWS Lambda, Amazon Redshift, and Amazon QuickSight.
+* Strengthen knowledge of data processing, data analytics, and building data analytics solutions on AWS.
 
-### Weekly Tasks:
+## Tasks for This Week
 
-| Day | Tasks | Start Date | End Date | Resources / Notes |
+| Day | Task | Start Date | Completion Date | Reference |
 | --- | --- | --- | --- | --- |
-| Mon | - Learn Dead Letter Queue architecture:<br>+ Role of DLQ in asynchronous processing systems.<br>+ How SQS integrates with DLQ to manage failed messages.<br>+ Configuration parameters: maxReceiveCount, retention period. | 07/07/2026 | 07/07/2026 | |
-| Tue | - Configure RedrivePolicy:<br>+ Set maxReceiveCount = 3 (auto-move to DLQ after 3 failed retries).<br>+ Create dedicated DLQ queues per message type (game-economy-dlq.fifo, ...).<br>+ Configure 14-day message retention on DLQ. | 08/07/2026 | 08/07/2026 | |
-| Wed | - Configure functionResponseType: ReportBatchItemFailures:<br>+ Allow Lambda to report individual failed messages in a batch.<br>+ Handle partial failure: only failed messages get retried.<br>+ Integrate with SQS event source mapping. | 09/07/2026 | 09/07/2026 | |
-| Thu | - Test retry and DLQ:<br>+ Deliberately send faulty messages to test the retry mechanism.<br>+ Verify messages are retried exactly 3 times.<br>+ Verify messages are moved to DLQ after all retries fail. | 10/07/2026 | 10/07/2026 | |
-| Fri - Sat | - Set up CloudWatch Metrics and Alarms for DLQ:<br>+ Create ApproximateNumberOfMessagesVisible metric for DLQ.<br>+ Set up CloudWatch Alarm when DLQ has messages (threshold > 0).<br>+ Configure SNS notification to send email/alerts when alarm triggers. | 11/07/2026 | 12/07/2026 | |
+| 2 | - Review Module 7.<br>- Complete the AWS CloudShell and AWS SDK Labs.<br>- Complete the AWS Cloud9 Lab. | 22/06/2026 | 22/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Complete the AWS Glue DataBrew Lab.<br>- Perform Data Profiling.<br>- Clean and Transform Data. | 23/06/2026 | 23/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Complete the Data Pipeline Lab.<br>- Ingest and Store Data.<br>- Build a Data Catalog using AWS Glue. | 24/06/2026 | 24/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Complete Data Transformation Labs using AWS Glue, AWS Glue DataBrew, and Amazon EMR.<br>- Analyze data using Amazon Athena and Amazon Kinesis Data Analytics. | 25/06/2026 | 26/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 6 | - Complete the AWS Lambda Lab.<br>- Build a Data Warehouse with Amazon Redshift.<br>- Create dashboards using Amazon QuickSight. | 27/06/2026 | 28/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
-### Week 10 Results:
+## Week 10 Achievements
 
-* Successfully built Dead Letter Queue system to manage failed messages in asynchronous processing.
-* Configured RedrivePolicy with maxReceiveCount = 3, messages automatically move to DLQ after 3 failed retries.
-* Created dedicated DLQ queues per service (game-economy-dlq.fifo) with 14-day retention period.
-* Successfully configured ReportBatchItemFailures for partial failure handling in batch processing.
-* Retry testing successful: failed messages are retried exactly 3 times before moving to DLQ.
-* Set up CloudWatch Metrics and Alarms to monitor DLQ, sending alerts via SNS when failed messages are detected.
+* Successfully completed all remaining topics in **Module 7** on the Amazon Web Services learning platform.
+
+* Gained knowledge of:
+  * AWS CloudShell
+  * AWS SDK
+  * AWS Cloud9
+  * AWS Glue DataBrew
+  * AWS Glue
+  * Amazon EMR
+  * Amazon Athena
+  * Amazon Kinesis Data Analytics
+  * AWS Lambda
+  * Amazon Redshift
+  * Amazon QuickSight
+
+* Successfully completed all Module 7 labs, including:
+  * AWS CloudShell
+  * AWS SDK
+  * AWS Cloud9
+  * AWS Glue DataBrew
+  * Data Profiling
+  * Data Cleaning and Transformation
+  * Data Ingestion
+  * AWS Glue Data Catalog
+  * AWS Glue Interactive Sessions
+  * AWS Glue Studio (GUI)
+  * Amazon EMR
+  * Amazon Athena
+  * Amazon Kinesis Data Analytics
+  * AWS Lambda
+  * Amazon Redshift
+  * Building Dashboards and Interactive Dashboards with Amazon QuickSight
+
+* Learned how to design and implement end-to-end data processing, storage, analytics, and visualization workflows using AWS services.
+
+* Updated the internship work log with all learning activities and hands-on practice results, successfully completed **Module 7**, and prepared to continue with the next modules of the training program.

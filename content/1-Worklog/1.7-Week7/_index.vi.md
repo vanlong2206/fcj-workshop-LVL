@@ -1,30 +1,56 @@
 ---
 title: "Worklog Tuần 7"
-date: 2026-06-15
+date: 2026-06-01
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
 
+
 ### Mục tiêu tuần 7:
 
-* Phát triển các Dependent Services phục vụ logic game: Shop, Gift Code.
-* Xây dựng cơ chế Cross-Service Communication qua API Gateway để các Lambda functions giao tiếp với nhau.
+* Hoàn thành các nội dung còn lại của Module 5 trên nền tảng Amazon Web Services.
+* Thực hành các bài Lab về IAM, Restriction Policy, KMS, CloudTrail, Athena và mã hóa dữ liệu trên Amazon S3.
+* Nâng cao kiến thức về quản lý danh tính, phân quyền, giám sát và bảo mật hệ thống trên AWS.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu / Ghi chú |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Thiết kế kiến trúc cho lambda-transaction:<br>+ Xác định các API endpoints cần thiết.<br>+ Phân luồng dữ liệu giữa lambda-transaction và các core services (lambda-economy, lambda-inventory). | 16/06/2026 | 16/06/2026 | |
-| 3 | - Phát triển chức năng Shop:<br>+ Xây dựng API mua vật phẩm bằng Coin/Gem.<br>+ Xử lý logic kiểm tra số dư và trừ tiền.<br>+ Cập nhật inventory cho người chơi sau giao dịch. | 17/06/2026 | 17/06/2026 | |
-| 4 | - Phát triển chức năng Gift Code:<br>+ Xây dựng API tạo và nhận Gift Code.<br>+ Cơ chế xác thực mã, kiểm tra hạn sử dụng và số lần nhận.<br>+ Xử lý trao thưởng vật phẩm/tài nguyên. | 18/06/2026 | 18/06/2026 | |
-| 5 - 6 | - Xây dựng Cross-Service Communication:<br>+ Thiết lập API Gateway làm trung gian giao tiếp giữa các Lambda.<br>+ Cấu hình IAM Role cho phép Lambda invoke lẫn nhau.<br>+ Xử lý lỗi và timeout khi giao tiếp giữa các services. | 19/06/2026 | 20/06/2026 | |
-| CN | - Kiểm thử tích hợp toàn bộ luồng transaction:<br>+ Mua vật phẩm từ Shop -> trừ tiền -> nhận đồ.<br>+ Nhận Gift Code -> kiểm tra mã -> trao thưởng.<br>+ Kiểm tra tính nhất quán dữ liệu giữa các services. | 21/06/2026 | 21/06/2026 | |
+| 2 | - Ôn tập Module 5 <br> - Thực hành Lab Restriction Policy <br> - Tạo IAM Limited User | 01/06/2026 | 01/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 3 | - Thực hành Lab AWS KMS <br> - Tạo Policy, Role, Group và User <br> - Mã hóa dữ liệu trên Amazon S3 | 02/06/2026 | 02/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 4 | - Thực hành Lab AWS CloudTrail và Amazon Athena <br> - Truy vấn log, kiểm tra và chia sẻ dữ liệu mã hóa <br> - Resource Cleanup | 03/06/2026 | 03/06/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 5 | - Thực hành Lab IAM Group, IAM User và IAM Role <br> - Cấu hình Switch Role <br> - Giới hạn quyền truy cập theo IP và thời gian <br> - Thực hành IAM Access Key và IAM Role cho EC2 | 04/06/2026 | 05/06/2026 | https://cloudjourney.awsstudygroup.com/ |
 
 ### Kết quả đạt được tuần 7:
 
-* Hoàn thành thiết kế và phát triển lambda-transaction với đầy đủ các API endpoints cho Shop và Gift Code.
-* Hệ thống Shop hoạt động ổn định: người chơi có thể mua vật phẩm, hệ thống tự động kiểm tra số dư, trừ tiền và cập nhật inventory chính xác.
-* Chức năng Gift Code được triển khai thành công với cơ chế xác thực mã, kiểm tra hạn sử dụng và giới hạn số lần nhận.
-* Xây dựng thành công cơ chế Cross-Service Communication qua API Gateway, cho phép các Lambda functions giao tiếp an toàn và hiệu quả với nhau.
-* Hoàn thành kiểm thử tích hợp, đảm bảo tính nhất quán dữ liệu xuyên suốt các luồng giao dịch.
+* Hoàn thành toàn bộ nội dung **Module 5** trên nền tảng Amazon Web Services.
+
+* Nắm được kiến thức về:
+  * AWS Identity and Access Management (IAM).
+  * Restriction Policy.
+  * AWS Key Management Service (KMS).
+  * AWS CloudTrail.
+  * Amazon Athena.
+  * Mã hóa dữ liệu trên Amazon S3.
+  * IAM Access Key và IAM Role.
+
+* Hoàn thành các bài Lab thuộc Module 5, bao gồm:
+  * Restriction Policy.
+  * IAM Limited User.
+  * AWS KMS.
+  * AWS CloudTrail.
+  * Amazon Athena.
+  * Mã hóa dữ liệu trên Amazon S3.
+  * IAM Group.
+  * IAM User.
+  * IAM Role.
+  * Switch Role.
+  * Giới hạn quyền truy cập theo IP và thời gian.
+  * IAM Access Key.
+  * IAM Role cho EC2.
+  * Resource Cleanup.
+
+* Hiểu và áp dụng các cơ chế quản lý danh tính, phân quyền truy cập, mã hóa dữ liệu, giám sát hoạt động và bảo vệ tài nguyên trên AWS.
+
+* Cập nhật đầy đủ kết quả học tập, thực hành vào nhật ký công việc, sẵn sàng tiếp tục các nội dung của Module 6 trong tuần tiếp theo.

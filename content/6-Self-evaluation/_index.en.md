@@ -1,6 +1,6 @@
 ---
 title: "Self-evaluation"
-date: 2024-01-01
+date: 2026-07-16
 weight: 6
 chapter: false
 pre: " <b> 6. </b> "
@@ -8,33 +8,34 @@ pre: " <b> 6. </b> "
 
 # Self-evaluation
 
-Throughout the **First Cloud AI Journey (FCAJ)** training program from May 5, 2026 to July 30, 2026, I had the opportunity to learn, practice, and deploy various solutions on **AWS Cloud**, especially **Serverless** architecture and system operations support services.
+During my internship at **First Cloud AI Journey (FCAJ)** from **17/04/2026** to **12/07/2026**, I had the opportunity to explore and gain practical experience with AWS Cloud services through workshops and program activities. This period helped me strengthen the knowledge I learned at university while gradually becoming familiar with the learning process, teamwork, and the Cloud Computing environment.
 
-During project implementation and workshop development, I deployed many AWS services such as **Amazon API Gateway, AWS Lambda, Amazon SQS FIFO, Dead Letter Queue (DLQ), Amazon EventBridge, Amazon Aurora, AWS Backup, and Amazon CloudWatch**. Through this, I gained a deeper understanding of designing serverless architecture, building synchronous and asynchronous processing flows, automating system maintenance tasks, implementing backup mechanisms, and monitoring application activities on AWS.
+During the internship, I was assigned to be responsible for **developing Blog content** for the group. To complete this task, I proactively researched AWS documents, referred to materials related to workshops, collected information, and prepared Blog articles according to the program requirements. In addition, I independently updated illustrations, edited content, and completed the articles before submission. Besides my assigned tasks, I also participated in the program workshops to gain more knowledge about AWS services and improve my practical understanding.
 
-In addition to improving technical knowledge, I also honed skills in requirements analysis, system architecture design, troubleshooting, deployment process testing, and technical documentation for each workshop. At the same time, I always proactively researched documentation, discussed with mentors and team members to refine solutions and improve product quality.
+Through the process of completing my tasks, I had the opportunity to learn more about several AWS services such as **Amazon API Gateway, AWS Lambda, Amazon SQS, Amazon EventBridge, Amazon CloudWatch**, and **AWS Backup**. Besides that, I improved my skills in searching and reading technical documents, collecting and summarizing information, writing technical content, and using Git and GitHub for content management. I also enhanced my ability to collaborate with team members to complete common activities and assigned tasks.
 
-In terms of work attitude, I always strived to complete assigned tasks on schedule, proactively learned new technologies, and adhered to AWS deployment procedures. This period helped me accumulate practical experience and build a solid foundation to continue developing in the field of Cloud Computing and Serverless Architecture.
+During the internship, I always tried my best to complete assigned tasks on time, seriously received feedback from mentors, and proactively improved my missing knowledge. Although my practical experience with AWS is still limited, the program provided me with a stronger foundation, valuable learning experiences, and clearer direction for my future development in the field of Cloud Computing.
 
-To objectively reflect on the internship process, I hereby evaluate myself based on the following criteria:
+To objectively reflect my internship process, I would like to evaluate myself based on the following criteria:
 
-| No. | Criteria                                       | Description                                                                                 | Good | Fair | Average |
-| --- | ---------------------------------------------- | ------------------------------------------------------------------------------------------- | ---- | ---- | ------- |
-| 1   | **Professional Knowledge & Skills**            | Understanding of the field, applying knowledge to practice, tool usage skills, work quality | ✅   | ☐   | ☐      |
-| 2   | **Learning Ability**                           | Acquiring new knowledge, learning quickly                                                   | ☐   | ✅   | ☐      |
-| 3   | **Proactiveness**                              | Self-learning, taking on tasks without waiting for instructions                             | ☐   | ✅   | ☐      |
-| 4   | **Responsibility**                             | Completing work on time, ensuring quality                                                   | ✅   | ☐   | ☐      |
-| 5   | **Discipline**                                 | Following schedule, rules, work procedures                                                  | ✅   | ☐   | ☐      |
-| 6   | **Improvement Mindset**                        | Willing to receive feedback and improve                                                     | ☐   | ✅   | ☐      |
-| 7   | **Communication**                              | Presenting ideas, reporting clearly                                                         | ☐   | ✅   | ☐      |
-| 8   | **Teamwork**                                   | Working effectively with colleagues, participating in teams                                 | ✅   | ☐   | ☐      |
-| 9   | **Professional Conduct**                       | Respecting colleagues, partners, work environment                                           | ✅   | ☐   | ☐      |
-| 10  | **Problem-solving**                            | Identifying problems, proposing solutions, creativity                                       | ☐   | ✅   | ☐      |
-| 11  | **Contribution to Project/Organization**       | Work efficiency, improvement initiatives, team recognition                                  | ✅   | ☐   | ☐      |
-| 12  | **Overall**                                    | General evaluation of the entire internship                                                 | ✅   | ☐   | ☐      |
+| No. | Criteria | Description | Good | Fair | Average |
+| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | :--: | :--: | :--------: |
+| 1 | **Professional Knowledge and Skills** | Understanding of AWS Cloud, applying knowledge to assigned tasks, and using supporting tools | ☐ | ✅ | ☐ |
+| 2 | **Learning Ability** | Actively acquiring new knowledge and completing assigned tasks | ✅ | ☐ | ☐ |
+| 3 | **Proactiveness** | Independently researching documents, exploring content, and completing assigned work | ☐ | ✅ | ☐ |
+| 4 | **Sense of Responsibility** | Completing tasks on schedule and ensuring work quality | ✅ | ☐ | ☐ |
+| 5 | **Discipline** | Following program rules and schedules | ☐ | ✅ | ☐ |
+| 6 | **Willingness to Improve** | Being open to feedback and continuously improving myself | ✅ | ☐ | ☐ |
+| 7 | **Communication** | Communicating with mentors and team members when necessary | ☐ | ✅ | ☐ |
+| 8 | **Teamwork** | Collaborating with team members to complete common team activities | ☐ | ✅ | ☐ |
+| 9 | **Professional Attitude** | Respecting mentors, team members, and following program regulations | ✅ | ☐ | ☐ |
+| 10 | **Problem-solving Skills** | Proactively researching and suggesting solutions when facing difficulties | ☐ | ✅ | ☐ |
+| 11 | **Contribution to Project/Organization** | Completing the assigned Blog task, contributing content to common team activities, and completing assigned responsibilities | ☐ | ✅ | ☐ |
+| 12 | **Overall Evaluation** | Successfully completing the internship process, gaining additional knowledge and experience in AWS Cloud | ☐ | ✅ | ☐ |
 
 ### Areas for Improvement
 
-* Improve AWS cost optimization and resource management skills to ensure efficient system operation and avoid unnecessary expenses.
-* Continue to strengthen analysis and troubleshooting skills in Serverless systems, especially when integrating multiple AWS services together.
-* Improve technical documentation and solution presentation skills to make deployment, maintenance, and knowledge sharing more convenient and professional.
+- Continue improving my knowledge of AWS Cloud and related services to participate more effectively in practical exercises and real-world projects.
+- Further develop my ability to analyze and troubleshoot issues when working with AWS services.
+- Improve communication skills, idea presentation, and teamwork efficiency during the working process.
+- Proactively update new knowledge, strengthen English technical document reading skills, and gain more practical experience in Cloud Computing.
