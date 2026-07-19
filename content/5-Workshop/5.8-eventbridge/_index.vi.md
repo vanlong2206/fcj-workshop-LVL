@@ -1,5 +1,5 @@
 ---
-title: "AWS EventBridge"
+title: "Thiết lập EventBridge và Lambda cho bảo trì hệ thống"
 date: 2024-01-01
 weight: 8
 chapter: false
@@ -9,13 +9,13 @@ pre: " <b> 5.8. </b> "
 
 #### 5.8.1 Khái niệm
 
-**Amazon EventBridge** là dịch vụ bus sự kiện (event bus) không máy chủ (serverless) do AWS cung cấp, cho phép kết nối các ứng dụng với nhau bằng cách sử dụng các sự kiện (events). EventBridge giúp xây dựng kiến trúc ứng dụng theo hướng sự kiện (Event-Driven Architecture) một cách dễ dàng, linh hoạt và có khả năng mở rộng cao.
+**Amazon EventBridge** là dịch vụ event bus serverless do AWS cung cấp, cho phép kết nối các ứng dụng với nhau bằng cách sử dụng các sự kiện. EventBridge giúp xây dựng kiến trúc ứng dụng theo hướng sự kiện (Event-Driven Architecture) một cách dễ dàng, linh hoạt và có khả năng mở rộng cao.
 
 #### 5.8.2 Kiến trúc hệ thống EventBridge
 
-![1783852903546](image/_index.vi/1783852903546.png)
+![1783852903546](image/_index.vi/eventdridge_maintanance.png)
 
-<div align="center"><i>Hình 5.8.1: Sơ đồ kiến trúc EventBridge.</i></div>
+<div align="center"><i>Hình 5.8.1: Sơ đồ kiến trúc cho sự kiện bảo trì hệ thống.</i></div>
 
 - **EventBridge** kích hoạt Maintenance Lambda theo lịch Cron.
 - **Lambda** bật Maintenance Mode — cập nhật API Gateway stage variable (`maintenance=true`) và DB flag (`SystemConfig.maintenance_mode=true`) để từ chối request mới.
@@ -113,11 +113,13 @@ Với action `start_maintenance`:
 Với action `vacuum_analyze`:
 
 **Tổng quan về VACUUM và ANALYZE:**
+
 - **VACUUM:** Do PostgreSQL sử dụng cơ chế kiểm soát đồng thời nhiều phiên bản (MVCC - Multi-Version Concurrency Control), khi các tác vụ `UPDATE` hoặc `DELETE` diễn ra, hệ thống không xóa vật lý các dữ liệu cũ ngay lập tức mà chỉ đánh dấu chúng là "dead tuples". Theo thời gian, điều này gây ra hiện tượng phình to dữ liệu (table bloat). Lệnh `VACUUM` được gọi để quét và thu hồi không gian lưu trữ từ các dead tuples này, giúp giải phóng dung lượng và duy trì tốc độ đọc/ghi ổ đĩa.
 - **ANALYZE:** Lệnh này có nhiệm vụ thu thập và cập nhật các số liệu thống kê (statistics) về phân bổ dữ liệu bên trong các bảng. Trình tối ưu hóa truy vấn (Query Planner) của PostgreSQL phụ thuộc hoàn toàn vào số liệu này để tính toán và đưa ra kế hoạch thực thi (execution plan) tối ưu nhất, giúp các truy vấn (queries) luôn giữ được tốc độ phản hồi nhanh, ngay cả khi lượng dữ liệu lớn dần.
 - Bằng cách kết hợp **VACUUM ANALYZE** và **REINDEX** (chống phân mảnh các chỉ mục) chạy tự động vào giờ thấp điểm, cơ sở dữ liệu luôn tự động làm sạch và duy trì hiệu năng ở mức cao nhất mà không cần can thiệp thủ công.
 
 **Các bước thực thi của Lambda:**
+
 - **Kết nối Aurora PostgreSQL** — qua `ApplicationDbContext`
 - **VACUUM ANALYZE** — lặp qua từng table
 - **REINDEX** — lặp qua từng table
@@ -242,7 +244,6 @@ Alarms OK Không có lỗi — maintenance hoạt động tốt
 ![1783873987556](image/_index.vi/1783873987556.png)
 
 <div align="center"><i>Hình 5.8.8: Tắt bảo trì ở tab Test.</i></div>
-
 
 #### 5.8.7 Kết quả đạt được
 

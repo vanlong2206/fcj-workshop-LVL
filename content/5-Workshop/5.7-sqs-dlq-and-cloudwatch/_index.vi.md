@@ -13,7 +13,7 @@ pre: " <b> 5.7. </b> "
 
 #### 5.7.2 Kiến trúc hệ thống SQS DLQ và CloudWatch
 
-![1783476840032](image/_index.vi/1783476840032.png)
+![1783476840032](image/_index.vi/SQS-DLQ_diagram.png.png)
 
 <div align="center"><i>Hình 5.7.1: Sơ đồ hệ thống.</i></div>
 

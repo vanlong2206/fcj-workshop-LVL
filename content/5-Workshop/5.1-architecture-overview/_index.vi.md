@@ -1,5 +1,5 @@
 ---
-title : "Giới thiệu"
+title : "Tổng quan về kiến trúc hệ thống"
 date : 2026-06-18 
 weight : 1
 chapter : false

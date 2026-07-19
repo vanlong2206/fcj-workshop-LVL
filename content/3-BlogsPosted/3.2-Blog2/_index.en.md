@@ -1,43 +1,43 @@
 ---
-title: "Blog 2"
-date: 2024-01-01
-weight: 1
+title: "Amazon EKS Supports Control Plane Egress Through Your VPC"
+date: 2026-07-08
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-### Amazon EKS Now Supports Control Plane Egress Through Your VPC
+### Amazon EKS Supports Control Plane Egress Through Your VPC
 
-While exploring Amazon EKS, I came across the new Customer-Routed Control Plane Egress feature. This feature allows Kubernetes Control Plane traffic to be routed through your Amazon VPC, giving you more control and better security.
+![EKS data flow through VPC](images/eks-vpc-routing.jpg)
 
-![AWS Cloud architecture diagram showing EKS Control Plane egress through VPC](https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/740769954_1520636753147268_6569374290610978119_n.jpg?stp=dst-jpg_tt6&cstp=mx921x535&ctp=s921x535&_nc_cat=100&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeEOWx61b8hA-5lYmEZhNsUWtNIwVyoUDzO00jBXKhQPM4hEyspulfaaBTEAx91gOQMo0e7_7o8Dz4UHRcFbWZDv&_nc_ohc=ML7L_ZDcrM4Q7kNvwEnLSLA&_nc_oc=Adq3MoZ5E_hTO2UC1-p_vnFKYBkjtRQyLc3odd_yb5sHE9fc004NAD-WzRypuvg4qXNTgwLfjqQLWC5vSjj1ubO9&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=dFpWsQnnBiVpmAoj6RTC4g&_nc_ss=7b2a8&oh=00_AQCEW_p70XQFIbV6a_QUzd8jNbkye_D0uos5c9mvKIuTjQ&oe=6A5ADFC7)
+While learning about Amazon EKS, I noticed that AWS recently introduced the **Customer-Routed Control Plane Egress** feature. This feature allows traffic from the Kubernetes Control Plane to be routed through the customer's Amazon VPC, increasing system control and security.
 
 #### 3.2.1 What is Amazon EKS?
 
-Amazon Elastic Kubernetes Service (Amazon EKS) is a managed Kubernetes service by AWS. It makes it easier to deploy and operate Kubernetes clusters without having to manage the Control Plane yourself. EKS also integrates with many AWS services such as IAM, VPC, and CloudWatch for management and monitoring.
+Amazon Elastic Kubernetes Service (Amazon EKS) is a managed Kubernetes service by AWS. This service helps users deploy and operate Kubernetes more easily without needing to manage the Control Plane themselves. Additionally, EKS integrates with many AWS services such as IAM, VPC, and CloudWatch to support system management and monitoring.
 
-#### 3.2.2 What's New?
+#### 3.2.2 What's new with this feature?
 
-Previously, Kubernetes Control Plane traffic was handled through AWS-managed network infrastructure. With the new feature, this traffic can now go through your own Amazon VPC via Elastic Network Interfaces (ENIs). This allows administrators to apply tools like Security Groups, Route Tables, VPC Endpoints, or AWS Network Firewall for better network traffic control.
+Previously, traffic from the Kubernetes Control Plane was handled by AWS-managed network infrastructure. With the new feature, this traffic can go through the customer's own Amazon VPC via an Elastic Network Interface (ENI). As a result, administrators can apply tools like Security Groups, Route Tables, VPC Endpoints, or AWS Network Firewall for better network traffic control.
 
-#### 3.2.3 Benefits
+#### 3.2.3 Key Benefits
 
-In my opinion, this feature brings several benefits:
+In my opinion, this feature brings many benefits such as:
 
-* Better network traffic control.
-* Enhanced system security.
-* Support for audit and compliance requirements.
-* Convenience when using authentication services or internal systems.
+* **Increased Control:** Detailed management of outbound network traffic from the Control Plane.
+* **Enhanced Security:** Apply the enterprise's own security barrier layers to the system.
+* **Ensured Compliance:** Helps meet strict requirements for network system auditing.
+* **Integration Capabilities:** Convenient when using authentication services or internal systems contained within the VPC.
 
-#### 3.2.4 Important Notes
+#### 3.2.4 Deployment Notes
 
-When using CUSTOMER_ROUTED mode, administrators need to configure the network correctly since routing will be managed by the organization. Therefore, it's important to test thoroughly before deploying in a production environment.
+When using the `CUSTOMER_ROUTED` mode, administrators need to configure the network accurately because routing will be self-managed by the enterprise. Therefore, Route Tables and Security Groups should be carefully checked before deploying in a production environment to avoid losing connection to the Cluster.
 
-#### 3.2.5 Personal Review
+#### 3.2.5 Personal Evaluation & Conclusion
 
-I think this is a quite useful update from Amazon EKS. This feature gives businesses more control over traffic management and enhanced security when deploying Kubernetes on AWS. For students exploring Cloud like myself, this is also a great opportunity to understand how AWS continuously improves its services to meet real-world user needs.
+In my opinion, this is quite a useful update for Amazon EKS. This feature helps businesses be more proactive in traffic management and enhances security when deploying Kubernetes on AWS. For a student learning about Cloud like myself, this is also an opportunity to better understand how AWS continuously improves its services to meet the practical needs of users.
 
-#### 3.2.6 Conclusion
+In summary, **Customer-Routed Control Plane Egress** is a notable improvement. Allowing Control Plane traffic to be routed through the Amazon VPC makes the system more flexible, secure, and easier to manage. I believe this feature will be adopted by many businesses when deploying Kubernetes on AWS in the near future.
 
-Customer-Routed Control Plane Egress is a notable improvement in Amazon EKS. By allowing Control Plane traffic to be routed through your Amazon VPC, the system becomes more flexible, secure, and easier to manage. I believe this feature will be widely adopted by enterprises deploying Kubernetes on AWS in the near future.
+*Author: Lai Van Long*
 
-Reference: https://aws.amazon.com/vi/blogs/containers/amazon-eks-now-supports-control-plane-egress-through-your-vpc/
+**Reference:** [Amazon EKS now supports control plane egress through your VPC](https://aws.amazon.com/vi/blogs/containers/amazon-eks-now-supports-control-plane-egress-through-your-vpc/)

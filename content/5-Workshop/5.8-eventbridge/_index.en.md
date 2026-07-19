@@ -1,6 +1,6 @@
 ---
-title: "AWS EventBridge"
-date: 2026-06-18
+title: "EventBridge and Lambda Setup for System Maintenance"
+date: 2024-01-01
 weight: 8
 chapter: false
 pre: " <b> 5.8. </b> "
@@ -8,29 +8,29 @@ pre: " <b> 5.8. </b> "
 
 #### AWS EventBridge
 
-#### 5.8.1 Concept
+#### 5.8.1 Overview
 
-**Amazon EventBridge** is a serverless event bus service provided by AWS that allows connecting applications together using events. EventBridge helps build Event-Driven Architecture easily, flexibly, and with high scalability.
+**Amazon EventBridge** is a serverless event bus service from AWS that connects applications using events. EventBridge simplifies building event-driven architectures that are flexible and highly scalable.
 
 #### 5.8.2 EventBridge System Architecture
 
-![1783852903546](image/_index.vi/1783852903546.png)
+![1783852903546](image/_index.vi/eventdridge_maintanance.png)
 
-<div align="center"><i>Figure 5.8.1: EventBridge architecture diagram.</i></div>
+<div align="center"><i>Figure 5.8.1: Architecture diagram for system maintenance events.</i></div>
 
-- **EventBridge** triggers Maintenance Lambda on a Cron schedule.
-- **Lambda** enables Maintenance Mode — updates API Gateway stage variable (`maintenance=true`) and DB flag (`SystemConfig.maintenance_mode=true`) to reject new requests.
-- **Lambda** connects directly to Aurora PostgreSQL via TypeORM (IAM authentication).
-- Performs maintenance tasks:
-  - `start_maintenance`: Enables maintenance mode (no DB tasks).
-  - `stop_maintenance`: Disables maintenance mode.
-  - `vacuum_analyze`: VACUUM ANALYZE + REINDEX on 15 tables.
-  - `reset_daily`: Reset stamina to 20.0, record `last_daily_reset` timestamp.
-- After completion (or if action is not start/stop), Lambda disables maintenance mode.
+- **EventBridge** triggers the Maintenance Lambda on a Cron schedule.
+- The **Lambda** enables Maintenance Mode — it updates an API Gateway stage variable (`maintenance=true`) and a DB flag (`SystemConfig.maintenance_mode=true`) to reject new requests.
+- The **Lambda** connects directly to Aurora PostgreSQL via TypeORM using IAM authentication.
+- The Lambda performs maintenance tasks such as:
+  - `start_maintenance`: enable maintenance mode (no DB changes required).
+  - `stop_maintenance`: disable maintenance mode.
+  - `vacuum_analyze`: run `VACUUM ANALYZE` plus `REINDEX` on 15 tables.
+  - `reset_daily`: reset player stamina to 20.0 and record the `last_daily_reset` timestamp.
+- After the tasks complete (or when action is not start/stop), the Lambda disables maintenance mode.
 
-#### 5.8.3 Creating EventBridge Scheduler
+#### 5.8.3 Creating EventBridge Schedules
 
-Declared in the events block of the Lambda (automatic) in file services/lambda-maintenance/serverless.yml:
+Declare scheduled rules in the Lambda's `events` block (automatic deployment) inside `services/lambda-maintenance/serverless.yml`:
 
 ```yaml
 functions:
@@ -57,7 +57,7 @@ functions:
             action: reset_daily
 ```
 
-#### 5.8.4 Building Maintenance Lambda
+#### 5.8.4 Building the Maintenance Lambda
 
 ##### Directory structure
 
@@ -68,7 +68,7 @@ services/lambda-maintenance/
 ├── tsconfig.json
 └── src/
     ├── lambda.ts                 # Entry point — EventBridge handler
-    ├── index.ts                  # Dev script (local run)
+    ├── index.ts                  # Dev script (run locally)
     └── handlers/
         ├── startMaintenance.ts   # Enable maintenance mode
         ├── stopMaintenance.ts    # Disable maintenance mode
@@ -76,11 +76,11 @@ services/lambda-maintenance/
         ├── resetDaily.ts         # Reset stamina + timestamp
 ```
 
-##### Entry point dispatcher
+##### Entry-point dispatcher
 
 File: `services/lambda-maintenance/src/lambda.ts`
 
-Lambda receives EventBridge event, parses the `action` field, and dispatches to the corresponding handler:
+The Lambda receives EventBridge events, parses the `action` field, and dispatches to the corresponding handler:
 
 ```typescript
 type MaintenanceAction = 'start_maintenance' | 'stop_maintenance'
@@ -103,33 +103,32 @@ export const handler = async (event: EventBridgeEvent<'Scheduled Event', Mainten
 };
 ```
 
-##### Lambda execution steps
+##### Lambda execution flow
 
-With action `start_maintenance`:
+For `start_maintenance` action:
 
-**Enable Maintenance Mode** — call API Gateway `UpdateStageCommand` set `maintenance=true`
+- **Enable Maintenance Mode** — call API Gateway `UpdateStageCommand` to set `maintenance=true`.
+- **Set DB flag** — upsert `SystemConfig.maintenance_mode = true`.
+- **Log to CloudWatch** — each step writes logs.
 
-**Set DB flag** — upsert `SystemConfig.maintenance_mode = true`
+For `vacuum_analyze` action:
 
-**Write CloudWatch Logs** — each step has logs
+**Overview of VACUUM and ANALYZE:**
 
-With action `vacuum_analyze`:
+* **VACUUM:** Because PostgreSQL utilizes Multi-Version Concurrency Control, when UPDATE or DELETE operations occur, the system does not physically delete old data immediately; instead, it marks them as dead tuples. Over time, this causes table bloat. The VACUUM command is invoked to scan and reclaim storage space from these dead tuples, thereby freeing up capacity and maintaining disk read/write performance.
+* **ANALYZE:** This command is responsible for collecting and updating statistics regarding the distribution of data within tables. The PostgreSQL Query Planner relies heavily on these statistics to calculate and determine the most optimal execution plan, ensuring that queries maintain fast response times even as data volumes grow.  
 
-**Connect to Aurora PostgreSQL** — via `ApplicationDbContext`
-
-**VACUUM ANALYZE** — per table
-
-**REINDEX** — per table
-
-**Write CloudWatch Logs** + Metrics
+- **Connect to Aurora PostgreSQL** — via `ApplicationDbContext`.
+- **VACUUM ANALYZE** — run for each table.
+- **REINDEX** — run for each table.
+- **Log and emit Metrics** — CloudWatch Logs and custom metrics.
 
 #### 5.8.5 Maintenance Mode Handling
 
-##### Maintenance Mode uses 2 parallel mechanisms:
+##### Maintenance Mode uses two parallel mechanisms:
 
-**API Gateway V2 Stage Variable**: `maintenance=true/false` — set via `UpdateStageCommand`
-
-**Database Flag**: `SystemConfig` key=`maintenance_mode`, value=`true/false`
+- **API Gateway V2 Stage Variable**: `maintenance=true/false` — set via `UpdateStageCommand`.
+- **Database Flag**: `SystemConfig` with key=`maintenance_mode`, value=`true/false`.
 
 ##### Middleware check
 
@@ -143,7 +142,7 @@ export const maintenanceMiddleware = async (req, res, next) => {
   if (config?.value === "true") {
     res.status(503).json({
       error: "Service Unavailable",
-      message: "System is under maintenance. Please try again later.",
+      message: "The system is under maintenance. Please try again later.",
     });
     return;
   }
@@ -151,25 +150,25 @@ export const maintenanceMiddleware = async (req, res, next) => {
 };
 ```
 
-Middleware is injected into all 6 Lambda domain services (auth, economy, inventory, transaction, progression-world, loot-reward), running right after DB initialization and before routes.
+This middleware is injected into all six Lambda domain services (auth, economy, inventory, transaction, progression-world, loot-reward). It runs after DB initialization and before route handlers.
 
-##### When isMaintenance = true
+##### When `isMaintenance = true`
 
 ```
 HTTP 503 Service Unavailable
 {
   "error": "Service Unavailable",
-  "message": "System is under maintenance. Please try again later."
+  "message": "The system is under maintenance. Please try again later."
 }
 ```
 
-##### When isMaintenance = false
+##### When `isMaintenance = false`
 
-System operates normally, middleware bypass.
+The system operates normally and the middleware is bypassed.
 
 #### 5.8.6 Testing
 
-##### * Manual Trigger
+##### Manual trigger example
 
 ```json
 {
@@ -186,45 +185,45 @@ System operates normally, middleware bypass.
 
 ![1783870580554](image/_index.vi/1783870580554.png)
 
-<div align="center"><i>Figure 5.8.2: Start maintenance in Test tab.</i></div>
+<div align="center"><i>Figure 5.8.2: Start maintenance via the Test tab.</i></div>
 
-Click **Test** — Lambda is triggered, expected to return successfully (200 OK).
+Click **Test** — the Lambda is invoked and should return success (200 OK).
 
-##### * Check Lambda triggered
+##### Verify the Lambda invocation
 
 ![1783870803214](image/_index.vi/1783870803214.png)
 
-<div align="center"><i>Figure 5.8.3: Observe charts in Monitor tab.</i></div>
+<div align="center"><i>Figure 5.8.3: Observe charts in the Monitor tab.</i></div>
 
-- **Invocations** — chart shows increased call count after testing
-- **Duration** — processing time (expected a few seconds to tens of seconds)
-- **Error count & success rate (%)** — expected 0% errors
+- **Invocations** — chart shows an increase after testing.
+- **Duration** — processing time (expected a few to tens of seconds).
+- **Error count & success rate (%)** — expected 0% errors.
 
-##### * Check API during maintenance
+##### Verify API behavior during maintenance
 
 ![1783871048041](image/_index.vi/1783871048041.png)
 
-<div align="center"><i>Figure 5.8.4: Returns HTTP 503 during maintenance.</i></div>
+<div align="center"><i>Figure 5.8.4: API returns HTTP 503 during maintenance.</i></div>
 
-##### * Check CloudWatch Logs
+##### Verify CloudWatch Logs
 
 ![1783873833229](image/_index.vi/1783873833229.png)
 
-<div align="center"><i>Figure 5.8.5: Check logs in CloudWatch.</i></div>
+<div align="center"><i>Figure 5.8.5: Inspect logs in CloudWatch.</i></div>
 
-##### * Check CloudWatch Metrics & Alarm
+##### Verify CloudWatch Metrics & Alarms
 
 ![1783871319914](image/_index.vi/1783871319914.png)
 
-<div align="center"><i>Figure 5.8.6: Check metrics charts.</i></div>
+<div align="center"><i>Figure 5.8.6: Inspect metrics charts.</i></div>
 
 ![1783871376765](image/_index.vi/1783871376765.png)
 
-<div align="center"><i>Figure 5.8.7: Check Alarms.</i></div>
+<div align="center"><i>Figure 5.8.7: Inspect alarms.</i></div>
 
-Alarms OK — No errors, maintenance running well.
+Alarms OK — no errors detected; maintenance executed successfully.
 
-##### * Stop maintenance
+##### Stop maintenance example
 
 ```json
 {
@@ -241,12 +240,12 @@ Alarms OK — No errors, maintenance running well.
 
 ![1783873987556](image/_index.vi/1783873987556.png)
 
-<div align="center"><i>Figure 5.8.8: Stop maintenance in Test tab.</i></div>
+<div align="center"><i>Figure 5.8.8: Stop maintenance via the Test tab.</i></div>
 
 #### 5.8.7 Results
 
-The maintenance system is fully automated via **4 EventBridge Rules**, each rule triggers `gameapi-maintenance-dev-handler` Lambda on its own Cron schedule. Maintenance Mode uses both API Gateway stage variable and DB flag (`SystemConfig.maintenance_mode`), combined with middleware returning HTTP 503 to block requests during maintenance.
+Maintenance is fully automated using **four EventBridge Rules**, each triggering the `gameapi-maintenance-dev-handler` Lambda on its own Cron schedule. Maintenance Mode is enforced using both an API Gateway stage variable and a DB flag (`SystemConfig.maintenance_mode`), combined with middleware that returns HTTP 503 to block requests during maintenance.
 
-For database optimization, Lambda runs **VACUUM ANALYZE + REINDEX** on 15 tables at 03:00 UTC daily. Periodic data reset occurs at 00:00 UTC daily, including cleaning up old data (deactivating expired gift codes, deleting expired shop logs and save data), resetting player stamina to 20.0, and recording `last_daily_reset` timestamp.
+For database optimization, the Lambda runs **VACUUM ANALYZE + REINDEX** on 15 tables daily at 03:00 UTC. Daily resets occur at 00:00 UTC, including cleaning expired data (deactivating expired gift codes, deleting expired shop logs and save data), resetting player stamina to 20.0, and recording the `last_daily_reset` timestamp.
 
-The entire process is recorded in detail through **CloudWatch Logs** and 3 metrics (`MaintenanceAction`, `MaintenanceDuration`, `MaintenanceActionFailed`). CloudWatch Alarm `gameapi-maintenance-action-failed` will alert if any errors occur during maintenance, helping the operations team detect and handle issues promptly.
+All actions are logged to **CloudWatch Logs** and emitted as three metrics (`MaintenanceAction`, `MaintenanceDuration`, `MaintenanceActionFailed`). The CloudWatch Alarm `gameapi-maintenance-action-failed` notifies the operations team if any maintenance errors occur, enabling timely detection and remediation.

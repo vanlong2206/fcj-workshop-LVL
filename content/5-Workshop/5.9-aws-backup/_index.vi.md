@@ -13,7 +13,7 @@ pre: " <b> 5.9. </b> "
 
 #### 5.9.2 Kiến trúc AWS Backup
 
-![1783878044406](image/_index.vi/1783878044406.png)
+![1783878044406](image/_index.vi/storage_backup.png)
 
 <div align="center"><i>Hình 5.9.1: Kiến trúc hệ thống AWS Backup.</i></div>
 

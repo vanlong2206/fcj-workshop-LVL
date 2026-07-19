@@ -5,7 +5,6 @@ weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
-
 #### Amazon SQS FIFO
 
 #### 5.6.1 Concept
@@ -14,7 +13,7 @@ pre : " <b> 5.6. </b> "
 
 #### 5.6.2 System Architecture
 
-![1783096083070](image/_index.vi/1783096083070.png)
+![1783096083070](image/_index.vi/SQS_diagram.png)
 
 <div align="center"><i>Figure 5.6.1: System architecture.</i></div>
 
@@ -180,7 +179,7 @@ Handler pattern (services/sqs-consumer-economy/src/lambda.ts):
 
 ```typescript
 export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
-  if (!initialized) {          
+  if (!initialized) {        
     await initializeApplicationDbContext();
     initialized = true;
   }

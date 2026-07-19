@@ -1,5 +1,5 @@
 ---
-title : "Introduction"
+title : "Architecture Overview"
 date : 2026-06-18
 weight : 1
 chapter : false

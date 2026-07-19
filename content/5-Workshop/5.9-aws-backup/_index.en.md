@@ -13,7 +13,7 @@ pre: " <b> 5.9. </b> "
 
 #### 5.9.2 AWS Backup Architecture
 
-![1783878044406](image/_index.vi/1783878044406.png)
+![1783878044406](image/_index.vi/storage_backup.png)
 
 <div align="center"><i>Figure 5.9.1: AWS Backup system architecture.</i></div>
 

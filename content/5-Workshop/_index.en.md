@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-![1782935499173](image/_index.vi/1782935499173.png)
-
 # Research and Deployment of Server Systems for Online Games
 
 #### Overview
@@ -30,7 +28,7 @@ The system separates data flow and processing into two strategic models dependin
 5. [Amazon API Gateway Setup](5.5-API-Gateway/)
 6. [Amazon SQS FIFO](5.6-sqs-fifo/)
 7. [AWS DLQ & AWS CloudWatch](5.7-sqs-dlq/)
-8. [AWS EventBridge](5.8-eventbridge/)
+8. [EventBridge and Lambda Setup for System Maintenance](5.8-eventbridge/)
 9. [AWS Backup](5.9-aws-backup/)
 10. [Verification and Testing](5.10-verification-and-testing/)
 11. [Resource Clean Up](5.11-clean-up/)

@@ -5,76 +5,67 @@ weight : 2
 chapter : false
 pre : " <b> 5.2. </b> "
 ---
+### 5.2.1 Setting up IAM Roles with Least Privilege
 
-### 5.2.1 Setting up Roles with Minimum Permissions using AWS IAM.
+In the system architecture, AWS Lambda functions are categorized into three groups with distinct permissions to ensure proper delegation and operational security.
 
-In the system architecture diagram, AWS Lambda functions are divided into three groups with separate permissions to ensure authorization and operational safety.
+#### 5.2.1.1 Backend Group: Responsible for handling application business logic, granted read/write access to the Amazon Aurora PostgreSQL database.
 
-#### 5.2.1.1 Backend Group: Responsible for processing application business logic and granted read/write permissions on Amazon Aurora PostgreSQL database.
-
-##### Creating IAM Policy (Database Access Policy).
+##### Creating an IAM Policy (Database Access Policy).
 
 ![IAM_RDS](images/IAM_RDS_1.png)
 
-<div align="center"><i>Figure 5.2.1: Create custom policy using JSON.</i></div>
+<div align="center"><i>Figure 5.2.1: Configuring the policy via JSON.</i></div>
 
-```
+```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"rds-db:connect"
-			],
-			"Resource": [
-				"arn:aws:rds-db:<region>:<aws-account-id>:dbuser:cluster-id/database-user-name"
-			]
-		}
-	]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rds-db:connect"
+      ],
+      "Resource": [
+        "arn:aws:rds-db:<region>:<aws-account-id>:dbuser:cluster-id/database-user-name"
+      ]
+    }
+  ]
 }
 ```
 
-region: ap-southeast-1 is the database region.
-
-account-id: <aws-account-id> is the AWS account ID allowed to access the database.
-
-cluster-id is the Aurora Cluster ID.
-
-database-user-name is the database name.
-
-Temporarily leave cluster-id and database-user-name as placeholders.
+* region: ap-southeast-1 is the database deployment region.
+* account-id: <aws-account-id> is the AWS account ID authorized to access the database.
+* cluster-id is the ID of the Aurora Cluster.
+* database-user-name is the name of the database.
 
 ![IAM_RDS](images/IAM_RDS_2.png)
 
-<div align="center"><i>Figure 5.2.2: Name and confirm the policy.</i></div>
+<div align="center"><i>Figure 5.2.2: Naming and confirming the policy.</i></div>
 
-##### Creating IAM Role for Backend.
+##### Creating an IAM Role for the Backend.
 
 ![IAM_RDS](images/IAM_RDS_3.png)
 
-<div align="center"><i>Figure 5.2.3: Select the authorized service for database access.</i></div>
+<div align="center"><i>Figure 5.2.3: Selecting the service authorized to access the database.</i></div>
 
-Since the database is accessed through Lambda functions, select Lambda Service Use Case.
+Since the database is processed via Lambda functions, select "Lambda" as the Service Use Case.
 
 ![IAM_RDS](images/IAM_RDS_4.png)
 
-<div align="center"><i>Figure 5.2.4: Add policy to this role.</i></div>
+<div align="center"><i>Figure 5.2.4: Attaching policies to the Role.</i></div>
 
-Search and select the following 2 policies:
-
-* Backend-Aurora-Connect-Policy: the policy just created to grant database access.
-* AWSLambdaBasicExecutionRole: this policy grants permission to write logs to CloudWatch.
+Find and select the following two policies:
+* Backend-Aurora-Connect-Policy: The custom policy created above.
+* AWSLambdaBasicExecutionRole: Grants permission to write logs to CloudWatch.
 
 ![IAM_RDS](images/IAM_RDS_5.png)
 
-<div align="center"><i>Figure 5.2.5: Name and confirm the role.</i></div>
+<div align="center"><i>Figure 5.2.5: Naming and confirming the role.</i></div>
 
-#### 5.2.1.2 Database Maintenance Group: Responsible for periodic database maintenance tasks, including resetting the daily world progression and executing `VACUUM` to clean up unused data, helping maintain system performance.
+#### 5.2.1.2 Database Maintenance Group: Handles periodic database maintenance tasks, including daily world state resets and executing `VACUUM` commands to clean up unused data, ensuring system performance.
 
-Similar steps...
-
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -84,35 +75,25 @@ Similar steps...
             "Action": [
                 "lambda:InvokeFunction"
             ],
-			"Resource": [
-				"arn:aws:lambda:<region>:<aws-account-id>:function:lambda-function-name"
-			]
+            "Resource": [
+                "arn:aws:lambda:<region>:<aws-account-id>:function:lambda-function-name"
+            ]
         }
     ]
 }
 ```
 
-region: ap-southeast-1 is the database region.
-
-account-id: <aws-account-id> is the AWS account ID allowed to access the database.
-
-lambda-function-name: the name of the Lambda function responsible for database maintenance.
-
-Temporarily leave lambda-function-name as a placeholder.
-
 ![IAM_Maintenance](images/IAM_Maintenance_1.png)
 
-<div align="center"><i>Figure 5.2.6: Name and confirm the policy.</i></div>
+<div align="center"><i>Figure 5.2.6: Naming and confirming the policy.</i></div>
 
 ![IAM_Maintenance](images/IAM_Maintenance_2.png)
 
-<div align="center"><i>Figure 5.2.7: Name and confirm the role.</i></div>
+<div align="center"><i>Figure 5.2.7: Naming and confirming the role.</i></div>
 
-#### 5.2.1.3 API Traffic Orchestration: Intervene in Amazon API Gateway environment variables to open or close system access when needed.
+#### 5.2.1.3 API Traffic Coordination: Modifies Amazon API Gateway environment variables to open or close system access when necessary.
 
-Similar steps...
-
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -130,129 +111,75 @@ Similar steps...
 }
 ```
 
-api-id: The API Gateway ID.
-
-Temporarily leave api-id as a placeholder.
-
 ![IAM_API_Traffic](images/IAM_API_Traffic_1.png)
 
-<div align="center"><i>Figure 5.2.8: Name and confirm the policy.</i></div>
+<div align="center"><i>Figure 5.2.8: Naming and confirming the policy.</i></div>
 
 ![IAM_API_Traffic](images/IAM_API_Traffic_2.png)
 
-<div align="center"><i>Figure 5.2.9: Name and confirm the role.</i></div>
+<div align="center"><i>Figure 5.2.9: Naming and confirming the role.</i></div>
 
 ---
 
 ### 5.2.2 Cost Management with AWS Budgets.
 
-#### 5.2.2.1 Operational Cost Estimation.
+#### 5.2.2.1 Calculating Operational Costs.
 
-Assumed Load and System Parameters
-
-* Number of users: 500 daily active users.
-* Total requests: 5,000,000 requests/month through API Gateway.
-* Average data size: 34 KB per request/response.
-* Network traffic: ~50 GB Data Transfer Out per month.
-* AWS Lambda:
-  * Memory: 512 MB RAM.
-  * Average execution time: 100 ms/request.
-  * Architecture: ARM.
-* Amazon SQS: ~2,000,000 async processing requests, generating 6,000,000 total SQS operations. DLQ error rate estimated at <0.1%.
+Assumed Load and System Parameters:
+* Daily Active Users: 500.
+* Total Requests: 5,000,000 requests/month via API Gateway.
+* Average Data Size: 34 KB per request/response.
+* Network Traffic: ~50 GB Data Transfer Out/month.
+* AWS Lambda: 512 MB RAM, 100 ms average execution time, ARM architecture.
+* Amazon SQS: ~2,000,000 async requests, total 6,000,000 SQS tasks, DLQ error rate <0.1%.
 * Amazon S3: ~10 GB.
-* Amazon CloudWatch Logs: ~10 GB ingested and stored per month.
-* Amazon Aurora PostgreSQL & RDS Proxy: average 2 ACU running 24/7.
+* Amazon CloudWatch Logs: ~10 GB ingestion/month.
+* Amazon Aurora PostgreSQL: 2 ACU average, 24/7.
 
-| Service Name                           |           Monthly Cost (USD)           | Annual Cost (USD) |
-| :------------------------------------- | :-------------------------------------: | :---------------: |
-| Amazon Aurora PostgreSQL-Compatible DB |                  74.68                  |      896.16      |
-| Amazon RDS Proxy                       |                  26.28                  |      315.36      |
-| AWS Web Application Firewall (WAF)     |                  11.00                  |      132.00      |
-| Amazon CloudFront                      |                  10.25                  |      123.00      |
-| Amazon CloudWatch                      |                  7.05                  |       84.54       |
-| Amazon API Gateway                     |                  6.25                  |       75.00       |
-| AWS Lambda                             |                  4.33                  |       51.96       |
-| Amazon Simple Queue Service (SQS)      |                  3.00                  |       36.00       |
-| Amazon Route 53                        |                  0.90                  |       10.80       |
-| S3 Standard                            |                  0.51                  |       6.12       |
-| Data Transfer                          |                  0.00                  |       0.00       |
-| **Total**                        | **$134.30** | **$1,611.58** |                  |
+| Service Name                           | Monthly Cost (USD) | Annual Cost (USD) |
+| :------------------------------------- | :----------------: | :---------------: |
+| Amazon Aurora PostgreSQL-Compatible DB |       74.68       |      896.16      |
+| AWS Web Application Firewall (WAF)     |       11.00       |      132.00      |
+| Amazon CloudFront                      |       10.25       |      123.00      |
+| Amazon CloudWatch                      |        7.05        |       84.54       |
+| Amazon API Gateway                     |        6.25        |       75.00       |
+| AWS Lambda                             |        4.33        |       51.96       |
+| Amazon Simple Queue Service (SQS)      |        3.00        |       36.00       |
+| S3 Standard                            |        0.51        |       6.12       |
+| Data Transfer                          |        0.00        |       0.00       |
+| **Total**                        | **$117.07** |  **$1,404.78**  |
 
 ![Cost_Calculator](images/Cost_Calculator_1.png)
 
-<div align="center"><i>Figure 5.2.10: Service cost ratio chart.</i></div>
+<div align="center"><i>Figure 5.2.10: Service cost distribution chart.</i></div>
 
-#### 5.2.2.2 Setting Budget Limits for AWS Budgets.
+#### 5.2.2.2 Setting AWS Budgets Limits.
 
-##### Budget 1: Calculating total operational cost of the entire system.
+##### Budget 1: Total System Operational Cost.
 
 ![Budget](images/Budget_1.png)
+<div align="center"><i>Figure 5.2.11 - 5.2.16: Configuring Cost Budget (140 USD threshold, early warnings, and critical alerts).</i></div>
 
-<div align="center"><i>Figure 5.2.11: Configure Cost Budget.</i></div>
-
-![Budget](images/Budget_2.png)
-
-<div align="center"><i>Figure 5.2.12: Set Cost Budget parameters.</i></div>
-
-Fixed monthly limit of 140 USD.
-
-![Budget](images/Budget_3.png)
-
-<div align="center"><i>Figure 5.2.13: Set early warning (forecast).</i></div>
-
-![Budget](images/Budget_4.png)
-
-<div align="center"><i>Figure 5.2.14: Set actual threshold warning (near limit).</i></div>
-
-![Budget](images/Budget_5.png)
-
-<div align="center"><i>Figure 5.2.15: Set emergency warning (exceeded limit).</i></div>
-
-![Budget](images/Budget_6.png)
-
-<div align="center"><i>Figure 5.2.16: Confirm and complete Cost Budget creation.</i></div>
-
-##### Budget 2: Monitor Aurora DB.
+##### Budget 2: Aurora DB Monitoring.
 
 ![Budget](images/Budget_7.png)
+<div align="center"><i>Figure 5.2.17 - 5.2.21: Configuring Usage Budget for 2 ACU 24/7 runtime.</i></div>
 
-<div align="center"><i>Figure 5.2.17: Configure Usage Budget.</i></div>
+### 5.2.3 Initializing the Edge Layer.
 
-![Budget](images/Budget_8.png)
+The edge layer includes CloudFront, Route 53, and WAF. The configuration file `network-security-stack.yaml` is provided below.
 
-<div align="center"><i>Figure 5.2.18: Set Usage Budget parameters.</i></div>
-
-System runs 2 ACU 24/7, requiring approximately 1460 ACU-Hrs per month.
-
-![Budget](images/Budget_9.png)
-
-<div align="center"><i>Figure 5.2.19: Set actual threshold warning.</i></div>
-
-![Budget](images/Budget_10.png)
-
-<div align="center"><i>Figure 5.2.20: Set emergency actual threshold warning.</i></div>
-
-![Budget](images/Budget_11.png)
-
-<div align="center"><i>Figure 5.2.21: Confirm and complete Usage Budget creation.</i></div>
-
-### 5.2.3 Creating the Network Edge Layer.
-
-This layer includes: CloudFront, Route 53, and WAF.
-
-Create a `.yaml` file `network-security-stack.yaml` with the following content:
-
-```
+```yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Edge Layer: CloudFront + WAF'
 
 Parameters:
   ApiGatewayDomainName:
     Type: String
-    Description: Endpoint URL của API Gateway
+    Description: API Gateway Endpoint URL
 
 Resources:
-# Initialize WAF
+# WAF Initialization
   ApiWafWebACL:
     Type: AWS::WAFv2::WebACL
     Properties:
@@ -278,7 +205,7 @@ Resources:
             MetricName: AWSCommonRulesMetrics
             SampledRequestsEnabled: true
 
-# Initialize CloudFront
+# CloudFront Initialization
   ApiCloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -312,22 +239,7 @@ Outputs:
     Value: !GetAtt ApiCloudFrontDistribution.DomainName
 ```
 
-Note: Although the core system is in ap-southeast-1, the SSL certificates and WAF protecting CloudFront are located in us-east-1, so the network edge layer will be deployed in us-east-1.
+Note: While the core system is in ap-southeast-1, the SSL certificate and WAF for CloudFront are managed in us-east-1.
 
 ![Network_Security_Stack](images/Network_Security_Stack_1.png)
-
-<div align="center"><i>Figure 5.2.22: Create CloudFormation Stack and upload the network-security-stack.yaml file.</i></div>
-
-![Network_Security_Stack](images/Network_Security_Stack_2.png)
-
-<div align="center"><i>Figure 5.2.23: Name the stack and provide the endpoint.</i></div>
-
-Currently there is no API Gateway domain name for communication, so temporarily use any domain name `aws.amazon.com` to bypass this step; it will be updated later when the actual domain is available.
-
-![Network_Security_Stack](images/Network_Security_Stack_3.png)
-
-<div align="center"><i>Figure 5.2.24: Confirm and Submit.</i></div>
-
-![Network_Security_Stack](images/Network_Security_Stack_4.png)
-
-<div align="center"><i>Figure 5.2.25: Verify the created components.</i></div>
+<div align="center"><i>Figure 5.2.22 - 5.2.25: Creating the CloudFormation Stack and verifying components.</i></div>

@@ -1,134 +1,187 @@
 ---
 title: "Proposal"
-date: 2024-01-01
+date: 2026-07-13
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-## AWS Serverless Solution for This Project: Game Backend API
+## Game Backend Process Storage and Processing System
 
-### 2.1 Executive Summary
+### 2.1 Summary
 
-The Game Backend API project is for a 2D RPG game with a Node.js + TypeScript + Express 5 backend and PostgreSQL/Aurora RDS database. The AWS Serverless solution migrates from a monolith to **microservices serverless** with 6 Lambda APIs + 5 SQS Consumers + 1 Maintenance Lambda, reducing costs, improving scalability, and enabling flexible deployment.
+The project builds a storage and process handling system for a Game Backend with the goal of fully transforming the architecture from a traditional monolith to a Serverless Microservices ecosystem on AWS. By splitting business logic into 6 independent Lambda clusters, combining asynchronous processing through SQS, and flexible storage with Aurora Serverless v2, this solution solves the waste of compute resources during low-traffic periods and the risk of total system failure. The new architecture commits to reducing an estimated 40% of monthly infrastructure costs, enabling instant scaling during sudden player spikes, and accelerating secure feature deployment.
 
-### 2.2 Problem Statement
+### 2.2 Problems
 
-**Operational Cost:**
-The current monolith architecture runs on a server 24/7, even when no players are active. This wastes significant compute resources. The server must be provisioned for peak load but runs idle during off-peak hours, leading to suboptimal operational costs.
+**Operational cost issue:**
+The current monolith architecture runs on the server 24/7 even when no players are active. This causes significant compute waste. The server must be provisioned for peak load (high traffic periods) but still runs idle during off-peak hours, resulting in inefficient operational cost.
 
-**Scalability:**
-When the number of players spikes (game events, ads, holiday seasons), the monolith cannot scale individual parts independently. For example, only Auth or Economy features are overloaded, but the entire system must be scaled. This is both expensive and inefficient. The monolith architecture also does not support flexible auto-scaling per domain.
+**Scalability issue:**
+When player counts suddenly spike (game events, promotions, holiday seasons), the monolith cannot scale individual parts separately. For example, if only the Auth or Economy feature is overloaded, the entire system still has to scale. This is both expensive and inefficient. The monolith architecture also does not support flexible auto-scaling per domain.
 
-**Deployment and Maintenance:**
-Every feature update or bug fix requires redeploying the entire application. A minor bug in the Auth module can bring down the whole game. CI/CD pipelines are more complex and deployment takes longer due to rebuilding and restarting the entire system. Independent rollback per feature is not possible.
+**Deployment and maintenance issue:**
+Every feature update or bug fix requires redeploying the entire application. A small bug in the Auth module can take down the whole game. The CI/CD process becomes more complex and deployment takes longer because the entire system must be rebuilt and restarted. Independent rollback for individual features is not possible.
 
-**Async Processing:**
-Critical tasks like currency updates (earn/spend), inventory changes (add/remove item), gift code redemption, and save data persistence are currently handled synchronously within the request-response cycle. If the server crashes mid-operation, data may be lost or become inconsistent. There is no retry mechanism or queue to guarantee successful processing.
+**Asynchronous processing issue:**
+Critical tasks such as currency updates (earn/spend), inventory changes (add/remove item), redeeming gift codes, and saving progress are currently handled synchronously in the request-response cycle. If the server fails mid-operation, data can be lost or become inconsistent. There is no retry mechanism or queue to guarantee successful processing.
 
-**Backup and Disaster Recovery:**
-Game data — accounts, currency, inventory, save data — is the most valuable asset. There is currently no automated backup strategy or clear disaster recovery (DR) plan. If the database encounters issues (disk failure, replication errors, attacks), player data could be permanently lost.
+**Backup and disaster recovery issue:**
+Game data — accounts, currency, inventory, save data — is the most important asset. If the game server lacks an automated backup strategy and a clear disaster recovery plan, then when the database has a failure (disk corruption, replication issues, attack), player data can be permanently lost.
 
 ### 2.3 Solution Architecture
 
-![1783961736805](image/_index.vi/1783961736805.png)
+![System architecture diagram](image/diagram.png)
 
-**Data Flow Overview:**
+**Processing flow overview:**
 
-Client (game app) sends requests through API Gateway, which routes to the corresponding Lambda per domain. Lambda APIs handle business logic and write data to Aurora RDS PostgreSQL. For critical tasks requiring data integrity (earn/spend currency, add/remove item, redeem gift code, distribute stats, upload save data), Lambda APIs send messages to SQS FIFO queues. SQS Consumer Lambdas process messages from queues and write to the database, ensuring async processing with retry capability.
+The system architecture is designed following separation of layers (Edge, Compute, Data, Management) with interaction flows numbered on the diagram:
 
-**Component Details:**
+[1] -> [2] -> [3]: Intake and Routing Flow (Edge Layer)
 
-API Gateway serves as the single entry point receiving client requests, handling authentication (JWT), rate limiting, and routing to the correct Lambda. 6 Lambda APIs are deployed independently, each wrapping an Express app with `@vendia/serverless-express`, running on Node.js 20, handling a specific game domain. These Lambdas scale independently based on request volume per domain.
+- [1] Send request: The client sends API requests to the backend.
+- [2] Filter bad requests: Traffic enters CloudFront and is immediately monitored by AWS WAF to block malformed requests, botnets, or application-layer DDoS attacks.
+- [3] Accelerate and route: CloudFront optimizes global delivery and forwards secure traffic to API Gateway. API Gateway applies rate limiting and routes requests to the appropriate Lambda cluster.
 
-5 SQS FIFO queues ensure messages are processed in order (FIFO) and not lost. Each queue has its own DLQ (Dead Letter Queue) to collect failed messages after 3 retries, with CloudWatch alarms for timely alerts. SQS Consumer Lambdas process messages in batches (max 10 messages/batch) with partial failure handling (SGDBatchResponse).
+[4a] & [4b, 4c]: Business Processing Flow (Compute & Database Layer)
 
-Aurora RDS Serverless v2 PostgreSQL is the primary database, auto-scaling ACUs based on load, supporting IAM authentication for security. TypeORM auto-creates/updates schemas on startup (synchronize: true). There are 18 entities divided into 5 domains (User, Forum, GiftCode, Game, System).
+- [4a] Synchronous read/write: For tasks requiring immediate response (such as login, inventory lookup in auth, inventory, transaction, economy domains), Lambda handles the request directly and reads/writes to Aurora RDS.
+- [4c] Immediate read queries (SELECT/JOIN): For information requests, Lambda can fetch data from the database and return the result immediately to the client.
+- [4b] Write/update operations (UPDATE/INSERT): For game data updates, requests are sent to SQS FIFO. DB Writer Lambdas then process the queue sequentially to write to the database, ensuring integrity and preventing data conflicts under concurrent operations.
 
-EventBridge acts as a scheduler with 4 rules: enable maintenance mode (Monday 10:00 UTC), disable maintenance mode (Monday 12:00 UTC), vacuum analyze and reindex all tables (3:00 AM daily), daily reset (midnight — reset stamina, clean expired codes, logs, stale data). The Maintenance Lambda receives events from EventBridge and executes corresponding tasks.
+[5] -> [6] -> [7] -> [8]: Maintenance and Backup Flow
 
-AWS Backup handles automatic daily database backups (5:00 UTC, 14-day retention) and weekly backups (Sunday 5:00 UTC, 56-day retention).
+- [5] Enter maintenance: On schedule, the system sets the `isMaintenance` flag on API Gateway to block external requests and freeze the system state.
+- [6] Perform maintenance & reset: Background jobs trigger daily reset tasks (refresh daily gameplay activities, respawn monsters, reset events) and run vacuum/analyze to optimize database tables for fast access.
+- [7] Backup data: While the system is in maintenance mode, export and backup processes run to save data safely to Amazon S3.
+- [8] End maintenance: After tasks complete, the `isMaintenance` flag is removed and the system reopens to normal player requests.
 
-Shared code is packaged via npm workspace `@gameapi/shared`, including: 18 TypeORM entities, 3 middlewares (auth, admin, maintenance), SQS producer with 8 static methods, utilities (JwtHelper, PasswordHasher, TimeHelper, ItemGenerationHelper, logger), services (GiftCodeService, GameLogicValidator), and CloudWatch metrics helper.
+**Component details:**
 
-### 2.4 Technical Implementation
+API Gateway is the single entry point for client requests, responsible for authentication, rate limiting, and routing to the correct Lambda. Six API Lambdas are deployed independently, each wrapping an Express app with `@vendia/serverless-express`, running on Node.js 20 and handling a specific game domain. These Lambdas scale independently based on request volume per domain.
 
-**6 Lambda APIs** divided by domain — Auth (register/login/dashboard), Economy (balance/earn/spend), Inventory (item CRUD + storage), Transaction (shop + gift code), Progression (stats + farming), Loot-Reward (leaderboard + forum + save data + game data).
+Five SQS FIFO queues ensure messages are processed in order and not lost. Each queue has its own DLQ to collect failed messages after three retries, with CloudWatch alarms for timely alerts. Consumer Lambdas process batches of up to 10 messages with partial failure handling.
 
-**5 SQS FIFO queues** — economy, inventory, giftcode, stats, save-data. Each queue has its own DLQ with CloudWatch alarm. Messages are processed asynchronously by corresponding consumer Lambdas.
+Aurora RDS Serverless PostgreSQL is the primary database, auto-scaling ACUs based on load and supporting IAM authentication for security. TypeORM auto-creates/updates schemas on startup (`synchronize: true`). There are 18 entities in 5 domains (User, Forum, GiftCode, Game, System).
 
-**Database** — Aurora RDS PostgreSQL with TypeORM (synchronize: true). 18 entities across 5 domains. Supports IAM authentication for production, password for local dev.
+EventBridge acts as the scheduler with four rules: enable maintenance, disable maintenance, vacuum/analyze/reindex tables, and daily reset (reset stamina, clean expired codes, logs, stale data). The Maintenance Lambda receives EventBridge events and performs the corresponding tasks.
+
+AWS Backup performs automatic daily and weekly database backups.
+
+Shared code is packaged through the npm workspace `@gameapi/shared`, including: 18 TypeORM entities, 3 middlewares (auth, admin, maintenance), an SQS producer with 8 static methods, utilities (JwtHelper, PasswordHasher, TimeHelper, ItemGenerationHelper, logger), services (GiftCodeService, GameLogicValidator), and CloudWatch metrics helper.
+
+### 2.4 Architectural Tradeoffs
+
+#### 2.4.1 Security vs. operational cost
+
+**Problem:** Placing Aurora RDS in a private subnet requires Lambdas to access the Internet through NAT Gateway or VPC Endpoints.
+
+**Decision:** Deploy Aurora RDS in a public subnet so Lambdas can run in the default subnet with Internet access without NAT Gateway.
+
+**Benefit:** Immediately saves fixed NAT Gateway cost (~$32/month plus data transfer). For the early project stage with limited players and budget, additional networking cost is not financially feasible.
+
+#### 2.4.2 AWS Lambda vs traditional EC2
+
+**Problem:** Game traffic is highly bursty. Peak usage can spike in evenings, weekends, or events, while traffic drops at night. Traditional EC2 provisioned for peak load wastes resources, and Auto Scaling takes 2-5 minutes to launch new instances, missing sudden bursts.
+
+**Decision:** Remove EC2 and migrate the entire processing logic to AWS Lambda.
+
+**Tradeoff:** Accept loss of OS-level control, execution time limits, and cold start latency on the first request.
+
+**Benefit:** Pay-per-use compute eliminates idle costs. When player count is zero, compute cost is essentially zero. The system gains instant, independent scaling per module, and infrastructure management shifts to AWS, letting developers focus on game logic.
+
+#### 2.4.3 Aurora Serverless vs traditional RDS
+
+**Problem:** Relational databases are the hardest scalability bottleneck. Traditional RDS requires choosing instance size in advance. Scaling up during sudden load requires restarts and minutes of downtime.
+
+**Decision:** Use Amazon Aurora Serverless v2 PostgreSQL instead of traditional RDS PostgreSQL/MySQL.
+
+**Tradeoff:** Aurora Serverless has a higher ACU unit price than an equivalent provisioned RDS instance. It also requires stricter connection management because many Lambda instances may connect concurrently.
+
+**Benefit:** The cost difference is offset by instant vertical scaling from 0.5 ACU to tens of ACUs without downtime. Aurora scales down during low traffic, aligning costs to actual usage and avoiding paying for a high-capacity database 24/7.
+
+### 2.5 Technical Implementation
+
+**Six Lambda APIs** are divided by domain — Auth (register/login/dashboard), Economy (balance/earn/spend), Inventory (item CRUD + storage), Transaction (shop + gift code), Progression (stats + farming), Loot-Reward (leaderboard + forum + save data + game data).
+
+**Five SQS FIFO queues** — economy, inventory, giftcode, stats, save-data. Each queue has its own DLQ with CloudWatch alarm. Messages are processed asynchronously by consumer Lambdas.
+
+**Database** — Aurora RDS PostgreSQL with TypeORM (`synchronize: true`). 18 entities across 5 domains. Supports IAM authentication for production and password auth for local development.
 
 **Security** — JWT for APIs, admin secret for admin endpoints, rate limiting, IAM authentication.
 
-**Shared code** — npm workspace `@gameapi/shared` containing models, middlewares, utils, SQS producer, shared services.
+**Shared code** — npm workspace `@gameapi/shared` containing models, middlewares, utils, SQS producer, and shared services.
 
-**Maintenance** — 4 EventBridge rules: enable/disable maintenance (Monday), vacuum analyze (3:00 AM), daily reset (midnight).
+**Maintenance** — four EventBridge rules: enable/disable maintenance, vacuum/analyze, and daily reset.
 
 **Deployment** — Docker Compose for local dev, Serverless Framework + esbuild for AWS production.
 
-### 2.5 Roadmap
+### 2.6 Roadmap
 
-Week 1-2: Survey and solution design.
-Week 3-4: Set up AWS infrastructure (RDS, API Gateway, SQS, EventBridge, IAM).
-Week 5-6: Implement Lambda Auth + Economy + corresponding consumers.
-Week 7-8: Implement Lambda Inventory + Transaction + corresponding consumers.
-Week 9-10: Implement Lambda Progression + Loot-Reward + corresponding consumers.
-Week 11: Implement Maintenance Lambda, backup, monitoring.
-Week 12: Integration testing, load testing, cutover, go-live.
+Week 4: Survey and solution design.
 
-### 2.6 Budget Estimation
+Week 5: Set up AWS infrastructure (RDS, API Gateway, SQS, EventBridge, IAM).
 
-Monthly AWS service costs (estimated for ~1000 players):
+Week 6: Deploy Auth + Economy Lambda and corresponding consumers.
 
-- **AWS Lambda (12 functions):** $50-200/month — based on request count and execution time. 6 API Lambdas + 5 Consumer Lambdas + 1 Maintenance Lambda. 1 million requests/month free, then $0.20/million requests.
-- **API Gateway (REST API):** $30-100/month — based on request count. 1 million requests/month free for first 12 months.
-- **Aurora RDS Serverless v2 (PostgreSQL):** $50-150/month — based on ACU (Aurora Capacity Unit). Starts at 2 ACU, auto-scales.
-- **SQS FIFO (5 queues + 5 DLQs):** $5-15/month — FIFO $0.50/million requests, DLQ storage $0.023/GB/month.
-- **EventBridge (4 rules):** $5-10/month — $1/million events, 4 daily schedule rules.
-- **CloudWatch Logs + Metrics:** $10-30/month — Lambda logs, custom metrics, DLQ alarms.
-- **AWS Backup (daily + weekly):** $10-20/month — database backup storage + 14-56 day retention.
+Week 7: Deploy Inventory + Transaction Lambda and corresponding consumers.
 
-**Total: $160-525/month.** For small scale under 1000 players, costs could be around ~$200/month.
+Week 8: Deploy Progression + Loot-Reward Lambda and corresponding consumers.
 
-### 2.7 Risk Assessment
+Week 9: Deploy Maintenance Lambda, backup, and monitoring.
 
-**Lambda Cold Start:**
-When no requests come for an extended period, Lambda resources are reclaimed. The first subsequent request will be slow due to runtime initialization and database connection setup (cold start). Medium impact — players may experience slight lag on the first request. Mitigated by using Provisioned Concurrency for critical Lambdas (Auth and GameData) to keep execution environments warm.
+Week 10: Integration testing, load testing, cutover, go-live.
 
-**FIFO Queue Throughput Limit:**
-SQS FIFO limits throughput to 3000 TPS — exceeding this causes message throttling. Low impact since for under 1000 concurrent players, this throughput is sufficient. For future expansion, more queues and account-based sharding can be added.
+### 2.7 Budget Estimate
 
-**Data Loss or Duplicate Messages:**
-SQS FIFO guarantees exactly-once processing, but the consumer may crash after processing but before acknowledging, leading to duplicates. Low impact — handlers should be designed idempotent. DLQ with maxReceiveCount=3 ensures no messages are ever lost, and operations teams are alerted via CloudWatch alarm when DLQ has messages.
+**Assumptions:**
 
-**Database Connection Pool Exhaustion:**
-Each Lambda instance creates its own connection pool to the database. If many Lambda instances run concurrently, connections may exceed RDS limits. Medium-high impact. Mitigated by limiting pool size per Lambda (max 2-5 connections), using RDS Proxy for centralized connection pool management, and leveraging IAM authentication to avoid storing passwords.
+* 500 DAU.
+* ~5,000,000 requests/month through API Gateway.
+* Average request/response payload size 34 KB.
+* 50 GB/month outbound data transfer.
+* Lambda memory 512 MB, average execution 100 ms, ARM architecture.
+* SQS ~2,000,000 async requests, 6,000,000 total operations, <0.1% failure rate.
+* Storage: S3 ~10 GB, CloudWatch Logs ~10 GB/month.
+* Aurora Serverless PostgreSQL average 2 ACU 24/7.
 
-**Sudden AWS Cost Spikes:**
-When a game goes viral or has a major event, request spikes drive up Lambda, API Gateway, and database costs. High impact — could result in unexpected AWS bills. Mitigated by setting up AWS Budget Alerts at 3 thresholds (50%, 80%, 100%), API Gateway usage plans, rate limiting, and CloudWatch dashboard monitoring.
+| Service | Monthly Cost (USD) | Annual Cost (USD) |
+| --- | --- | --- |
+| Amazon Aurora PostgreSQL-Compatible DB | 74.68 | 896.16 |
+| AWS WAF | 11.00 | 132.00 |
+| Amazon CloudFront | 10.25 | 123.00 |
+| Amazon CloudWatch | 7.05 | 84.54 |
+| Amazon API Gateway | 6.25 | 75.00 |
+| AWS Lambda | 4.33 | 51.96 |
+| Amazon SQS | 3.00 | 36.00 |
+| Amazon S3 | 0.51 | 6.12 |
+| Data Transfer | 0.00 | 0.00 |
+| **Total** | **117.07** | **1,404.78** |
 
-**Lambda Timeout with Large Data:**
-Player save data can be very large (many items, plots, transaction history), causing Lambda timeout (default 30s, max 900s). Medium impact. Mitigated by increasing Lambda timeout appropriately, splitting save data into multiple parts, or handling heavy tasks async via SQS.
+This architecture costs $117.07/month and $1,404.78/year for the estimated load. Compute-related services (Lambda + API Gateway + SQS) are under $15/month, while Aurora and RDS Proxy remain the largest expense.
 
-**AWS Dependency:**
-The entire system runs on AWS — if AWS has a regional outage (ap-southeast-1), the game stops completely. High impact but low probability. Mitigated by multi-AZ RDS configuration, cross-region DR backup plan, and detailed recovery documentation.
+### 2.8 Risk Assessment
 
-### 2.8 Expected Results
+**Lambda cold starts:** First request after idle time can be slow due to runtime initialization and DB connection. Medium impact. Mitigated with Provisioned Concurrency for critical Lambdas.
 
-**Reduced Operational Costs:**
-With Lambda pay-per-use, compute costs only incur when there are player requests. No more wasted resources from running a server 24/7. Expected 40-60% cost savings compared to a fixed-server monolith, especially during early stages with low player counts.
+**Public DB endpoint risk:** Placing Aurora RDS in a public subnet without NAT Gateway exposes a public endpoint. High impact. Mitigated with strict Security Groups, IAM authentication, and a future Private Subnet migration plan.
 
-**Flexible Scalability:**
-Each domain scales independently based on actual load. Auth Lambda can scale to 1000 instances while Inventory Lambda needs only 10. API Gateway auto-scales by request volume. Aurora Serverless v2 automatically adjusts ACUs based on database load. No more system-wide bottlenecks.
+**SQS FIFO throughput limit:** 3000 TPS limit. Low impact for the current scale; future scaling can add additional queues and sharding.
 
-**Fast and Safe Deployment:**
-Deploy each Lambda independently without affecting other domains. Deployment time drops from 10-15 minutes (monolith) to 1-2 minutes (per Lambda). Independent rollback if issues arise. Simpler CI/CD with Serverless Framework.
+**Duplicate messages:** Consumer crashes after processing but before ack may cause duplicates. Low impact. Mitigated with idempotent handlers and DLQ alarms.
 
-**Reliable Async Processing:**
-FIFO queues guarantee ordered processing with no message loss. DLQ + CloudWatch alarm enables timely detection and handling of failed messages. Automatic retry up to 3 times. Idempotent handlers prevent duplicates caused by retries.
+**DB connection exhaustion:** Many Lambda instances may exhaust DB connections. Medium-high impact. Mitigated by limiting pool size per Lambda and using RDS Proxy.
 
-**Production Ready:**
-AWS Backup automatic (daily + weekly) with clear retention policies. CloudWatch monitoring and alarms for all components (DLQ, Lambda errors, API Gateway 5xx, database connections). Multi-layer security: JWT, admin secret, rate limiting, IAM authentication. Maintenance mode for controlled maintenance without affecting data.
+**AWS bill spikes:** Viral traffic can increase Lambda, API Gateway, and DB costs. High impact. Mitigated with AWS Budgets, usage plans, rate limiting, and CloudWatch alerts.
 
-**Smooth Migration:**
-Monolith can run in parallel during cutover. Domains can be migrated gradually from monolith to Lambda without stopping the game. Quick rollback by pointing API Gateway back to the monolith if issues are detected.
+**Large save data timeouts:** Large save payloads may hit Lambda timeout. Medium impact. Mitigated by increasing timeout or handling large data async via SQS.
+
+**AWS dependency:** Regional AWS outages can fully impact availability. High impact. Mitigated by multi-AZ RDS, cross-region DR backups, and recovery docs.
+
+### 2.9 Expected Outcomes
+
+*Reduced costs* — pay-per-use Lambda means no idle compute cost, with an expected 40-60% savings over a fixed-server monolith.
+*Flexible scaling* — each domain scales independently, avoiding system-wide bottlenecks.
+*Faster deployment* — independent Lambda deployment reduces rollout time and enables safer rollbacks.
+*Reliable async processing* — FIFO queue ordering, retries, DLQ alarms, and idempotency.
+*Production readiness* — automated backups, monitoring, alarms, JWT security, rate limiting, IAM auth, and maintenance mode.
+*Smooth migration* — run the monolith in parallel during cutover and migrate domains gradually.

@@ -5,7 +5,7 @@ weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-# Nghiên cứu và Triển khai Hệ thống Máy chủ cho Trò chơi Trực tuyến
+# Hệ thống lưu trữ và xử lý tiến trình Game Backend
 
 #### Tổng quan
 
@@ -27,7 +27,7 @@ Hệ thống phân tách luồng dữ liệu và xử lý thành hai mô hình c
 5. [Khởi tạo Amazon API Gateway](5.5-API-Gateway/)
 6. [Amazon SQS FIFO](5.6-sqs-fifo/)
 7. [AWS DLQ &amp; AWS CloudWatch](5.7-sqs-dlq/)
-8. [AWS EventBridge](5.8-eventbridge/)
+8. [Thiết lập EventBridge và Lambda cho bảo trì hệ thống](5.8-eventbridge/)
 9. [AWS Backup](5.9-aws-backup/)
 10. [Kiểm tra kết quả và thực nghiệm](5.10-verification-and-testing/)
 11. [Dọn dẹp tài nguyên](5.11-clean-up/)

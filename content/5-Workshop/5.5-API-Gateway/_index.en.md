@@ -12,7 +12,7 @@ Amazon API Gateway helps create, publish, maintain, monitor, and secure APIs at 
 
 #### 5.5.2 Workflow
 
-![1783018858523](image/_index.vi/1783018858523.png)
+![1783018858523](image/APIGW_diagram.png)
 
 <div align="center"><i>Figure 5.5.1: API Gateway workflow</i></div>
 

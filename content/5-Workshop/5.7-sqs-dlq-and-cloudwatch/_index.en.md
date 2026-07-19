@@ -14,7 +14,7 @@ pre: " <b> 5.7. </b> "
 
 #### 5.7.2 SQS DLQ and CloudWatch System Architecture
 
-![1783476840032](image/_index.vi/1783476840032.png)
+![1783476840032](image/_index.vi/SQS-DLQ_diagram.png.png)
 
 <div align="center"><i>Figure 5.7.1: System diagram.</i></div>
 
